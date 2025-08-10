@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# 忽略IDE相关
+.idea/
+
 # 忽略构建目录
 build*/
 Binary/
