@@ -1,0 +1,14 @@
+﻿{
+  "version": 4,
+  "configurePresets": [
+    {
+      "name": "Default",
+      "hidden": false,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/Binaries",
+      "cacheVariables": {
+      }
+    }
+  ]
+}
+

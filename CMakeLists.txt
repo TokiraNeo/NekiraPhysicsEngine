@@ -1,3 +1,6 @@
+# ======================================
+# Root
+# ======================================
 cmake_minimum_required(VERSION 3.29)
 project(NekiraPhysics2D LANGUAGES CXX VERSION 1.0.0)
 
