@@ -1,0 +1,18 @@
+﻿{
+  "version": 4,
+  "configurePresets": [
+    {
+      "name": "Default",
+      "hidden": false,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_CXX_STANDARD_REQUIRED": "YES",
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    }
+  ]
+}
