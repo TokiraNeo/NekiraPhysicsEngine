@@ -1,4 +1,8 @@
 ---
+# C++标准
+Language: Cpp
+Standard: Latest
+
 # 基础风格：LLVM（可改为 Google/Mozilla/GNU）
 BasedOnStyle: LLVM
 
