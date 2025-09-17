@@ -1,11 +1,15 @@
 ﻿{
-  "version": 4,
+  "version": 6,
   "configurePresets": [
     {
       "name": "Default",
+      "inherits": "vcpkg",
       "hidden": false,
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build",
+      "environment": {
+        "VCPKG_ROOT": "C:/vcpkg"
+      },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
