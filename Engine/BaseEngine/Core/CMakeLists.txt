@@ -1,28 +1,38 @@
 ﻿# ======================================
-# Math 模块
+# Core 模块
 # ======================================
+
 
 
 # ======================================
 # 头文件、源文件
 # ======================================
-file(GLOB_RECURSE CORE_HEADER_FILES Public/*.hpp)
-file(GLOB_RECURSE CORE_SOURCE_FILES Private/*.cpp)
+file(GLOB_RECURSE CORE_HEADER_FILES "Public/*.hpp")
+file(GLOB_RECURSE CORE_SOURCE_FILES "Private/*.cpp")
 
 # ======================================
 # 生成库
 # ======================================
-add_library(Math STATIC ${CORE_HEADER_FILES} ${CORE_SOURCE_FILES})
+add_library(Core STATIC ${CORE_HEADER_FILES} ${CORE_SOURCE_FILES})
 
 # ======================================
 # 头文件目录
 # ======================================
-target_include_directories(Math PUBLIC Public)
+target_include_directories(Core PUBLIC Public)
+
+# ======================================
+# 依赖
+# ======================================
+target_link_libraries(Core
+        PUBLIC
+        Math
+        PRIVATE
+)
 
 # ======================================
 # 构建输出
 # ======================================
-set_target_properties(Math PROPERTIES
+set_target_properties(Core PROPERTIES
         ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin
