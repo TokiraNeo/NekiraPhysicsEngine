@@ -1,6 +1,6 @@
-﻿# ======================================
-# 子目录
-# ======================================
-add_subdirectory(CoreMacros)
-add_subdirectory(Core)
-add_subdirectory(Math)
+# =============================
+# Engine/CMakeLists.txt
+# =============================
+
+add_subdirectory(BaseEngine)
+#add_subdirectory(PhysicsEngine)
