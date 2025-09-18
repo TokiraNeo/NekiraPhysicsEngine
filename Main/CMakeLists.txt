@@ -8,7 +8,7 @@ add_executable(NekiraPhysics2D NekiraPhysics2D.cpp)
 # ======================================
 target_link_libraries(NekiraPhysics2D
     PRIVATE
-        BaseEngine
+        
 )
 
 # ======================================

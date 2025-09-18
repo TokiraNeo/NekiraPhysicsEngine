@@ -25,3 +25,4 @@
 
 - `BaseEngine`是基础引擎套件
 - `PhysicsEngine`是物理引擎套件，主要负责物理相关的逻辑
+- `RenderEngine`是渲染引擎套件，主要负责引擎界面的渲染、图形管线的渲染

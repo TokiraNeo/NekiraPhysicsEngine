@@ -25,8 +25,9 @@ target_include_directories(Core PUBLIC Public)
 # ======================================
 target_link_libraries(Core
     PUBLIC
-        Math
+        
     PRIVATE
+        Math
         CoreMacros
 )
 
