@@ -10,45 +10,45 @@
 
 #include <Utility/Utilities.hpp>
 
-NAMESPACE_BEGIN(Math)
+NAMESPACE_BEGIN(BE::Math)
 
-/// Vector2<>
+/// TVector2<>
 template <typename T>
-struct Vector2 final
+struct TVector2 final
 {
     T X;
     T Y;
 
-    ~Vector2() = default;
+    ~TVector2() = default;
 
-    Vector2();
-    explicit Vector2(T value);
-    Vector2(T x, T y);
+    TVector2();
+    explicit TVector2(T value);
+    TVector2(T x, T y);
 
-    Vector2(const Vector2& other);
-    Vector2(Vector2&& other) noexcept;
+    TVector2(const TVector2& other);
+    TVector2(TVector2&& other) noexcept;
 
-    Vector2& operator=(const Vector2& other);
-    Vector2& operator=(Vector2&& other) noexcept;
+    TVector2& operator=(const TVector2& other);
+    TVector2& operator=(TVector2&& other) noexcept;
 
-    Vector2 operator+(const Vector2& other) const;
-    Vector2 operator-(const Vector2& other) const;
-    Vector2 operator*(const Vector2& other) const;
-    Vector2 operator*(T scalar) const;
+    TVector2 operator+(const TVector2& other) const;
+    TVector2 operator-(const TVector2& other) const;
+    TVector2 operator*(const TVector2& other) const;
+    TVector2 operator*(T scalar) const;
 
-    Vector2& operator+=(const Vector2& other);
-    Vector2& operator-=(const Vector2& other);
-    Vector2& operator*=(const Vector2& other);
-    Vector2& operator*=(T scalar);
+    TVector2& operator+=(const TVector2& other);
+    TVector2& operator-=(const TVector2& other);
+    TVector2& operator*=(const TVector2& other);
+    TVector2& operator*=(T scalar);
 
-    bool operator==(const Vector2& other) const;
-    bool operator!=(const Vector2& other) const;
+    bool operator==(const TVector2& other) const;
+    bool operator!=(const TVector2& other) const;
 
     // Dot product
-    T operator|(const Vector2& other) const;
+    T operator|(const TVector2& other) const;
     // Cross product
-    T        operator^(const Vector2& other) const;
-    Vector2& operator^=(const Vector2& other);
+    T         operator^(const TVector2& other) const;
+    TVector2& operator^=(const TVector2& other);
 
     T Magnitude() const;
     T SquareMagnitude() const;
@@ -61,34 +61,34 @@ struct Vector2 final
 
 
 /// ====-------------------------------------====
-/// Implementation of Vector2<>
+/// Implementation of TVector2<>
 /// ====-------------------------------------====
 
 template <typename T>
-Vector2<T>::Vector2() : X(0), Y(0)
+TVector2<T>::TVector2() : X(0), Y(0)
 {}
 
 template <typename T>
-Vector2<T>::Vector2(T value) : X(value), Y(value)
+TVector2<T>::TVector2(T value) : X(value), Y(value)
 {}
 
 template <typename T>
-Vector2<T>::Vector2(T x, T y) : X(x), Y(y)
+TVector2<T>::TVector2(T x, T y) : X(x), Y(y)
 {}
 
 template <typename T>
-Vector2<T>::Vector2(const Vector2& other) : X(other.X), Y(other.Y)
+TVector2<T>::TVector2(const TVector2& other) : X(other.X), Y(other.Y)
 {}
 
 template <typename T>
-Vector2<T>::Vector2(Vector2&& other) noexcept : X(other.X), Y(other.Y)
+TVector2<T>::TVector2(TVector2&& other) noexcept : X(other.X), Y(other.Y)
 {
     other.X = 0;
     other.Y = 0;
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator=(const Vector2& other)
+TVector2<T>& TVector2<T>::operator=(const TVector2& other)
 {
     if (this != &other)
     {
@@ -99,7 +99,7 @@ Vector2<T>& Vector2<T>::operator=(const Vector2& other)
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator=(Vector2&& other) noexcept
+TVector2<T>& TVector2<T>::operator=(TVector2&& other) noexcept
 {
     if (this != &other)
     {
@@ -112,31 +112,31 @@ Vector2<T>& Vector2<T>::operator=(Vector2&& other) noexcept
 }
 
 template <typename T>
-Vector2<T> Vector2<T>::operator+(const Vector2& other) const
+TVector2<T> TVector2<T>::operator+(const TVector2& other) const
 {
-    return Vector2<T>(X + other.X, Y + other.Y);
+    return TVector2<T>(X + other.X, Y + other.Y);
 }
 
 template <typename T>
-Vector2<T> Vector2<T>::operator-(const Vector2& other) const
+TVector2<T> TVector2<T>::operator-(const TVector2& other) const
 {
-    return Vector2<T>(X - other.X, Y - other.Y);
+    return TVector2<T>(X - other.X, Y - other.Y);
 }
 
 template <typename T>
-Vector2<T> Vector2<T>::operator*(const Vector2& other) const
+TVector2<T> TVector2<T>::operator*(const TVector2& other) const
 {
-    return Vector2<T>(X * other.X, Y * other.Y);
+    return TVector2<T>(X * other.X, Y * other.Y);
 }
 
 template <typename T>
-Vector2<T> Vector2<T>::operator*(T scalar) const
+TVector2<T> TVector2<T>::operator*(T scalar) const
 {
-    return Vector2<T>(X * scalar, Y * scalar);
+    return TVector2<T>(X * scalar, Y * scalar);
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator+=(const Vector2& other)
+TVector2<T>& TVector2<T>::operator+=(const TVector2& other)
 {
     X += other.X;
     Y += other.Y;
@@ -144,7 +144,7 @@ Vector2<T>& Vector2<T>::operator+=(const Vector2& other)
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator-=(const Vector2& other)
+TVector2<T>& TVector2<T>::operator-=(const TVector2& other)
 {
     X -= other.X;
     Y -= other.Y;
@@ -152,7 +152,7 @@ Vector2<T>& Vector2<T>::operator-=(const Vector2& other)
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator*=(const Vector2& other)
+TVector2<T>& TVector2<T>::operator*=(const TVector2& other)
 {
     X *= other.X;
     Y *= other.Y;
@@ -160,7 +160,7 @@ Vector2<T>& Vector2<T>::operator*=(const Vector2& other)
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator*=(T scalar)
+TVector2<T>& TVector2<T>::operator*=(T scalar)
 {
     X *= scalar;
     Y *= scalar;
@@ -168,25 +168,25 @@ Vector2<T>& Vector2<T>::operator*=(T scalar)
 }
 
 template <typename T>
-bool Vector2<T>::operator==(const Vector2& other) const
+bool TVector2<T>::operator==(const TVector2& other) const
 {
     return IsNearlyEqual(X, other.X) && IsNearlyEqual(Y, other.Y);
 }
 
 template <typename T>
-bool Vector2<T>::operator!=(const Vector2& other) const
+bool TVector2<T>::operator!=(const TVector2& other) const
 {
     return !(*this == other);
 }
 
 template <typename T>
-T Vector2<T>::operator|(const Vector2& other) const
+T TVector2<T>::operator|(const TVector2& other) const
 {
     return (X * other.X) + (Y * other.Y);
 }
 
 template <typename T>
-T Vector2<T>::operator^(const Vector2& other) const
+T TVector2<T>::operator^(const TVector2& other) const
 {
     // |X1 Y1|
     // |X2 Y2|
@@ -195,27 +195,27 @@ T Vector2<T>::operator^(const Vector2& other) const
 }
 
 template <typename T>
-Vector2<T>& Vector2<T>::operator^=(const Vector2& other)
+TVector2<T>& TVector2<T>::operator^=(const TVector2& other)
 {
-    Vector2 cross = (*this) ^ other;
+    TVector2 cross = (*this) ^ other;
     *this = cross;
     return *this;
 }
 
 template <typename T>
-T Vector2<T>::Magnitude() const
+T TVector2<T>::Magnitude() const
 {
     return Sqrt((X * X) + (Y * Y));
 }
 
 template <typename T>
-T Vector2<T>::SquareMagnitude() const
+T TVector2<T>::SquareMagnitude() const
 {
     return (X * X) + (Y * Y);
 }
 
 template <typename T>
-void Vector2<T>::Normalize()
+void TVector2<T>::Normalize()
 {
     T mag = Magnitude();
     if (mag > 0)
@@ -226,10 +226,10 @@ void Vector2<T>::Normalize()
 }
 
 template <typename T>
-void Vector2<T>::Invert()
+void TVector2<T>::Invert()
 {
     X = -X;
     Y = -Y;
 }
 
-NAMESPACE_END() // namespace Math
+NAMESPACE_END() // namespace BE::Math

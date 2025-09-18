@@ -10,46 +10,46 @@
 
 #include <Utility/Utilities.hpp>
 
-NAMESPACE_BEGIN(Math)
+NAMESPACE_BEGIN(BE::Math)
 
-/// Vector3<>
+/// TVector3<>
 template <typename T>
-struct Vector3 final
+struct TVector3 final
 {
     T X;
     T Y;
     T Z;
 
-    ~Vector3() = default;
+    ~TVector3() = default;
 
-    Vector3();
-    explicit Vector3(T value);
-    Vector3(T x, T y, T z);
+    TVector3();
+    explicit TVector3(T value);
+    TVector3(T x, T y, T z);
 
-    Vector3(const Vector3& other);
-    Vector3(Vector3&& other) noexcept;
+    TVector3(const TVector3& other);
+    TVector3(TVector3&& other) noexcept;
 
-    Vector3& operator=(const Vector3& other);
-    Vector3& operator=(Vector3&& other) noexcept;
+    TVector3& operator=(const TVector3& other);
+    TVector3& operator=(TVector3&& other) noexcept;
 
-    Vector3 operator+(const Vector3& other) const;
-    Vector3 operator-(const Vector3& other) const;
-    Vector3 operator*(const Vector3& other) const;
-    Vector3 operator*(T scalar) const;
+    TVector3 operator+(const TVector3& other) const;
+    TVector3 operator-(const TVector3& other) const;
+    TVector3 operator*(const TVector3& other) const;
+    TVector3 operator*(T scalar) const;
 
-    Vector3& operator+=(const Vector3& other);
-    Vector3& operator-=(const Vector3& other);
-    Vector3& operator*=(const Vector3& other);
-    Vector3& operator*=(T scalar);
+    TVector3& operator+=(const TVector3& other);
+    TVector3& operator-=(const TVector3& other);
+    TVector3& operator*=(const TVector3& other);
+    TVector3& operator*=(T scalar);
 
-    bool operator==(const Vector3& other) const;
-    bool operator!=(const Vector3& other) const;
+    bool operator==(const TVector3& other) const;
+    bool operator!=(const TVector3& other) const;
 
     // Dot product
-    T operator|(const Vector3& other) const;
+    T operator|(const TVector3& other) const;
     // Cross product
-    Vector3  operator^(const Vector3& other) const;
-    Vector3& operator^=(const Vector3& other);
+    TVector3  operator^(const TVector3& other) const;
+    TVector3& operator^=(const TVector3& other);
 
     T Magnitude() const;
     T SquareMagnitude() const;
@@ -62,27 +62,27 @@ struct Vector3 final
 
 
 /// ====-------------------------------------====
-/// Implementation of Vector3<>
+/// Implementation of TVector3<>
 /// ====-------------------------------------====
 
 template <typename T>
-Vector3<T>::Vector3() : X(0), Y(0), Z(0)
+TVector3<T>::TVector3() : X(0), Y(0), Z(0)
 {}
 
 template <typename T>
-Vector3<T>::Vector3(T value) : X(value), Y(value), Z(value)
+TVector3<T>::TVector3(T value) : X(value), Y(value), Z(value)
 {}
 
 template <typename T>
-Vector3<T>::Vector3(T x, T y, T z) : X(x), Y(y), Z(z)
+TVector3<T>::TVector3(T x, T y, T z) : X(x), Y(y), Z(z)
 {}
 
 template <typename T>
-Vector3<T>::Vector3(const Vector3& other) : X(other.X), Y(other.Y), Z(other.Z)
+TVector3<T>::TVector3(const TVector3& other) : X(other.X), Y(other.Y), Z(other.Z)
 {}
 
 template <typename T>
-Vector3<T>::Vector3(Vector3&& other) noexcept : X(other.X), Y(other.Y), Z(other.Z)
+TVector3<T>::TVector3(TVector3&& other) noexcept : X(other.X), Y(other.Y), Z(other.Z)
 {
     other.X = 0;
     other.Y = 0;
@@ -90,7 +90,7 @@ Vector3<T>::Vector3(Vector3&& other) noexcept : X(other.X), Y(other.Y), Z(other.
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator=(const Vector3& other)
+TVector3<T>& TVector3<T>::operator=(const TVector3& other)
 {
     if (this != &other)
     {
@@ -102,7 +102,7 @@ Vector3<T>& Vector3<T>::operator=(const Vector3& other)
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator=(Vector3&& other) noexcept
+TVector3<T>& TVector3<T>::operator=(TVector3&& other) noexcept
 {
     if (this != &other)
     {
@@ -117,31 +117,31 @@ Vector3<T>& Vector3<T>::operator=(Vector3&& other) noexcept
 }
 
 template <typename T>
-Vector3<T> Vector3<T>::operator+(const Vector3& other) const
+TVector3<T> TVector3<T>::operator+(const TVector3& other) const
 {
-    return Vector3<T>(X + other.X, Y + other.Y, Z + other.Z);
+    return TVector3<T>(X + other.X, Y + other.Y, Z + other.Z);
 }
 
 template <typename T>
-Vector3<T> Vector3<T>::operator-(const Vector3& other) const
+TVector3<T> TVector3<T>::operator-(const TVector3& other) const
 {
-    return Vector3<T>(X - other.X, Y - other.Y, Z - other.Z);
+    return TVector3<T>(X - other.X, Y - other.Y, Z - other.Z);
 }
 
 template <typename T>
-Vector3<T> Vector3<T>::operator*(const Vector3& other) const
+TVector3<T> TVector3<T>::operator*(const TVector3& other) const
 {
-    return Vector3<T>(X * other.X, Y * other.Y, Z * other.Z);
+    return TVector3<T>(X * other.X, Y * other.Y, Z * other.Z);
 }
 
 template <typename T>
-Vector3<T> Vector3<T>::operator*(T scalar) const
+TVector3<T> TVector3<T>::operator*(T scalar) const
 {
-    return Vector3<T>(X * scalar, Y * scalar, Z * scalar);
+    return TVector3<T>(X * scalar, Y * scalar, Z * scalar);
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator+=(const Vector3& other)
+TVector3<T>& TVector3<T>::operator+=(const TVector3& other)
 {
     X += other.X;
     Y += other.Y;
@@ -150,7 +150,7 @@ Vector3<T>& Vector3<T>::operator+=(const Vector3& other)
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator-=(const Vector3& other)
+TVector3<T>& TVector3<T>::operator-=(const TVector3& other)
 {
     X -= other.X;
     Y -= other.Y;
@@ -159,7 +159,7 @@ Vector3<T>& Vector3<T>::operator-=(const Vector3& other)
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator*=(const Vector3& other)
+TVector3<T>& TVector3<T>::operator*=(const TVector3& other)
 {
     X *= other.X;
     Y *= other.Y;
@@ -168,7 +168,7 @@ Vector3<T>& Vector3<T>::operator*=(const Vector3& other)
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator*=(T scalar)
+TVector3<T>& TVector3<T>::operator*=(T scalar)
 {
     X *= scalar;
     Y *= scalar;
@@ -177,55 +177,55 @@ Vector3<T>& Vector3<T>::operator*=(T scalar)
 }
 
 template <typename T>
-bool Vector3<T>::operator==(const Vector3& other) const
+bool TVector3<T>::operator==(const TVector3& other) const
 {
     return IsNearlyEqual(X, other.X) && IsNearlyEqual(Y, other.Y) && IsNearlyEqual(Z, other.Z);
 }
 
 template <typename T>
-bool Vector3<T>::operator!=(const Vector3& other) const
+bool TVector3<T>::operator!=(const TVector3& other) const
 {
     return !(*this == other);
 }
 
 template <typename T>
-T Vector3<T>::operator|(const Vector3& other) const
+T TVector3<T>::operator|(const TVector3& other) const
 {
     return (X * other.X) + (Y * other.Y) + (Z * other.Z);
 }
 
 template <typename T>
-Vector3<T> Vector3<T>::operator^(const Vector3& other) const
+TVector3<T> TVector3<T>::operator^(const TVector3& other) const
 {
     // | i   j   k  |
     // | X1  Y1  Z1 |
     // | X2  Y2  Z2 |
     // Cross product: i(Y1*Z2 - Z1*Y2) - j(X1*Z2 - Z1*X2) + k(X1*Y2 - Y1*X2)
-    return Vector3<T>((Y * other.Z) - (Z * other.Y), (Z * other.X) - (X * other.Z), (X * other.Y) - (Y * other.X));
+    return TVector3<T>((Y * other.Z) - (Z * other.Y), (Z * other.X) - (X * other.Z), (X * other.Y) - (Y * other.X));
 }
 
 template <typename T>
-Vector3<T>& Vector3<T>::operator^=(const Vector3& other)
+TVector3<T>& TVector3<T>::operator^=(const TVector3& other)
 {
-    Vector3 cross = (*this) ^ other;
+    TVector3 cross = (*this) ^ other;
     *this = cross;
     return *this;
 }
 
 template <typename T>
-T Vector3<T>::Magnitude() const
+T TVector3<T>::Magnitude() const
 {
     return Sqrt((X * X) + (Y * Y) + (Z * Z));
 }
 
 template <typename T>
-T Vector3<T>::SquareMagnitude() const
+T TVector3<T>::SquareMagnitude() const
 {
     return (X * X) + (Y * Y) + (Z * Z);
 }
 
 template <typename T>
-void Vector3<T>::Normalize()
+void TVector3<T>::Normalize()
 {
     T mag = Magnitude();
     if (mag > 0)
@@ -237,11 +237,11 @@ void Vector3<T>::Normalize()
 }
 
 template <typename T>
-void Vector3<T>::Invert()
+void TVector3<T>::Invert()
 {
     X = -X;
     Y = -Y;
     Z = -Z;
 }
 
-NAMESPACE_END() // namespace Math
+NAMESPACE_END() // namespace BE::Math

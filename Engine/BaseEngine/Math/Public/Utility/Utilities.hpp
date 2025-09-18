@@ -10,7 +10,7 @@
 
 #include <CoreMacros.hpp>
 
-NAMESPACE_BEGIN(Math)
+NAMESPACE_BEGIN(BE::Math)
 
 bool IsNearlyZero(float value, float epsilon = 1E-6F);
 
@@ -24,4 +24,4 @@ float Sqrt(float value);
 
 double Sqrt(double value);
 
-NAMESPACE_END() // namespace Math
+NAMESPACE_END() // namespace BE::Math

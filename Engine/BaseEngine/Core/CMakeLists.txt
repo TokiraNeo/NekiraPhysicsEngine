@@ -24,9 +24,10 @@ target_include_directories(Core PUBLIC Public)
 # 依赖
 # ======================================
 target_link_libraries(Core
-        PUBLIC
+    PUBLIC
         Math
-        PRIVATE
+    PRIVATE
+        CoreMacros
 )
 
 # ======================================
