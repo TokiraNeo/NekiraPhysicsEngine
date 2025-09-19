@@ -2,7 +2,7 @@
 # Core 模块
 # ======================================
 
-
+find_package(EASTL REQUIRED)
 
 # ======================================
 # 头文件、源文件
@@ -24,9 +24,11 @@ target_include_directories(Core PUBLIC Public)
 # 依赖
 # ======================================
 target_link_libraries(Core
-        PUBLIC
+    PUBLIC
+        
+    PRIVATE
         Math
-        PRIVATE
+        CoreMacros
 )
 
 # ======================================

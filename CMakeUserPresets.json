@@ -17,6 +17,15 @@
         "CMAKE_CXX_STANDARD_REQUIRED": "YES",
         "CMAKE_CXX_COMPILER": "clang++"
       }
+    },
+    {
+      "name": "Debug",
+      "inherits": "Default",
+      "hidden": false,
+      "binaryDir": "${sourceDir}/build_Debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
     }
   ]
 }

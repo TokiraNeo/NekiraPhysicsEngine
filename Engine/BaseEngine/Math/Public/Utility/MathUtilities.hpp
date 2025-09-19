@@ -8,9 +8,7 @@
 
 #pragma once
 
-#include <CoreMacros.hpp>
 
-NAMESPACE_BEGIN(Math)
 
 bool IsNearlyZero(float value, float epsilon = 1E-6F);
 
@@ -20,4 +18,6 @@ bool IsNearlyEqual(float a, float b, float epsilon = 1E-6F);
 
 bool IsNearlyEqual(double a, double b, double epsilon = 1E-12);
 
-NAMESPACE_END() // namespace Math
+float Sqrt(float value);
+
+double Sqrt(double value);
