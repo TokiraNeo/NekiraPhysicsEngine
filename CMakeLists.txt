@@ -2,7 +2,7 @@
 # Root
 # ======================================
 cmake_minimum_required(VERSION 3.20)
-project(NekiraPhysics2D LANGUAGES CXX VERSION 1.0.0)
+project(NekiraPhysics2D LANGUAGES CXX VERSION 1.0.3)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 

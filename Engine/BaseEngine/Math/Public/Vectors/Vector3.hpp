@@ -10,11 +10,12 @@
 
 #include <CoreMacros.hpp>
 #include <Utility/MathUtilities.hpp>
+#include <EASTL/type_traits.h>
 
 NAMESPACE_BEGIN(BE::Math)
 
 /// TVector3<>
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 struct TVector3 final
 {
     T X;
@@ -66,23 +67,23 @@ struct TVector3 final
 /// Implementation of TVector3<>
 /// ====-------------------------------------====
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 constexpr TVector3<T>::TVector3() : X(0), Y(0), Z(0)
 {}
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 constexpr TVector3<T>::TVector3(T value) : X(value), Y(value), Z(value)
 {}
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 constexpr TVector3<T>::TVector3(T x, T y, T z) : X(x), Y(y), Z(z)
 {}
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>::TVector3(const TVector3& other) : X(other.X), Y(other.Y), Z(other.Z)
 {}
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>::TVector3(TVector3&& other) noexcept : X(other.X), Y(other.Y), Z(other.Z)
 {
     other.X = 0;
@@ -90,7 +91,7 @@ TVector3<T>::TVector3(TVector3&& other) noexcept : X(other.X), Y(other.Y), Z(oth
     other.Z = 0;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator=(const TVector3& other)
 {
     if (this != &other)
@@ -102,7 +103,7 @@ TVector3<T>& TVector3<T>::operator=(const TVector3& other)
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator=(TVector3&& other) noexcept
 {
     if (this != &other)
@@ -117,31 +118,31 @@ TVector3<T>& TVector3<T>::operator=(TVector3&& other) noexcept
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T> TVector3<T>::operator+(const TVector3& other) const
 {
     return TVector3<T>(X + other.X, Y + other.Y, Z + other.Z);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T> TVector3<T>::operator-(const TVector3& other) const
 {
     return TVector3<T>(X - other.X, Y - other.Y, Z - other.Z);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T> TVector3<T>::operator*(const TVector3& other) const
 {
     return TVector3<T>(X * other.X, Y * other.Y, Z * other.Z);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T> TVector3<T>::operator*(T scalar) const
 {
     return TVector3<T>(X * scalar, Y * scalar, Z * scalar);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator+=(const TVector3& other)
 {
     X += other.X;
@@ -150,7 +151,7 @@ TVector3<T>& TVector3<T>::operator+=(const TVector3& other)
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator-=(const TVector3& other)
 {
     X -= other.X;
@@ -159,7 +160,7 @@ TVector3<T>& TVector3<T>::operator-=(const TVector3& other)
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator*=(const TVector3& other)
 {
     X *= other.X;
@@ -168,7 +169,7 @@ TVector3<T>& TVector3<T>::operator*=(const TVector3& other)
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator*=(T scalar)
 {
     X *= scalar;
@@ -177,25 +178,25 @@ TVector3<T>& TVector3<T>::operator*=(T scalar)
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 bool TVector3<T>::operator==(const TVector3& other) const
 {
     return IsNearlyEqual(X, other.X) && IsNearlyEqual(Y, other.Y) && IsNearlyEqual(Z, other.Z);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 bool TVector3<T>::operator!=(const TVector3& other) const
 {
     return !(*this == other);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 T TVector3<T>::operator|(const TVector3& other) const
 {
     return (X * other.X) + (Y * other.Y) + (Z * other.Z);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T> TVector3<T>::operator^(const TVector3& other) const
 {
     // | i   j   k  |
@@ -205,7 +206,7 @@ TVector3<T> TVector3<T>::operator^(const TVector3& other) const
     return TVector3<T>((Y * other.Z) - (Z * other.Y), (Z * other.X) - (X * other.Z), (X * other.Y) - (Y * other.X));
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 TVector3<T>& TVector3<T>::operator^=(const TVector3& other)
 {
     TVector3 cross = (*this) ^ other;
@@ -213,19 +214,19 @@ TVector3<T>& TVector3<T>::operator^=(const TVector3& other)
     return *this;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 T TVector3<T>::Magnitude() const
 {
     return Sqrt((X * X) + (Y * Y) + (Z * Z));
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 T TVector3<T>::SquareMagnitude() const
 {
     return (X * X) + (Y * Y) + (Z * Z);
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 void TVector3<T>::Normalize()
 {
     T mag = Magnitude();
@@ -237,7 +238,7 @@ void TVector3<T>::Normalize()
     }
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 void TVector3<T>::Invert()
 {
     X = -X;

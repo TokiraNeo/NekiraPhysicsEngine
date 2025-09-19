@@ -165,13 +165,13 @@ constexpr SVector3D DOWN_VECTOR3D = SVector3D(0.0, 0.0, -1.0);
 /// Dot Product
 /// ====-------------------------------------====
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 static T DotProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return a | b;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 static T DotProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return a | b;
@@ -183,13 +183,13 @@ static T DotProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>&
 /// Cross Product
 /// ====-------------------------------------====
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 static BE::Math::TVector2<T> CrossProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return a ^ b;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 static BE::Math::TVector3<T> CrossProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return a ^ b;
@@ -201,13 +201,13 @@ static BE::Math::TVector3<T> CrossProduct(const BE::Math::TVector3<T>& a, const 
 /// Component-wise Product
 /// ====-------------------------------------====
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 static BE::Math::TVector2<T> ComponentWiseProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return a * b;
 }
 
-template <typename T>
+template <typename T> requires eastl::is_floating_point_v<T>
 static BE::Math::TVector3<T> ComponentWiseProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return a * b;
