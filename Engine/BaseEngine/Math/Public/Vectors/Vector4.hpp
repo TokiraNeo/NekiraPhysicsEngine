@@ -8,7 +8,8 @@
 
 #pragma once
 
-#include <Utility/Utilities.hpp>
+#include <CoreMacros.hpp>
+#include <Utility/MathUtilities.hpp>
 
 NAMESPACE_BEGIN(BE::Math)
 
@@ -23,9 +24,9 @@ struct TVector4 final
 
     ~TVector4() = default;
 
-    TVector4();
-    explicit TVector4(T value);
-    TVector4(T x, T y, T z, T w);
+    constexpr TVector4();
+    explicit constexpr TVector4(T value);
+    constexpr TVector4(T x, T y, T z, T w);
 
     TVector4(const TVector4& other);
     TVector4(TVector4&& other) noexcept;
@@ -64,15 +65,15 @@ struct TVector4 final
 /// ====-------------------------------------====
 
 template <typename T>
-TVector4<T>::TVector4() : X(0), Y(0), Z(0), W(0)
+constexpr TVector4<T>::TVector4() : X(0), Y(0), Z(0), W(0)
 {}
 
 template <typename T>
-TVector4<T>::TVector4(T value) : X(value), Y(value), Z(value), W(value)
+constexpr TVector4<T>::TVector4(T value) : X(value), Y(value), Z(value), W(value)
 {}
 
 template <typename T>
-TVector4<T>::TVector4(T x, T y, T z, T w) : X(x), Y(y), Z(z), W(w)
+constexpr TVector4<T>::TVector4(T x, T y, T z, T w) : X(x), Y(y), Z(z), W(w)
 {}
 
 template <typename T>

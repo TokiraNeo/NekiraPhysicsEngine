@@ -6,10 +6,9 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#include <Utility/Utilities.hpp>
+#include <Utility/MathUtilities.hpp>
 #include <cmath>
 
-NAMESPACE_BEGIN(BE::Math)
 
 bool IsNearlyZero(float value, float epsilon)
 {
@@ -40,5 +39,3 @@ double Sqrt(double value)
 {
     return std::sqrt(value);
 }
-
-NAMESPACE_END() // namespace BE::Math

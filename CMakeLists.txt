@@ -15,7 +15,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 # ======================================
 # 子目录
 # ======================================
-add_subdirectory(Main)
-add_subdirectory(Engine)
 add_subdirectory(ThirdParty)
-
+add_subdirectory(Engine)
+add_subdirectory(Main)

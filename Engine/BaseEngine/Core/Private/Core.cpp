@@ -16,7 +16,5 @@ int main()
 
     position ^= SVector(1.0F, 5.0F, 2.0F);
 
-    auto dot = position | SVector(0.0F, 1.0F, 0.0F);
-
-    auto cross = position ^ SVector(0.0F, 1.0F, 0.0F);
+    auto dot = position | FORWARD_VECTOR;
 }
