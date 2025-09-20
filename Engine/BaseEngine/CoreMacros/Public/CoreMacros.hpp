@@ -17,4 +17,3 @@
 #ifndef NAMESPACE_END
 #define NAMESPACE_END() }
 #endif
-

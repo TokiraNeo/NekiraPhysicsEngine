@@ -2,7 +2,7 @@
 # Core 模块
 # ======================================
 
-find_package(EASTL REQUIRED)
+find_package(NekiraDelegateLib CONFIG REQUIRED)
 
 # ======================================
 # 头文件、源文件
@@ -25,10 +25,10 @@ target_include_directories(Core PUBLIC Public)
 # ======================================
 target_link_libraries(Core
     PUBLIC
-        
-    PRIVATE
+        NekiraDelegateLib::DelegateCore
         Math
-        CoreMacros
+    PRIVATE
+
 )
 
 # ======================================
