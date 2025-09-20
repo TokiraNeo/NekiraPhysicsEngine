@@ -2,6 +2,8 @@
 # Math 模块
 # ======================================
 
+find_package(EASTL CONFIG REQUIRED)
+
 # ======================================
 # 头文件、源文件
 # ======================================
@@ -35,7 +37,8 @@ set_target_properties(Math PROPERTIES
 # ======================================
 target_link_libraries(Math
     PUBLIC
-    PRIVATE
+        EASTL
         CoreMacros
-        G
+    PRIVATE
+
 )
