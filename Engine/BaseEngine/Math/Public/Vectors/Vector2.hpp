@@ -55,16 +55,19 @@ struct TVector2 final
     T Magnitude() const;
     T SquareMagnitude() const;
 
+    // Normalize the vector to have a magnitude of 1
     void Normalize();
+    // Get a new normalized vector based on this vector, without modifying this vector
+    TVector2 Normalized() const;
 
     void Invert();
 };
 
 
 
-/// ====-------------------------------------====
-/// Implementation of TVector2<>
-/// ====-------------------------------------====
+/* ====-------------------------------------------==== */
+// Implementation of TVector2<>
+/* ====-------------------------------------------==== */
 
 template <typename T> requires eastl::is_floating_point_v<T>
 constexpr TVector2<T>::TVector2() : X(0), Y(0)
@@ -225,6 +228,18 @@ void TVector2<T>::Normalize()
         X *= (1.0F / mag);
         Y *= (1.0F / mag);
     }
+}
+
+template <typename T> requires eastl::is_floating_point_v<T>
+TVector2<T> TVector2<T>::Normalized() const
+{
+    T mag = Magnitude();
+    if (mag > 0)
+    {
+        return TVector2<T>(X * (1.0F / mag), Y * (1.0F / mag));
+    }
+    // If the magnitude is zero, return a default unit vector (1.0, 1.0)
+    return TVector2<T>(1.0F);
 }
 
 template <typename T> requires eastl::is_floating_point_v<T>
