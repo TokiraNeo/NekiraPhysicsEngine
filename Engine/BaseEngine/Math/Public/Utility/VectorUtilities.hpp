@@ -186,7 +186,7 @@ static BE::Math::TVector3<T> Perpendicular(const BE::Math::TVector3<T>& length, 
  * @param normal The normal vector2
  */
 template <typename T> requires eastl::is_floating_point_v<T>
-static BE::Math::TVector2<T> Reflect(const BE::Math::TVector2<T>& incident, const BE::Math::TVector2<T>& normal)
+static BE::Math::TVector2<T> Reflection(const BE::Math::TVector2<T>& incident, const BE::Math::TVector2<T>& normal)
 {
     // Make sure normal is normalized
     auto normalized = normal.Normalized();
@@ -200,7 +200,7 @@ static BE::Math::TVector2<T> Reflect(const BE::Math::TVector2<T>& incident, cons
  * @param normal The normal vector3
  */
 template <typename T> requires eastl::is_floating_point_v<T>
-static BE::Math::TVector3<T> Reflect(const BE::Math::TVector3<T>& incident, const BE::Math::TVector3<T>& normal)
+static BE::Math::TVector3<T> Reflection(const BE::Math::TVector3<T>& incident, const BE::Math::TVector3<T>& normal)
 {
     // Make sure normal is normalized
     auto normalized = normal.Normalized();
