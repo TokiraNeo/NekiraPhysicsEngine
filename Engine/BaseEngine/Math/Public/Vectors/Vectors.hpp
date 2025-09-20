@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include <Vectors/Vector2.hpp>
-#include <Vectors/Vector3.hpp>
-#include <Vectors/Vector4.hpp>
+#include <Vectors/Internal/Vector2.hpp>
+#include <Vectors/Internal/Vector3.hpp>
+#include <Vectors/Internal/Vector4.hpp>
 
 
 /* ====-------------------------------------------==== */

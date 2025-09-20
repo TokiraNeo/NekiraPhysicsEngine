@@ -8,14 +8,16 @@
 
 #pragma once
 
-#include <CoreMacros.hpp>
+
+#include <Matrices/Internal/MatrixBase.hpp>
 #include <Utility/MathUtilities.hpp>
-#include <EASTL/type_traits.h>
+
 
 NAMESPACE_BEGIN(BE::Math)
 
 /// TSquareMatrix<>
-template <typename T, char N = 2> requires eastl::is_floating_point_v<T>
+template <typename T, char N = 2>
+    requires TMatrixInternal::TMatrixConcept<T, N>
 struct TSquareMatrix final
 {
     static_assert((N >= 2), "Square matrix must be at least 2x2.");
@@ -37,7 +39,7 @@ public:
 
     TSquareMatrix operator*(T scalar) const;
     // @[TODO] Matrix Multiplication
-    TSquareMatrix operator*(const TSquareMatrix& other) const;
+    // TSquareMatrix operator*(const TSquareMatrix& other) const;
 
     // Get Transpose of the matrix
     TSquareMatrix Transpose() const;
@@ -48,7 +50,8 @@ public:
 // Implementation of TSquareMatrix<>
 /* ====-------------------------------------------==== */
 
-template <typename T, char N> requires eastl::is_floating_point_v<T>
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
 float* TSquareMatrix<T, N>::operator[](char index) const
 {
     index = Clamp<char>(index, 0, N - 1);
@@ -57,11 +60,12 @@ float* TSquareMatrix<T, N>::operator[](char index) const
     return &Data[index * N];
 }
 
-template <typename T, char N> requires eastl::is_floating_point_v<T>
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
 TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(T scalar) const
 {
     TSquareMatrix<T, N> result;
-    for(char i = 0; i < (N * N); ++i)
+    for (char i = 0; i < (N * N); ++i)
     {
         result.Data[i] = Data[i] * scalar;
     }
@@ -69,11 +73,12 @@ TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(T scalar) const
 }
 
 
-template <typename T, char N> requires eastl::is_floating_point_v<T>
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
 TSquareMatrix<T, N> TSquareMatrix<T, N>::Transpose() const
 {
     TSquareMatrix<T, N> result;
-    for(char i = 0; i < (N * N); ++i)
+    for (char i = 0; i < (N * N); ++i)
     {
         const char ROW = i / N;
         const char COL = i % N;
