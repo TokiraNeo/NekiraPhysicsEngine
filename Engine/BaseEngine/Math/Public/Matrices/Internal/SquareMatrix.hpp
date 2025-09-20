@@ -27,7 +27,8 @@ private:
 
 public:
     ~TSquareMatrix() = default;
-    TSquareMatrix() = default;
+
+    constexpr TSquareMatrix() = default;
 
     TSquareMatrix(const TSquareMatrix&) = default;
     TSquareMatrix& operator=(const TSquareMatrix&) = default;
