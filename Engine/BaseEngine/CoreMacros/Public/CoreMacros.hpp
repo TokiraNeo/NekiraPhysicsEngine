@@ -8,6 +8,13 @@
 
 #pragma once
 
+#ifndef KINDER_SMALL_FLOAT
+#define KINDER_SMALL_FLOAT 1E-6F
+#endif
+
+#ifndef KINDER_SMALL_DOUBLE
+#define KINDER_SMALL_DOUBLE 1E-12
+#endif
 
 /// 命名空间快捷宏，用于简化命名空间的定义和使用。
 #ifndef NAMESPACE_BEGIN

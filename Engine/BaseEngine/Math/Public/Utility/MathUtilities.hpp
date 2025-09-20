@@ -8,6 +8,8 @@
 
 #pragma once
 
+
+
 /**
  * @brief Check if a floating-point number is nearly zero
  * @param value The floating-point number to check
@@ -54,3 +56,59 @@ double RadiansToDegrees(double radians);
  */
 float DegreesToRadians(float degrees);
 double DegreesToRadians(double degrees);
+
+/**
+ * @brief Minimum of two values
+ */
+template <typename T>
+T Min(T a, T b)
+{
+    return (a < b) ? a : b;
+}
+
+/**
+ * @brief Maximum of two values
+ */
+template <typename T>
+T Max(T a, T b)
+{
+    return (a > b) ? a : b;
+}
+
+/**
+ * @brief Clamp a value between a minimum and maximum range
+ */
+template <typename T>
+T Clamp(T value, T min, T max)
+{
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+}
+
+/**
+ * @brief Mapping a value from one range to another
+ *
+ */
+template <typename T>
+T Mapping(T value, T inMin, T inMax, T outMin, T outMax)
+{
+    if (IsNearlyZero(inMax - inMin))
+    {
+        return outMin; // Avoid division by zero
+    }
+    return outMin + ((value - inMin) * (outMax - outMin) / (inMax - inMin));
+}
+
+/**
+ * @brief Linear Interpolation between two values
+ * @param a The start value
+ * @param b The end value
+ * @param t The interpolation factor (0.0 to 1.0)
+ */
+template <typename T>
+T Lerp(T a, T b, float t)
+{
+    t = Clamp(t, 0.0F, 1.0F);
+    return a + ((b - a) * t);
+}

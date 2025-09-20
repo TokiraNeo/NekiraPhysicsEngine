@@ -60,6 +60,9 @@ struct TVector4 final
     TVector4 Normalized() const;
 
     void Invert();
+
+    bool Equal(const TVector4& other,
+        T epsilon = (sizeof(T) == sizeof(float) ? KINDER_SMALL_FLOAT : KINDER_SMALL_DOUBLE)) const;
 };
 
 
@@ -252,4 +255,12 @@ void TVector4<T>::Invert()
     W = -W;
 }
 
+template <typename T> requires eastl::is_floating_point_v<T>
+bool TVector4<T>::Equal(const TVector4& other, T epsilon) const
+{
+    return IsNearlyEqual(X, other.X, epsilon) &&
+           IsNearlyEqual(Y, other.Y, epsilon) &&
+           IsNearlyEqual(Z, other.Z, epsilon) &&
+           IsNearlyEqual(W, other.W, epsilon);
+}
 NAMESPACE_END() // namespace BE::Math
