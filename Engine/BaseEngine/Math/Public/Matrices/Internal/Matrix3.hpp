@@ -18,9 +18,6 @@ template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 3>
 struct TMatrix3 final : public TSquareMatrix<T, 3>
 {
-    // Constructor using 3x3 elements
-    constexpr TMatrix3(T e11, T e12, T e13, T e21, T e22, T e23, T e31, T e32, T e33);
-
     // Constructor using TVector3
     constexpr TMatrix3(const TVector3<T>& row1, const TVector3<T>& row2, const TVector3<T>& row3);
 
@@ -33,23 +30,6 @@ struct TMatrix3 final : public TSquareMatrix<T, 3>
 /* ====-------------------------------------------==== */
 // Implementation of TMatrix3<>
 /* ====-------------------------------------------==== */
-
-template <typename T>
-    requires TMatrixInternal::TMatrixConcept<T, 3>
-constexpr TMatrix3<T>::TMatrix3(T e11, T e12, T e13, T e21, T e22, T e23, T e31, T e32, T e33)
-{
-    (*this)[0][0] = e11;
-    (*this)[0][1] = e12;
-    (*this)[0][2] = e13;
-
-    (*this)[1][0] = e21;
-    (*this)[1][1] = e22;
-    (*this)[1][2] = e23;
-
-    (*this)[2][0] = e31;
-    (*this)[2][1] = e32;
-    (*this)[2][2] = e33;
-}
 
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 3>

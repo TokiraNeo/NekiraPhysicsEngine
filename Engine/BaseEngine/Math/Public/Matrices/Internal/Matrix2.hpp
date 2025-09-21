@@ -20,9 +20,6 @@ template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 2>
 struct TMatrix2 : public TSquareMatrix<T, 2>
 {
-    // Constructor using 2x2 elements
-    constexpr TMatrix2(T e11, T e12, T e21, T e22);
-
     // Constructor using TVector2
     constexpr TMatrix2(const TVector2<T>& row1, const TVector2<T>& row2);
 
@@ -35,17 +32,6 @@ struct TMatrix2 : public TSquareMatrix<T, 2>
 /* ====-------------------------------------------==== */
 // Implementation of TMatrix2<>
 /* ====-------------------------------------------==== */
-
-template <typename T>
-    requires TMatrixInternal::TMatrixConcept<T, 2>
-constexpr TMatrix2<T>::TMatrix2(T e11, T e12, T e21, T e22)
-{
-    (*this)[0][0] = e11;
-    (*this)[0][1] = e12;
-
-    (*this)[1][0] = e21;
-    (*this)[1][1] = e22;
-}
 
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 2>

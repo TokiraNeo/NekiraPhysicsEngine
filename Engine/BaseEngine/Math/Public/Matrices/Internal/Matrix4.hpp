@@ -18,10 +18,6 @@ template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 4>
 struct TMatrix4 : public TSquareMatrix<T, 4>
 {
-    // Constructor using 4x4 elements
-    constexpr TMatrix4(T e11, T e12, T e13, T e14, T e21, T e22, T e23, T e24, T e31, T e32, T e33, T e34, T e41, T e42,
-                       T e43, T e44);
-
     // Constructor using TVector4
     constexpr TMatrix4(const TVector4<T>& row1, const TVector4<T>& row2, const TVector4<T>& row3,
                        const TVector4<T>& row4);
@@ -35,32 +31,6 @@ struct TMatrix4 : public TSquareMatrix<T, 4>
 /* ====-------------------------------------------==== */
 // Implementation of TMatrix4<>
 /* ====-------------------------------------------==== */
-
-template <typename T>
-    requires TMatrixInternal::TMatrixConcept<T, 4>
-constexpr TMatrix4<T>::TMatrix4(T e11, T e12, T e13, T e14, T e21, T e22, T e23, T e24, T e31, T e32, T e33, T e34,
-                                T e41, T e42, T e43, T e44)
-{
-    (*this)[0][0] = e11;
-    (*this)[0][1] = e12;
-    (*this)[0][2] = e13;
-    (*this)[0][3] = e14;
-
-    (*this)[1][0] = e21;
-    (*this)[1][1] = e22;
-    (*this)[1][2] = e23;
-    (*this)[1][3] = e24;
-
-    (*this)[2][0] = e31;
-    (*this)[2][1] = e32;
-    (*this)[2][2] = e33;
-    (*this)[2][3] = e34;
-
-    (*this)[3][0] = e41;
-    (*this)[3][1] = e42;
-    (*this)[3][2] = e43;
-    (*this)[3][3] = e44;
-}
 
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 4>
