@@ -27,7 +27,9 @@
 /* ====-------------------------------------------==== */
 /// 命名空间快捷宏，用于简化命名空间的定义和使用。
 #ifndef NAMESPACE_BEGIN
-#define NAMESPACE_BEGIN(name) namespace name {
+#define NAMESPACE_BEGIN(name)                                                                                          \
+    namespace name                                                                                                     \
+    {
 #endif
 
 #ifndef NAMESPACE_END

@@ -18,7 +18,7 @@ NAMESPACE_BEGIN(BE::Math)
 /// TSquareMatrix<>
 template <typename T, char N = 2>
     requires TMatrixInternal::TMatrixConcept<T, N>
-struct TSquareMatrix final
+struct TSquareMatrix
 {
     static_assert((N >= 2), "Square matrix must be at least 2x2.");
 
@@ -26,7 +26,7 @@ private:
     T Data[N * N];
 
 public:
-    ~TSquareMatrix() = default;
+    virtual ~TSquareMatrix() = default;
 
     constexpr TSquareMatrix() = default;
 
@@ -36,11 +36,11 @@ public:
     TSquareMatrix(TSquareMatrix&&) = default;
     TSquareMatrix& operator=(TSquareMatrix&&) = default;
 
-    float* operator[](char index) const;
+    constexpr T* operator[](char index);
 
     TSquareMatrix operator*(T scalar) const;
-    // @[TODO] Matrix Multiplication
-    // TSquareMatrix operator*(const TSquareMatrix& other) const;
+    // Matrix Multiplication
+    TSquareMatrix operator*(const TSquareMatrix& other) const;
 
     // Get Transpose of the matrix
     TSquareMatrix Transpose() const;
@@ -53,12 +53,12 @@ public:
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>
-float* TSquareMatrix<T, N>::operator[](char index) const
+constexpr T* TSquareMatrix<T, N>::operator[](char index)
 {
     index = Clamp<char>(index, 0, N - 1);
     // @example:
     // For a 3x3 matrix (N=3), [1][1] -> *(Data[1] + 1) -> Data[4]
-    return &Data[index * N];
+    return &(Data[index * N]);
 }
 
 template <typename T, char N>
@@ -73,6 +73,29 @@ TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(T scalar) const
     return result;
 }
 
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
+TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(const TSquareMatrix& other) const
+{
+    // Square Matrix Multiplication will always result in a square matrix of the same size
+    TSquareMatrix<T, N> result;
+
+    for (char row = 0; row < N; ++row)
+    {
+        for (char col = 0; col < N; ++col)
+        {
+            // Calculate：C_{ij} = \sum_{k=1}^{n} A_{ik} B_{kj}
+            T sum = static_cast<T>(0);
+            for (char k = 0; k < N; ++k)
+            {
+                sum = sum + (Data[(row * N) + k] * other.Data[(k * N) + col]);
+            }
+            result.Data[(row * N) + col] = sum;
+        }
+    }
+
+    return result;
+}
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>

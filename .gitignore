@@ -34,6 +34,9 @@
 # 忽略IDE相关
 .idea/
 
+# 忽略VSCode相关
+.vscode*/
+
 # 忽略构建目录
 build*/
 Binary/
