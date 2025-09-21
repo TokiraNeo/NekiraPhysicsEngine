@@ -6,9 +6,11 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#include <Core.hpp>
+#include <Math.hpp>
 
-int main()
+void Func()
 {
-
+    SMatrix3 mat = SMatrix3::Identity();
+    SMatrix2 mat2 = SMatrix2::Identity();
+    SMatrix4 mat4 = SMatrix4::Identity();
 }
