@@ -14,7 +14,7 @@
 /**
  * @brief Dot Product for Vector2
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static T DotProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return a | b;
@@ -23,7 +23,7 @@ static T DotProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>&
 /**
  * @brief Dot Product for Vector3
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static T DotProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return a | b;
@@ -34,7 +34,7 @@ static T DotProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>&
 /**
  * @brief Cross Product for Vector2
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector2<T> CrossProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return a ^ b;
@@ -43,7 +43,7 @@ static BE::Math::TVector2<T> CrossProduct(const BE::Math::TVector2<T>& a, const 
 /**
  * @brief Cross Product for Vector3
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector3<T> CrossProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return a ^ b;
@@ -54,7 +54,7 @@ static BE::Math::TVector3<T> CrossProduct(const BE::Math::TVector3<T>& a, const 
 /**
  * @brief Component-wise Product for Vector2
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector2<T> ComponentWiseProduct(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return a * b;
@@ -63,7 +63,7 @@ static BE::Math::TVector2<T> ComponentWiseProduct(const BE::Math::TVector2<T>& a
 /**
  * @brief Component-wise Product for Vector3
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector3<T> ComponentWiseProduct(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return a * b;
@@ -74,7 +74,7 @@ static BE::Math::TVector3<T> ComponentWiseProduct(const BE::Math::TVector3<T>& a
 /**
  * @brief Distance Between Two Vector2 or 2D Points
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static T Distance(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     return (a - b).Magnitude();
@@ -83,7 +83,7 @@ static T Distance(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b
 /**
  * @brief Distance Between Two Vector3 or 3D Points
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static T Distance(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     return (a - b).Magnitude();
@@ -94,14 +94,14 @@ static T Distance(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b
 /**
  * @brief Angle Between Two Vector2 (in Radians)
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static T AngleBetween(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T>& b)
 {
     auto dot = DotProduct(a, b);
     auto mags = Sqrt(a.SquareMagnitude() * b.SquareMagnitude());
-    if( mags > 0 )
+    if (mags > 0)
     {
-         return ACos(dot / mags);
+        return ACos(dot / mags);
     }
     return 0.0F;
 }
@@ -109,17 +109,18 @@ static T AngleBetween(const BE::Math::TVector2<T>& a, const BE::Math::TVector2<T
 /**
  * @brief Angle Between Two Vector3 (in Radians)
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static T AngleBetween(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T>& b)
 {
     auto dot = DotProduct(a, b);
     auto mags = Sqrt(a.SquareMagnitude() * b.SquareMagnitude());
-    if( mags > 0 )
+    if (mags > 0)
     {
-         return ACos(dot / mags);
+        return ACos(dot / mags);
     }
     return 0.0F;
 }
+
 
 
 /**
@@ -127,12 +128,12 @@ static T AngleBetween(const BE::Math::TVector3<T>& a, const BE::Math::TVector3<T
  * @param length Vector2 to be projected
  * @param direction Direction vector2 to project onto
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector2<T> Projection(const BE::Math::TVector2<T>& length, const BE::Math::TVector2<T>& direction)
 {
     auto dot = DotProduct(length, direction);
     auto dirMagSq = direction.SquareMagnitude();
-    if( dirMagSq > 0 )
+    if (dirMagSq > 0)
     {
         return direction * (dot / dirMagSq);
     }
@@ -144,12 +145,12 @@ static BE::Math::TVector2<T> Projection(const BE::Math::TVector2<T>& length, con
  * @param length Vector3 to be projected
  * @param direction Direction vector3 to project onto
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector3<T> Projection(const BE::Math::TVector3<T>& length, const BE::Math::TVector3<T>& direction)
 {
     auto dot = DotProduct(length, direction);
     auto dirMagSq = direction.SquareMagnitude();
-    if( dirMagSq > 0 )
+    if (dirMagSq > 0)
     {
         return direction * (dot / dirMagSq);
     }
@@ -163,7 +164,7 @@ static BE::Math::TVector3<T> Projection(const BE::Math::TVector3<T>& length, con
  * @param length Vector2 to be projected
  * @param direction Direction vector2 to project onto
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector2<T> Perpendicular(const BE::Math::TVector2<T>& length, const BE::Math::TVector2<T>& direction)
 {
     return length - Projection(length, direction);
@@ -174,7 +175,7 @@ static BE::Math::TVector2<T> Perpendicular(const BE::Math::TVector2<T>& length, 
  * @param length Vector3 to be projected
  * @param direction Direction vector3 to project onto
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector3<T> Perpendicular(const BE::Math::TVector3<T>& length, const BE::Math::TVector3<T>& direction)
 {
     return length - Projection(length, direction);
@@ -185,7 +186,7 @@ static BE::Math::TVector3<T> Perpendicular(const BE::Math::TVector3<T>& length, 
  * @param incident The incident vector2, which is to be reflected
  * @param normal The normal vector2
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector2<T> Reflection(const BE::Math::TVector2<T>& incident, const BE::Math::TVector2<T>& normal)
 {
     // Make sure normal is normalized
@@ -199,7 +200,7 @@ static BE::Math::TVector2<T> Reflection(const BE::Math::TVector2<T>& incident, c
  * @param incident The incident vector3, which is to be reflected
  * @param normal The normal vector3
  */
-template <typename T> requires eastl::is_floating_point_v<T>
+template <typename T>
 static BE::Math::TVector3<T> Reflection(const BE::Math::TVector3<T>& incident, const BE::Math::TVector3<T>& normal)
 {
     // Make sure normal is normalized
