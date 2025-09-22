@@ -38,7 +38,7 @@ set_target_properties(Math PROPERTIES
 target_link_libraries(Math
     PUBLIC
         EASTL
-        CoreMacros
+        CoreBase
     PRIVATE
 
 )

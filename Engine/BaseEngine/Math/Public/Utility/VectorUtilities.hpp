@@ -1,4 +1,4 @@
-﻿/**
+/**
  * MIT License
  *
  * Copyright (c) 2025 TokiraNeo (https://github.com/TokiraNeo)
