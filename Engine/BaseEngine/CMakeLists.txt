@@ -4,7 +4,7 @@
 
 # 添加BaseEngine的子模块列表
 set(BaseEngine_ModuleList
-    CoreMacros
+    CoreBase
     Core
     Math
 )

@@ -8,15 +8,16 @@
 
 #pragma once
 
-#include <Matrices/Internal/SquareMatrix.hpp>
-#include <Vectors/Vectors.hpp>
+#include <Matrices/Internal/Matrix3.hpp>
+
+
 
 NAMESPACE_BEGIN(BE::Math)
 
 /// 4x4 Matrix
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 4>
-struct TMatrix4 : public TSquareMatrix<T, 4>
+struct TMatrix4 final : public TSquareMatrix<T, 4>
 {
     // Constructor using TVector4
     constexpr TMatrix4(const TVector4<T>& row1, const TVector4<T>& row2, const TVector4<T>& row3,
@@ -24,6 +25,31 @@ struct TMatrix4 : public TSquareMatrix<T, 4>
 
     // Identity Matrix4
     constexpr static TMatrix4 Identity();
+
+    // Get Minor of element at (row, col)
+    constexpr T Minor(char row, char col) const;
+
+    // Minor Matrix4
+    TMatrix4 MinorMatrix() const;
+
+    // Get Cofactor of element at (row, col)
+    constexpr T Cofactor(char row, char col) const;
+
+    // Get Cofactor Matrix4
+    TMatrix4 CofactorMatrix() const;
+
+    // Get Adjugate Matrix4
+    TMatrix4 Adjugate() const;
+
+    // Get Derminant of the matrix
+    constexpr T Determinant() const;
+
+    // Get Inverse of the matrix
+    TMatrix4 Inverse() const;
+
+private:
+    // Get 3x3 SubMatrix excluding specified row and column
+    constexpr TMatrix3<T> GetSubMatrix(char excludedRow, char excludedCol) const;
 };
 
 
@@ -64,6 +90,129 @@ constexpr TMatrix4<T> TMatrix4<T>::Identity()
 {
     return TMatrix4<T>{TVector4<T>(1, 0, 0, 0), TVector4<T>(0, 1, 0, 0), TVector4<T>(0, 0, 1, 0),
                        TVector4<T>(0, 0, 0, 1)};
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr T TMatrix4<T>::Minor(char row, char col) const
+{
+    row = Clamp<char>(row, 0, 3);
+    col = Clamp<char>(col, 0, 3);
+
+    // For a 4x4 matrix, the minor is the determinant of the 3x3 matrix
+    // example:
+    // | a b c d |
+    // | e f g h |
+    // | i j k l |
+    // | m n o p |
+    // Minor(0, 1):
+    // | e g h |
+    // | i k l |
+    // | m o p |
+    // Determinant = e|k p| - g|i p| + h|i o|
+
+    return GetSubMatrix(row, col).Determinant();
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+TMatrix4<T> TMatrix4<T>::MinorMatrix() const
+{
+    const TVector4<T> ROW1{Minor(0, 0), Minor(0, 1), Minor(0, 2), Minor(0, 3)};
+    const TVector4<T> ROW2{Minor(1, 0), Minor(1, 1), Minor(1, 2), Minor(1, 3)};
+    const TVector4<T> ROW3{Minor(2, 0), Minor(2, 1), Minor(2, 2), Minor(2, 3)};
+    const TVector4<T> ROW4{Minor(3, 0), Minor(3, 1), Minor(3, 2), Minor(3, 3)};
+
+    return TMatrix4<T>{ROW1, ROW2, ROW3, ROW4};
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr T TMatrix4<T>::Cofactor(char row, char col) const
+{
+    row = Clamp<char>(row, 0, 3);
+    col = Clamp<char>(col, 0, 3);
+
+    T sign = ((row + col) % 2 == 0) ? 1 : -1;
+    return sign * Minor(row, col);
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+TMatrix4<T> TMatrix4<T>::CofactorMatrix() const
+{
+    const TVector4<T> ROW1{Cofactor(0, 0), Cofactor(0, 1), Cofactor(0, 2), Cofactor(0, 3)};
+    const TVector4<T> ROW2{Cofactor(1, 0), Cofactor(1, 1), Cofactor(1, 2), Cofactor(1, 3)};
+    const TVector4<T> ROW3{Cofactor(2, 0), Cofactor(2, 1), Cofactor(2, 2), Cofactor(2, 3)};
+    const TVector4<T> ROW4{Cofactor(3, 0), Cofactor(3, 1), Cofactor(3, 2), Cofactor(3, 3)};
+
+    return TMatrix4<T>{ROW1, ROW2, ROW3, ROW4};
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+TMatrix4<T> TMatrix4<T>::Adjugate() const
+{
+    return CofactorMatrix().Transpose();
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr T TMatrix4<T>::Determinant() const
+{
+    // For a 4x4 matrix:
+    // | a b c d |
+    // | e f g h |
+    // | i j k l |
+    // | m n o p |
+    // Determinant = a*Cofactor(a) + b*Cofactor(b) + c*Cofactor(c) + d*Cofactor(d)
+
+    const T RESULT1 = (*this)[0][0] * Cofactor(0, 0);
+    const T RESULT2 = (*this)[0][1] * Cofactor(0, 1);
+    const T RESULT3 = (*this)[0][2] * Cofactor(0, 2);
+    const T RESULT4 = (*this)[0][3] * Cofactor(0, 3);
+
+    return RESULT1 + RESULT2 + RESULT3 + RESULT4;
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+TMatrix4<T> TMatrix4<T>::Inverse() const
+{
+    auto det = Determinant();
+    if (IsNearlyZero(det))
+    {
+        return TMatrix4<T>(0);
+    }
+    return (1.0 / det) * Adjugate();
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr TMatrix3<T> TMatrix4<T>::GetSubMatrix(char excludedRow, char excludedCol) const
+{
+    excludedRow = Clamp<char>(excludedRow, 0, 3);
+    excludedCol = Clamp<char>(excludedCol, 0, 3);
+
+    TMatrix3<T> subMatrix;
+
+    for (char i = 0; i < 4; ++i)
+    {
+        for (char j = 0; j < 4; ++j)
+        {
+            if (i == excludedRow || j == excludedCol)
+            {
+                continue;
+            }
+
+            auto subI = (i < excludedRow) ? i : i - 1;
+            auto subJ = (j < excludedCol) ? j : j - 1;
+
+            subMatrix[subI][subJ] = (*this)[i][j];
+        }
+    }
+
+    return subMatrix;
 }
 
 NAMESPACE_END() // namespace BE::Math
