@@ -9,8 +9,10 @@
 #pragma once
 
 
+#include <EASTL/array.h>
 #include <Matrices/Internal/MatrixBase.hpp>
 #include <Utility/MathUtilities.hpp>
+
 
 
 NAMESPACE_BEGIN(BE::Math)
@@ -23,18 +25,18 @@ struct TSquareMatrix
     static_assert((N >= 2), "Square matrix must be at least 2x2.");
 
 private:
-    T Data[N * N];
+    eastl::array<T, N * N> Data{0};
 
 public:
     virtual ~TSquareMatrix() = default;
 
     constexpr TSquareMatrix() = default;
 
-    TSquareMatrix(const TSquareMatrix&) = default;
-    TSquareMatrix& operator=(const TSquareMatrix&) = default;
+    TSquareMatrix(const TSquareMatrix&);
+    TSquareMatrix(TSquareMatrix&&) noexcept;
 
-    TSquareMatrix(TSquareMatrix&&) = default;
-    TSquareMatrix& operator=(TSquareMatrix&&) = default;
+    TSquareMatrix& operator=(const TSquareMatrix&);
+    TSquareMatrix& operator=(TSquareMatrix&&) noexcept;
 
     constexpr T* operator[](char index);
 
@@ -50,6 +52,38 @@ public:
 /* ====-------------------------------------------==== */
 // Implementation of TSquareMatrix<>
 /* ====-------------------------------------------==== */
+
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
+TSquareMatrix<T, N>::TSquareMatrix(const TSquareMatrix& other) : Data(other.Data)
+{}
+
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
+TSquareMatrix<T, N>::TSquareMatrix(TSquareMatrix&& other) noexcept : Data(eastl::move(other.Data))
+{}
+
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
+TSquareMatrix<T, N>& TSquareMatrix<T, N>::operator=(const TSquareMatrix& other)
+{
+    if (this != &other)
+    {
+        Data = other.Data;
+    }
+    return *this;
+}
+
+template <typename T, char N>
+    requires TMatrixInternal::TMatrixConcept<T, N>
+TSquareMatrix<T, N>& TSquareMatrix<T, N>::operator=(TSquareMatrix&& other) noexcept
+{
+    if (this != &other)
+    {
+        Data = eastl::move(other.Data);
+    }
+    return *this;
+}
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>
