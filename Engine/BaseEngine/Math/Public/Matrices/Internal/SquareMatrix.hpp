@@ -25,6 +25,9 @@ struct TSquareMatrix
     static_assert((N >= 2), "Square matrix must be at least 2x2.");
 
 private:
+    /**
+     * @brief In Nekira Physics Engine, we use row-major order to store matrix data.
+     */
     eastl::array<T, N * N> Data{0};
 
 public:

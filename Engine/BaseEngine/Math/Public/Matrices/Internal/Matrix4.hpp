@@ -9,6 +9,7 @@
 #pragma once
 
 #include <Matrices/Internal/Matrix3.hpp>
+#include <Vectors/Internal/Vector4.hpp>
 
 
 
@@ -46,6 +47,12 @@ struct TMatrix4 final : public TSquareMatrix<T, 4>
 
     // Get Inverse of the matrix
     TMatrix4 Inverse() const;
+
+    // Get Translation vector from the matrix
+    constexpr TVector3<T> GetTranslation() const;
+
+    // Get Scale vector from the matrix
+    constexpr TVector3<T> GetScale() const;
 
 private:
     // Get 3x3 SubMatrix excluding specified row and column
@@ -189,6 +196,41 @@ TMatrix4<T> TMatrix4<T>::Inverse() const
 
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr TVector3<T> TMatrix4<T>::GetTranslation() const
+{
+    /**
+     * @brief
+     * 在矩阵的数学表现上，Translation矩阵通常是这样的：
+     * | 1 0 0 Tx |
+     * | 0 1 0 Ty |
+     * | 0 0 1 Tz |
+     * | 0 0 0 1  |
+     *
+     * 但是在Nekira Physics Engine中，我们使用`行主序(row-major)`存储矩阵数据，
+     * 因此Translation矩阵在内存中的布局是这样的：
+     * | 1  0  0  0 |
+     * | 0  1  0  0 |
+     * | 0  0  1  0 |
+     * | Tx Ty Tz 1 |
+     * 即相当于我们把数学形式的Translation矩阵进行了转置。
+     * OpenGL和Vulkan是`列主序(column-major)`，DirectX是`行主序(row-major)`，
+     * Nekira Physics Engine选择了后者以保持一致性。
+     */
+    return TVector3<T>((*this)[3][0], (*this)[3][1], (*this)[3][2]);
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr TVector3<T> TMatrix4<T>::GetScale() const
+{
+    /**
+     * @brief As we use row-major order, the scale vector is ([0][0], [1][1], [2][2])
+     */
+    return TVector3<T>((*this)[0][0], (*this)[1][1], (*this)[2][2]);
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
 constexpr TMatrix3<T> TMatrix4<T>::GetSubMatrix(char excludedRow, char excludedCol) const
 {
     excludedRow = Clamp<char>(excludedRow, 0, 3);
@@ -198,9 +240,14 @@ constexpr TMatrix3<T> TMatrix4<T>::GetSubMatrix(char excludedRow, char excludedC
 
     for (char i = 0; i < 4; ++i)
     {
+        if (i == excludedRow)
+        {
+            continue;
+        }
+
         for (char j = 0; j < 4; ++j)
         {
-            if (i == excludedRow || j == excludedCol)
+            if (j == excludedCol)
             {
                 continue;
             }

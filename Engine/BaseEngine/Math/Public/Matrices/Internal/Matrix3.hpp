@@ -9,7 +9,7 @@
 #pragma once
 
 #include <Matrices/Internal/SquareMatrix.hpp>
-#include <Vectors/Vectors.hpp>
+#include <Vectors/Internal/Vector3.hpp>
 
 NAMESPACE_BEGIN(BE::Math)
 
