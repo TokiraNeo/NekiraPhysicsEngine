@@ -2,12 +2,12 @@
 
 > [!Important]
 >
-> - 使用右手坐标系, (X: forward, Y: right, Z: up)
+> - 使用左手坐标系, (X: forward, Y: right, Z: up)
 >
 >   >               ^ Z
->   >               |
+>   >               | / X
 >   >                --> Y
->   >             X/
+>   >
 
 > [!Tip]
 >

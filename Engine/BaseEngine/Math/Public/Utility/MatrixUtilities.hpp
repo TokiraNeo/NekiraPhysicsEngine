@@ -129,7 +129,7 @@ static BE::Math::TMatrix4<T> XRotation4x4(T degrees)
 {
     /**
      * @brief
-     * As we use row-major order, the X rotation matrix is:
+     * The X rotation matrix is(row-major):
      * | 1 0    0     0 |
      * | 0 cosθ -sinθ 0 |
      * | 0 sinθ cosθ  0 |
@@ -159,7 +159,7 @@ static BE::Math::TMatrix3<T> XRotation3x3(T degrees)
 {
     /**
      * @brief
-     * The X rotation matrix is:
+     * The X rotation matrix is(row-major):
      * | 1 0    0     |
      * | 0 cosθ -sinθ |
      * | 0 sinθ cosθ  |
@@ -188,7 +188,7 @@ static BE::Math::TMatrix4<T> YRotation4x4(T degrees)
 {
     /**
      * @brief
-     * As we use row-major order, the Y rotation matrix is:
+     * The Y rotation matrix(row-major):
      * | cosθ  0 sinθ 0 |
      * | 0     1 0    0 |
      * | -sinθ 0 cosθ 0 |
@@ -218,7 +218,7 @@ static BE::Math::TMatrix3<T> YRotation3x3(T degrees)
 {
     /**
      * @brief
-     * The Y rotation matrix is:
+     * The Y rotation matrix(row-major):
      * | cosθ  0 sinθ |
      * | 0     1 0    |
      * | -sinθ 0 cosθ |
@@ -247,7 +247,7 @@ static BE::Math::TMatrix4<T> ZRotation4x4(T degrees)
 {
     /**
      * @brief
-     * As we use row-major order, the Z rotation matrix is:
+     * The Z rotation matrix(row-major):
      * | cosθ -sinθ 0 0 |
      * | sinθ cosθ  0 0 |
      * | 0    0     1 0 |
@@ -277,7 +277,7 @@ static BE::Math::TMatrix3<T> ZRotation3x3(T degrees)
 {
     /**
      * @brief
-     * The Z rotation matrix is:
+     * The Z rotation matrix(row-major):
      * | cosθ -sinθ 0 |
      * | sinθ cosθ  0 |
      * | 0    0     1 |
