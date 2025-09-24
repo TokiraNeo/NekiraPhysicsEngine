@@ -10,6 +10,7 @@
 #include <cmath>
 #include <numbers>
 
+NAMESPACE_BEGIN(BE::Math)
 
 constexpr bool IsNearlyZero(float value, float epsilon)
 {
@@ -41,24 +42,44 @@ constexpr double Sqrt(double value)
     return std::sqrt(value);
 }
 
-constexpr float ACos(float value)
+constexpr float Cos(float radians)
 {
-    return std::acos(value);
+    return std::cos(radians);
 }
 
-constexpr double ACos(double value)
+constexpr double Cos(double radians)
 {
-    return std::acos(value);
+    return std::cos(radians);
 }
 
-constexpr float ASin(float value)
+constexpr float Sin(float radians)
 {
-    return std::asin(value);
+    return std::sin(radians);
 }
 
-constexpr double ASin(double value)
+constexpr double Sin(double radians)
 {
-    return std::asin(value);
+    return std::sin(radians);
+}
+
+constexpr float ACos(float radians)
+{
+    return std::acos(radians);
+}
+
+constexpr double ACos(double radians)
+{
+    return std::acos(radians);
+}
+
+constexpr float ASin(float radians)
+{
+    return std::asin(radians);
+}
+
+constexpr double ASin(double radians)
+{
+    return std::asin(radians);
 }
 
 constexpr float RadiansToDegrees(float radians)
@@ -80,3 +101,5 @@ constexpr double DegreesToRadians(double degrees)
 {
     return degrees * (std::numbers::pi_v<double> / 180.0);
 }
+
+NAMESPACE_END() // namespace BE::Math

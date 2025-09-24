@@ -8,7 +8,9 @@
 
 #pragma once
 
+#include <CoreMacros.hpp>
 
+NAMESPACE_BEGIN(BE::Math)
 
 /**
  * @brief Check if a floating-point number is nearly zero
@@ -34,16 +36,28 @@ constexpr float  Sqrt(float value);
 constexpr double Sqrt(double value);
 
 /**
+ * @brief Cosine (in Radians)
+ */
+constexpr float  Cos(float radians);
+constexpr double Cos(double radians);
+
+/**
+ * @brief Sine (in Radians)
+ */
+constexpr float  Sin(float radians);
+constexpr double Sin(double radians);
+
+/**
  * @brief Arc Cosine (in Radians)
  */
-constexpr float  ACos(float value);
-constexpr double ACos(double value);
+constexpr float  ACos(float radians);
+constexpr double ACos(double radians);
 
 /**
  * @brief Arc Sine (in Radians)
  */
-constexpr float  ASin(float value);
-constexpr double ASin(double value);
+constexpr float  ASin(float radians);
+constexpr double ASin(double radians);
 
 /**
  * @brief Arc Tangent (in Radians)
@@ -110,3 +124,5 @@ constexpr T Lerp(T a, T b, float t)
     t = Clamp(t, 0.0F, 1.0F);
     return a + ((b - a) * t);
 }
+
+NAMESPACE_END() // namespace BE::Math

@@ -206,17 +206,17 @@ constexpr TVector3<T> TMatrix4<T>::GetTranslation() const
      * | 0 0 1 Tz |
      * | 0 0 0 1  |
      *
-     * 但是在Nekira Physics Engine中，我们使用`行主序(row-major)`存储矩阵数据，
+     * 在Nekira Physics Engine中，我们使用`行主序(row-major)`存储矩阵数据，
      * 因此Translation矩阵在内存中的布局是这样的：
-     * | 1  0  0  0 |
-     * | 0  1  0  0 |
-     * | 0  0  1  0 |
-     * | Tx Ty Tz 1 |
-     * 即相当于我们把数学形式的Translation矩阵进行了转置。
-     * OpenGL和Vulkan是`列主序(column-major)`，DirectX是`行主序(row-major)`，
-     * Nekira Physics Engine选择了后者以保持一致性。
+     * | 1 0 0 Tx |
+     * | 0 1 0 Ty |
+     * | 0 0 1 Tz |
+     * | 0 0 0 1  |
+     * 即与数学形式保持一致。
+     * DirecX使用的是行主序，而OpenGL、Vulkan使用的是列主序。
+     * Nekira Physics Engine选择行主序，保证直观上与数学表现一致。
      */
-    return TVector3<T>((*this)[3][0], (*this)[3][1], (*this)[3][2]);
+    return TVector3<T>((*this)[0][3], (*this)[1][3], (*this)[2][3]);
 }
 
 template <typename T>

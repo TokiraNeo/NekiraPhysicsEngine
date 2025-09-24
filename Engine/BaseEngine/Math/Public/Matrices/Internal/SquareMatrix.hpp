@@ -26,7 +26,8 @@ struct TSquareMatrix
 
 private:
     /**
-     * @brief In Nekira Physics Engine, we use row-major order to store matrix data.
+     * @brief In Nekira Physics Engine, we use row-major order to store matrix data as it can improve CPU cache
+     * performance.
      */
     eastl::array<T, N * N> Data{0};
 
