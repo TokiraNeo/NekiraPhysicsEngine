@@ -123,7 +123,7 @@ TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(const TSquareMatrix& other) c
         for (char col = 0; col < N; ++col)
         {
             // Calculate：C_{ij} = \sum_{k=1}^{n} A_{ik} B_{kj}
-            T sum = static_cast<T>(0);
+            T sum = 0;
             for (char k = 0; k < N; ++k)
             {
                 sum = sum + (Data[(row * N) + k] * other.Data[(k * N) + col]);

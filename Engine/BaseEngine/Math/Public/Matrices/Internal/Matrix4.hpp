@@ -57,7 +57,6 @@ struct TMatrix4 final : public TSquareMatrix<T, 4>
     // Get Scale vector from the matrix
     constexpr TVector3<T> GetScale() const;
 
-private:
     // Get 3x3 SubMatrix excluding specified row and column
     constexpr TMatrix3<T> GetSubMatrix(char excludedRow, char excludedCol) const;
 };

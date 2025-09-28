@@ -12,6 +12,10 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
+// =====================================================================
+// Translation Matrix
+// =====================================================================
+
 /**
  * @brief Get Translation Matrix4 from a translation vector
  * @param postion Translation vector
@@ -64,7 +68,9 @@ static BE::Math::TMatrix4<T> Translation4x4(T x, T y, T z)
     return result;
 }
 
-
+// =====================================================================
+// Scaling Matrix
+// =====================================================================
 
 /**
  * @brief Get Scaling Matrix4 from a scale vector
@@ -118,7 +124,9 @@ static BE::Math::TMatrix4<T> Scaling4x4(T x, T y, T z)
     return result;
 }
 
-
+// =====================================================================
+// Euler-angle Rotations
+// =====================================================================
 
 /**
  * @brief Get X Rotation Matrix4 from an angle in degrees
@@ -297,10 +305,36 @@ static BE::Math::TMatrix3<T> ZRotation3x3(T degrees)
     return result;
 }
 
-
+// =====================================================================
+// Combined Euler-angle Rotations
+// =====================================================================
 
 /**
- * @brief Get Rotation Matrix4 from an axis and an angle in degrees
+ * @brief Get Rotation Matrix4 from TVector3(X, Y, Z)
+ * @param rotation Rotation vector3 in degrees for each axis
+ */
+template <typename T = float>
+static BE::Math::TMatrix4<T> Rotation4x4(const BE::Math::TVector3<T>& rotation)
+{
+    return XRotation4x4<T>(rotation.X) * YRotation4x4<T>(rotation.Y) * ZRotation4x4<T>(rotation.Z);
+}
+
+/**
+ * @brief Get Rotation Matrix3 from TVector3(X, Y, Z)
+ * @param rotation Rotation vector3 in degrees for each axis
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Rotation3x3(const BE::Math::TVector3<T>& rotation)
+{
+    return XRotation3x3<T>(rotation.X) * YRotation3x3<T>(rotation.Y) * ZRotation3x3<T>(rotation.Z);
+}
+
+// =====================================================================
+// Axis-Angle Rotation Matrix (Rodrigues' Rotation Formula)
+// =====================================================================
+
+/**
+ * @brief Get Rodrigues' Rotation Matrix4 from an axis and an angle in degrees
  * @param axis Axis to rotate around
  * @param degrees Angle in degrees
  */
@@ -318,7 +352,7 @@ static BE::Math::TMatrix4<T> AxisRotation4x4(const BE::Math::TVector3<T>& axis, 
 
     const T COS = Cos(RADIANS);
     const T SIN = Sin(RADIANS);
-    const T P = 1.0 - COS;
+    const T P = 1.0F - COS;
 
     /**
      * @brief Rodrigues' rotation matrix(row-major):
@@ -336,7 +370,20 @@ static BE::Math::TMatrix4<T> AxisRotation4x4(const BE::Math::TVector3<T>& axis, 
     return BE::Math::TMatrix4<T>{ROW1, ROW2, ROW3, ROW4};
 }
 
+/**
+ * @brief Get Rodrigues' Rotation Matrix3 from an axis and an angle in degrees
+ * @param axis Axis to rotate around
+ * @param degrees Angle in degrees
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> AxisRotation3x3(const BE::Math::TVector3<T>& axis, T degrees)
+{
+    return AxisRotation4x4<T>(axis, degrees).GetSubMatrix(3, 3);
+}
 
+// =====================================================================
+// Transform Points and Vectors
+// =====================================================================
 
 /**
  * @brief Transform a 2D point using a 3x3 transformation matrix
@@ -401,5 +448,38 @@ static BE::Math::TVector3<T> TransformVector3D(const BE::Math::TVector3<T>& dire
 
     return BE::Math::TVector3<T>{dir4D.X, dir4D.Y, dir4D.Z};
 }
+
+// =====================================================================
+// Combined Transform Matrix
+// =====================================================================
+
+/**
+ * @brief Get Transform Matrix4 from translation, rotation and scale
+ * @param scale Scale vector
+ * @param rotation Rotation vector (in degrees)
+ * @param translation Translation vector
+ */
+template <typename T = float>
+static BE::Math::TMatrix4<T> Transform4x4(const BE::Math::TVector3<T>& scale, const BE::Math::TVector3<T>& rotation,
+                                          const BE::Math::TVector3<T>& translation)
+{
+
+    return Scaling4x4<T>(scale) * Rotation4x4<T>(rotation) * Translation4x4<T>(translation);
+}
+
+/**
+ * @brief Get Transform Matrix4 from translation, axis-angle rotation and scale
+ * @param scale Scale vector
+ * @param axis Axis to rotate around
+ * @param degrees Angle in degrees
+ * @param translation Translation vector
+ */
+template <typename T = float>
+static BE::Math::TMatrix4<T> Transform4x4(const BE::Math::TVector3<T>& scale, const BE::Math::TVector3<T>& axis,
+                                          T degrees, const BE::Math::TVector3<T>& translation)
+{
+    return Scaling4x4<T>(scale) * AxisRotation4x4<T>(axis, degrees) * Translation4x4<T>(translation);
+}
+
 
 NAMESPACE_END() // namespace BE::Math
