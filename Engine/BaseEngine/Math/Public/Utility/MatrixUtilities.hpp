@@ -1,4 +1,4 @@
-﻿/**
+/**
  * MIT License
  *
  * Copyright (c) 2025 TokiraNeo (https://github.com/TokiraNeo)
@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Matrices/Internal/Matrix4.hpp>
+#include <Matrices/Matrices.hpp>
 
 NAMESPACE_BEGIN(BE::Math)
 
@@ -295,6 +295,112 @@ static BE::Math::TMatrix3<T> ZRotation3x3(T degrees)
     result[1][1] = Cos(radians);
 
     return result;
+}
+
+
+
+/**
+ * @brief Get Rotation Matrix4 from an axis and an angle in degrees
+ * @param axis Axis to rotate around
+ * @param degrees Angle in degrees
+ */
+template <typename T = float>
+static BE::Math::TMatrix4<T> AxisRotation4x4(const BE::Math::TVector3<T>& axis, T degrees)
+{
+    const BE::Math::TVector3<T> NORMALIZED_AXIS = axis.Normalized();
+
+    const T X = NORMALIZED_AXIS.X;
+    const T Y = NORMALIZED_AXIS.Y;
+    const T Z = NORMALIZED_AXIS.Z;
+
+    // Convert angle from degrees to radians
+    const T RADIANS = DegreesToRadians(degrees);
+
+    const T COS = Cos(RADIANS);
+    const T SIN = Sin(RADIANS);
+    const T P = 1.0 - COS;
+
+    /**
+     * @brief
+     * The axis rotation matrix(row-major):
+     * | cosθ + x^2(1-cosθ)      xy(1-cosθ)-zsinθ    xz(1-cosθ)+ysinθ   0 |
+     * | yx(1-cosθ)+zsinθ        cosθ + y^2(1-cosθ)  yz(1-cosθ)-xsinθ   0 |
+     * | zx(1-cosθ)-ysinθ        zy(1-cosθ)+xsinθ    cosθ + z^2(1-cosθ) 0 |
+     * | 0                       0                   0                  1 |
+     */
+
+    const BE::Math::TMatrix4<T> ROW1{(COS + (X * X * P)), ((X * Y * P) - (Z * SIN)), ((X * Z * P) + (Y * SIN)), 0};
+    const BE::Math::TMatrix4<T> ROW2{((Y * X * P) + (Z * SIN)), (COS + (Y * Y * P)), ((Y * Z * P) - (X * SIN)), 0};
+    const BE::Math::TMatrix4<T> ROW3{((Z * X * P) - (Y * SIN)), ((Z * Y * P) + (X * SIN)), (COS + (Z * Z * P)), 0};
+    const BE::Math::TMatrix4<T> ROW4{0, 0, 0, 1};
+
+    return BE::Math::TMatrix4<T>{ROW1, ROW2, ROW3, ROW4};
+}
+
+
+
+/**
+ * @brief Transform a 2D point using a 3x3 transformation matrix
+ * @param point 2D point to be transformed
+ * @param transform 3x3 transformation matrix
+ */
+template <typename T = float>
+static BE::Math::TVector2<T> TransformPoint2D(const BE::Math::TVector2<T>& point,
+                                              const BE::Math::TMatrix3<T>& transform)
+{
+    BE::Math::TVector3<T> point3D{point.X, point.Y, 1.0};
+
+    point3D = transform * point3D;
+
+    return BE::Math::TVector2<T>{point3D.X, point3D.Y};
+}
+
+/**
+ * @brief Transform a 3D point using a 4x4 transformation matrix
+ * @param point 3D point to be transformed
+ * @param transform 4x4 transformation matrix
+ */
+template <typename T = float>
+static BE::Math::TVector3<T> TransformPoint3D(const BE::Math::TVector3<T>& point,
+                                              const BE::Math::TMatrix4<T>& transform)
+{
+    BE::Math::TVector4<T> point4D{point.X, point.Y, point.Z, 1.0};
+
+    point4D = transform * point4D;
+
+    return BE::Math::TVector3<T>{point4D.X, point4D.Y, point4D.Z};
+}
+
+/**
+ * @brief Transform a 2D direction vector using a 3x3 transformation matrix
+ * @param direction 2D direction vector to be transformed
+ * @param transform 3x3 transformation matrix
+ */
+template <typename T = float>
+static BE::Math::TVector2<T> TransformVector2D(const BE::Math::TVector2<T>& direction,
+                                               const BE::Math::TMatrix3<T>& transform)
+{
+    BE::Math::TVector3<T> dir3D{direction.X, direction.Y, 0.0};
+
+    dir3D = transform * dir3D;
+
+    return BE::Math::TVector2<T>{dir3D.X, dir3D.Y};
+}
+
+/**
+ * @brief Transform a 3D direction vector using a 4x4 transformation matrix
+ * @param direction 3D direction vector to be transformed
+ * @param transform 4x4 transformation matrix
+ */
+template <typename T = float>
+static BE::Math::TVector3<T> TransformVector3D(const BE::Math::TVector3<T>& direction,
+                                               const BE::Math::TMatrix4<T>& transform)
+{
+    BE::Math::TVector4<T> dir4D{direction.X, direction.Y, direction.Z, 0.0};
+
+    dir4D = transform * dir4D;
+
+    return BE::Math::TVector3<T>{dir4D.X, dir4D.Y, dir4D.Z};
 }
 
 NAMESPACE_END() // namespace BE::Math

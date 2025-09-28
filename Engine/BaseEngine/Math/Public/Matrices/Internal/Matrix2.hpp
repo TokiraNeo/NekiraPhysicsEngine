@@ -22,6 +22,9 @@ struct TMatrix2 final : public TSquareMatrix<T, 2>
     // Constructor using TVector2
     constexpr TMatrix2(const TVector2<T>& row1, const TVector2<T>& row2);
 
+    // Multiply a TVector2: Matrix2 * TVector2
+    constexpr TVector2<T> operator*(const TVector2<T>& vec) const;
+
     // Identity Matrix2
     constexpr static TMatrix2 Identity();
 
@@ -62,6 +65,20 @@ constexpr TMatrix2<T>::TMatrix2(const TVector2<T>& row1, const TVector2<T>& row2
 
     (*this)[1][0] = row2.X;
     (*this)[1][1] = row2.Y;
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 2>
+constexpr TVector2<T> TMatrix2<T>::operator*(const TVector2<T>& vec) const
+{
+    const TVector2<T> ROW1{(*this)[0][0], (*this)[0][1]};
+    const TVector2<T> ROW2{(*this)[1][0], (*this)[1][1]};
+
+    // Dot product of each row with the vector
+    const T X = (vec | ROW1);
+    const T Y = (vec | ROW2);
+
+    return TVector2<T>{X, Y};
 }
 
 template <typename T>

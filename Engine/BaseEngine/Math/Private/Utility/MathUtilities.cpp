@@ -62,24 +62,24 @@ constexpr double Sin(double radians)
     return std::sin(radians);
 }
 
-constexpr float ACos(float radians)
+constexpr float ACos(float value)
 {
-    return std::acos(radians);
+    return std::acos(value);
 }
 
-constexpr double ACos(double radians)
+constexpr double ACos(double value)
 {
-    return std::acos(radians);
+    return std::acos(value);
 }
 
-constexpr float ASin(float radians)
+constexpr float ASin(float value)
 {
-    return std::asin(radians);
+    return std::asin(value);
 }
 
-constexpr double ASin(double radians)
+constexpr double ASin(double value)
 {
-    return std::asin(radians);
+    return std::asin(value);
 }
 
 constexpr float RadiansToDegrees(float radians)

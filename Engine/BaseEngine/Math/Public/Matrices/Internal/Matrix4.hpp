@@ -24,6 +24,9 @@ struct TMatrix4 final : public TSquareMatrix<T, 4>
     constexpr TMatrix4(const TVector4<T>& row1, const TVector4<T>& row2, const TVector4<T>& row3,
                        const TVector4<T>& row4);
 
+    // Multiply a TVector4: Matrix4 * TVector4
+    constexpr TVector4<T> operator*(const TVector4<T>& vec) const;
+
     // Identity Matrix4
     constexpr static TMatrix4 Identity();
 
@@ -89,6 +92,24 @@ constexpr TMatrix4<T>::TMatrix4(const TVector4<T>& row1, const TVector4<T>& row2
     (*this)[3][1] = row4.Y;
     (*this)[3][2] = row4.Z;
     (*this)[3][3] = row4.W;
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr TVector4<T> TMatrix4<T>::operator*(const TVector4<T>& vec) const
+{
+    const TVector4<T> ROW1{(*this)[0][0], (*this)[0][1], (*this)[0][2], (*this)[0][3]};
+    const TVector4<T> ROW2{(*this)[1][0], (*this)[1][1], (*this)[1][2], (*this)[1][3]};
+    const TVector4<T> ROW3{(*this)[2][0], (*this)[2][1], (*this)[2][2], (*this)[2][3]};
+    const TVector4<T> ROW4{(*this)[3][0], (*this)[3][1], (*this)[3][2], (*this)[3][3]};
+
+    // Dot product of each row with the vector
+    const T X = (vec | ROW1);
+    const T Y = (vec | ROW2);
+    const T Z = (vec | ROW3);
+    const T W = (vec | ROW4);
+
+    return TVector4<T>{X, Y, Z, W};
 }
 
 template <typename T>

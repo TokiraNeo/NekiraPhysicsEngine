@@ -21,6 +21,9 @@ struct TMatrix3 final : public TSquareMatrix<T, 3>
     // Constructor using TVector3
     constexpr TMatrix3(const TVector3<T>& row1, const TVector3<T>& row2, const TVector3<T>& row3);
 
+    // Multiply a TVector3: Matrix3 * TVector3
+    constexpr TVector3<T> operator*(const TVector3<T>& vec) const;
+
     // Identity Matrix3
     constexpr static TMatrix3 Identity();
 
@@ -67,6 +70,22 @@ constexpr TMatrix3<T>::TMatrix3(const TVector3<T>& row1, const TVector3<T>& row2
     (*this)[2][0] = row3.X;
     (*this)[2][1] = row3.Y;
     (*this)[2][2] = row3.Z;
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 3>
+constexpr TVector3<T> TMatrix3<T>::operator*(const TVector3<T>& vec) const
+{
+    const TVector3<T> ROW1{(*this)[0][0], (*this)[0][1], (*this)[0][2]};
+    const TVector3<T> ROW2{(*this)[1][0], (*this)[1][1], (*this)[1][2]};
+    const TVector3<T> ROW3{(*this)[2][0], (*this)[2][1], (*this)[2][2]};
+
+    // Dot product of each row with the vector
+    const T X = (vec | ROW1);
+    const T Y = (vec | ROW2);
+    const T Z = (vec | ROW3);
+
+    return TVector3<T>{X, Y, Z};
 }
 
 template <typename T>

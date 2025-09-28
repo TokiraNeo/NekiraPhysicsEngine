@@ -66,6 +66,8 @@ struct TVector2 final
 
     bool Equal(const TVector2& other,
                T               epsilon = (sizeof(T) == sizeof(float) ? KINDER_SMALL_FLOAT : KINDER_SMALL_DOUBLE)) const;
+
+    bool IsZero(T epsilon = (sizeof(T) == sizeof(float) ? KINDER_SMALL_FLOAT : KINDER_SMALL_DOUBLE)) const;
 };
 
 
@@ -285,4 +287,12 @@ bool TVector2<T>::Equal(const TVector2& other, T epsilon) const
 {
     return IsNearlyEqual(X, other.X, epsilon) && IsNearlyEqual(Y, other.Y, epsilon);
 }
+
+template <typename T>
+    requires TVectorInternal::TVectorConcept<T>
+bool TVector2<T>::IsZero(T epsilon) const
+{
+    return IsNearlyZero(X, epsilon) && IsNearlyZero(Y, epsilon);
+}
+
 NAMESPACE_END() // namespace BE::Math

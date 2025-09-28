@@ -50,14 +50,14 @@ constexpr double Sin(double radians);
 /**
  * @brief Arc Cosine (in Radians)
  */
-constexpr float  ACos(float radians);
-constexpr double ACos(double radians);
+constexpr float  ACos(float value);
+constexpr double ACos(double value);
 
 /**
  * @brief Arc Sine (in Radians)
  */
-constexpr float  ASin(float radians);
-constexpr double ASin(double radians);
+constexpr float  ASin(float value);
+constexpr double ASin(double value);
 
 /**
  * @brief Arc Tangent (in Radians)
