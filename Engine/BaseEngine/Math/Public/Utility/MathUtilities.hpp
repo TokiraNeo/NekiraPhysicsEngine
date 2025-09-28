@@ -17,8 +17,8 @@ NAMESPACE_BEGIN(BE::Math)
  * @param value The floating-point number to check
  * @param epsilon The tolerance level for comparison (default is 1E-6 for float, 1E-12 for double)
  */
-constexpr bool IsNearlyZero(float value, float epsilon = 1E-6F);
-constexpr bool IsNearlyZero(double value, double epsilon = 1E-12);
+bool IsNearlyZero(float value, float epsilon = 1E-6F);
+bool IsNearlyZero(double value, double epsilon = 1E-12);
 
 /**
  * @brief Check if two floating-point numbers are nearly equal
@@ -26,50 +26,50 @@ constexpr bool IsNearlyZero(double value, double epsilon = 1E-12);
  * @param b The second floating-point number
  * @param epsilon The tolerance level for comparison (default is 1E-6 for float, 1E-12 for double)
  */
-constexpr bool IsNearlyEqual(float a, float b, float epsilon = 1E-6F);
-constexpr bool IsNearlyEqual(double a, double b, double epsilon = 1E-12);
+bool IsNearlyEqual(float a, float b, float epsilon = 1E-6F);
+bool IsNearlyEqual(double a, double b, double epsilon = 1E-12);
 
 /**
  * @brief Square Root
  */
-constexpr float  Sqrt(float value);
-constexpr double Sqrt(double value);
+float  Sqrt(float value);
+double Sqrt(double value);
 
 /**
  * @brief Cosine (in Radians)
  */
-constexpr float  Cos(float radians);
-constexpr double Cos(double radians);
+float  Cos(float radians);
+double Cos(double radians);
 
 /**
  * @brief Sine (in Radians)
  */
-constexpr float  Sin(float radians);
-constexpr double Sin(double radians);
+float  Sin(float radians);
+double Sin(double radians);
 
 /**
  * @brief Arc Cosine (in Radians)
  */
-constexpr float  ACos(float value);
-constexpr double ACos(double value);
+float  ACos(float value);
+double ACos(double value);
 
 /**
  * @brief Arc Sine (in Radians)
  */
-constexpr float  ASin(float value);
-constexpr double ASin(double value);
+float  ASin(float value);
+double ASin(double value);
 
 /**
  * @brief Arc Tangent (in Radians)
  */
-constexpr float  RadiansToDegrees(float radians);
-constexpr double RadiansToDegrees(double radians);
+float  RadiansToDegrees(float radians);
+double RadiansToDegrees(double radians);
 
 /**
  * @brief Degrees to Radians
  */
-constexpr float  DegreesToRadians(float degrees);
-constexpr double DegreesToRadians(double degrees);
+float  DegreesToRadians(float degrees);
+double DegreesToRadians(double degrees);
 
 /**
  * @brief Minimum of two values
