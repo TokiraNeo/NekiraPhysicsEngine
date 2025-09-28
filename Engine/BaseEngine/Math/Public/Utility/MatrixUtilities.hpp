@@ -321,18 +321,17 @@ static BE::Math::TMatrix4<T> AxisRotation4x4(const BE::Math::TVector3<T>& axis, 
     const T P = 1.0 - COS;
 
     /**
-     * @brief
-     * The axis rotation matrix(row-major):
-     * | cosθ + x^2(1-cosθ)      xy(1-cosθ)-zsinθ    xz(1-cosθ)+ysinθ   0 |
-     * | yx(1-cosθ)+zsinθ        cosθ + y^2(1-cosθ)  yz(1-cosθ)-xsinθ   0 |
-     * | zx(1-cosθ)-ysinθ        zy(1-cosθ)+xsinθ    cosθ + z^2(1-cosθ) 0 |
-     * | 0                       0                   0                  1 |
+     * @brief Rodrigues' rotation matrix(row-major):
+     * | cosθ + x²(1-cosθ)    xy(1-cosθ) - zsinθ    xz(1-cosθ) + ysinθ    0 |
+     * | yx(1-cosθ) + zsinθ   cosθ + y²(1-cosθ)     yz(1-cosθ) - xsinθ    0 |
+     * | zx(1-cosθ) - ysinθ   zy(1-cosθ) + xsinθ    cosθ + z²(1-cosθ)     0 |
+     * | 0                    0                     0                     1 |
      */
 
-    const BE::Math::TMatrix4<T> ROW1{(COS + (X * X * P)), ((X * Y * P) - (Z * SIN)), ((X * Z * P) + (Y * SIN)), 0};
-    const BE::Math::TMatrix4<T> ROW2{((Y * X * P) + (Z * SIN)), (COS + (Y * Y * P)), ((Y * Z * P) - (X * SIN)), 0};
-    const BE::Math::TMatrix4<T> ROW3{((Z * X * P) - (Y * SIN)), ((Z * Y * P) + (X * SIN)), (COS + (Z * Z * P)), 0};
-    const BE::Math::TMatrix4<T> ROW4{0, 0, 0, 1};
+    const BE::Math::TVector4<T> ROW1{(COS + (X * X * P)), ((Y * X * P) - (Z * SIN)), ((Z * X * P) + (Y * SIN)), 0};
+    const BE::Math::TVector4<T> ROW2{((X * Y * P) + (Z * SIN)), (COS + (Y * Y * P)), ((Z * Y * P) - (X * SIN)), 0};
+    const BE::Math::TVector4<T> ROW3{((X * Z * P) - (Y * SIN)), ((Y * Z * P) + (X * SIN)), (COS + (Z * Z * P)), 0};
+    const BE::Math::TVector4<T> ROW4{0, 0, 0, 1};
 
     return BE::Math::TMatrix4<T>{ROW1, ROW2, ROW3, ROW4};
 }
