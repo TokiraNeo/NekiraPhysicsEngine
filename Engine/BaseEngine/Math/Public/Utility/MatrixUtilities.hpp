@@ -1,7 +1,7 @@
 /**
- * MIT License
+ * GPL-3.0 License
  *
- * Copyright (c) 2025 TokiraNeo (https://github.com/TokiraNeo)
+ * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
@@ -463,7 +463,6 @@ template <typename T = float>
 static BE::Math::TMatrix4<T> Transform4x4(const BE::Math::TVector3<T>& scale, const BE::Math::TVector3<T>& rotation,
                                           const BE::Math::TVector3<T>& translation)
 {
-
     return Scaling4x4<T>(scale) * Rotation4x4<T>(rotation) * Translation4x4<T>(translation);
 }
 
