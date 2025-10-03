@@ -1,7 +1,7 @@
 ﻿/**
- * MIT License
+ * GPL-3.0 License
  *
- * Copyright (c) 2025 TokiraNeo (https://github.com/TokiraNeo)
+ * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
@@ -10,73 +10,96 @@
 #include <cmath>
 #include <numbers>
 
+NAMESPACE_BEGIN(BE::Math)
 
-constexpr bool IsNearlyZero(float value, float epsilon)
+bool IsNearlyZero(float value, float epsilon)
 {
     return std::abs(value) <= epsilon;
 }
 
-constexpr bool IsNearlyZero(double value, double epsilon)
+bool IsNearlyZero(double value, double epsilon)
 {
     return std::abs(value) <= epsilon;
 }
 
-constexpr bool IsNearlyEqual(float a, float b, float epsilon)
+bool IsNearlyEqual(float a, float b, float epsilon)
 {
     return std::abs(a - b) <= epsilon;
 }
 
-constexpr bool IsNearlyEqual(double a, double b, double epsilon)
+bool IsNearlyEqual(double a, double b, double epsilon)
 {
     return std::abs(a - b) <= epsilon;
 }
 
-constexpr float Sqrt(float value)
+float Sqrt(float value)
 {
     return std::sqrt(value);
 }
 
-constexpr double Sqrt(double value)
+double Sqrt(double value)
 {
     return std::sqrt(value);
 }
 
-constexpr float ACos(float value)
+float Cos(float radians)
+{
+    return std::cos(radians);
+}
+
+double Cos(double radians)
+{
+    return std::cos(radians);
+}
+
+float Sin(float radians)
+{
+    return std::sin(radians);
+}
+
+double Sin(double radians)
+{
+    return std::sin(radians);
+}
+
+float ACos(float value)
 {
     return std::acos(value);
 }
 
-constexpr double ACos(double value)
+double ACos(double value)
 {
     return std::acos(value);
 }
 
-constexpr float ASin(float value)
+float ASin(float value)
 {
     return std::asin(value);
 }
 
-constexpr double ASin(double value)
+double ASin(double value)
 {
     return std::asin(value);
 }
 
-constexpr float RadiansToDegrees(float radians)
+float RadiansToDegrees(float radians)
 {
     return radians * (180.0F / std::numbers::pi_v<float>);
 }
 
-constexpr double RadiansToDegrees(double radians)
+double RadiansToDegrees(double radians)
 {
     return radians * (180.0 / std::numbers::pi_v<double>);
 }
 
-constexpr float DegreesToRadians(float degrees)
+float DegreesToRadians(float degrees)
 {
     return degrees * (std::numbers::pi_v<float> / 180.0F);
 }
 
-constexpr double DegreesToRadians(double degrees)
+double DegreesToRadians(double degrees)
 {
     return degrees * (std::numbers::pi_v<double> / 180.0);
 }
+
+NAMESPACE_END() // namespace BE::Math
