@@ -1,7 +1,7 @@
 /**
- * MIT License
+ * GPL-3.0 License
  *
- * Copyright (c) 2025 TokiraNeo (https://github.com/TokiraNeo)
+ * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
@@ -65,6 +65,8 @@ struct TVector4 final
 
     bool Equal(const TVector4& other,
                T               epsilon = (sizeof(T) == sizeof(float) ? KINDER_SMALL_FLOAT : KINDER_SMALL_DOUBLE)) const;
+
+    bool IsZero(T epsilon = (sizeof(T) == sizeof(float) ? KINDER_SMALL_FLOAT : KINDER_SMALL_DOUBLE)) const;
 };
 
 
@@ -286,6 +288,13 @@ bool TVector4<T>::Equal(const TVector4& other, T epsilon) const
 {
     return IsNearlyEqual(X, other.X, epsilon) && IsNearlyEqual(Y, other.Y, epsilon)
            && IsNearlyEqual(Z, other.Z, epsilon) && IsNearlyEqual(W, other.W, epsilon);
+}
+
+template <typename T>
+    requires TVectorInternal::TVectorConcept<T>
+bool TVector4<T>::IsZero(T epsilon) const
+{
+    return IsNearlyZero(X, epsilon) && IsNearlyZero(Y, epsilon) && IsNearlyZero(Z, epsilon) && IsNearlyZero(W, epsilon);
 }
 
 NAMESPACE_END() // namespace BE::Math

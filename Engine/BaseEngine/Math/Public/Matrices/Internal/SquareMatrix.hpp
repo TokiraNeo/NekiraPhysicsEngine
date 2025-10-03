@@ -1,7 +1,7 @@
 ﻿/**
- * MIT License
+ * GPL-3.0 License
  *
- * Copyright (c) 2025 TokiraNeo (https://github.com/TokiraNeo)
+ * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
@@ -25,6 +25,10 @@ struct TSquareMatrix
     static_assert((N >= 2), "Square matrix must be at least 2x2.");
 
 private:
+    /**
+     * @brief In Nekira Physics Engine, we use row-major order to store matrix data as it can improve CPU cache
+     * performance.
+     */
     eastl::array<T, N * N> Data{0};
 
 public:
@@ -119,7 +123,7 @@ TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(const TSquareMatrix& other) c
         for (char col = 0; col < N; ++col)
         {
             // Calculate：C_{ij} = \sum_{k=1}^{n} A_{ik} B_{kj}
-            T sum = static_cast<T>(0);
+            T sum = 0;
             for (char k = 0; k < N; ++k)
             {
                 sum = sum + (Data[(row * N) + k] * other.Data[(k * N) + col]);
