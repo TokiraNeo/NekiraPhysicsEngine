@@ -20,3 +20,10 @@
 ## Overview
 
 A Simple Physics Engine based on C++20. In Process...
+
+## License
+
+```
+GPL-3.0 License
+Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
+```

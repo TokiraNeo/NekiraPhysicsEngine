@@ -15,7 +15,7 @@ Checks: >
   -readability-named-parameter,
   -readability-identifier-length
 
-WarningsAsErrors: false
+WarningsAsErrors: "false"
 
 HeaderFilterRegex: "^.*/(include|source)/.*"
 
