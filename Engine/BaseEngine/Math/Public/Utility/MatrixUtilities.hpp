@@ -18,7 +18,7 @@ NAMESPACE_BEGIN(BE::Math)
 
 /**
  * @brief Get Translation Matrix4 from a translation vector
- * @param postion Translation vector
+ * @param position Translation vector
  */
 template <typename T = float>
 static BE::Math::TMatrix4<T> Translation4x4(const BE::Math::TVector3<T>& position)
