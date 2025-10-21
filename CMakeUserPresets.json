@@ -15,7 +15,7 @@
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_CXX_STANDARD_REQUIRED": "YES",
-        "CMAKE_CXX_COMPILER": "clang++"
+        "QT_CMAKE_PATH": "C:/Qt/6.9.3/mingw_64/lib/cmake"
       }
     },
     {

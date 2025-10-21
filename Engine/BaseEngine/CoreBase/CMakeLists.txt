@@ -23,7 +23,7 @@ target_include_directories(CoreBase
 
 target_link_libraries(CoreBase
     INTERFACE
-        EASTL
+        
 )
 
 # ======================================
