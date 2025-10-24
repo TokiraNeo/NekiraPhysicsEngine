@@ -12,16 +12,16 @@
 
 </div>
 
-> [!Important]
->
-> ### ThirdParty:
->
-> <div align="center">
->
-> <img alt="NekiraReflect" src="https://img.shields.io/badge/Nekira_Reflect-363a4f?style=for-the-badge&logo=github&labelColor=363a4f&link=https%3A%2F%2Fgithub.com%2FTokiraNeo%2FNekiraReflect">
-> <img alt="NekiraDelegate" src="https://img.shields.io/badge/Nekira_Delegate-363a4f?style=for-the-badge&logo=github&labelColor=363a4f&link=https%3A%2F%2Fgithub.com%2FTokiraNeo%2FNekiraDelegate">
->
-> </div>
+## ThirdParty:
+
+<div align="center">
+
+<a href="https://github.com/google/googletest"><img alt="GoogleTest" src="https://img.shields.io/badge/Google_Test-363a4f?style=for-the-badge&logo=github&labelColor=363a4f"></a>
+<a href="https://github.com/electronicarts/EASTL"><img alt="EASTL" src="https://img.shields.io/badge/EA_STL-363a4f?style=for-the-badge&logo=github&labelColor=363a4f"></a>
+<a href="https://github.com/TokiraNeo/NekiraReflect"><img alt="NekiraReflect" src="https://img.shields.io/badge/Nekira_Reflect-363a4f?style=for-the-badge&logo=github&labelColor=363a4f"></a>
+<a href ="https://github.com/TokiraNeo/NekiraDelegate"><img alt="NekiraDelegate" src="https://img.shields.io/badge/Nekira_Delegate-363a4f?style=for-the-badge&logo=github&labelColor=363a4f"></a>
+
+</div>
 
 ## Overview
 
