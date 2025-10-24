@@ -11,12 +11,13 @@
 #include <CoreMacros.hpp>
 #include <NekiraDelegate/SignalSlot/Connection.hpp>
 
+
 NAMESPACE_BEGIN(BE::Core)
 
 /**
  * @brief Base Object class in Nekira Physics Engine.
  * Inherits from IConnectionInterface to manage signal-slot connections automatically, which provides
- * a safe way to using Delegate.
+ * a safe way to use Delegate.
  */
 class CObject : public NekiraDelegate::IConnectionInterface
 {
@@ -30,6 +31,5 @@ public:
     CObject(CObject&&) noexcept = default;
     CObject& operator=(CObject&&) noexcept = default;
 };
-
 
 NAMESPACE_END() // namespace BE::Core
