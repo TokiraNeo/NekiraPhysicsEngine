@@ -2,20 +2,26 @@
  Nekira Physics Engine
 </h1>
 
+<div align="center">
+
 ![GitHub License](https://img.shields.io/github/license/TokiraNeo/NekiraPhysicsEngine?style=flat-square&labelColor=363a4f&color=b7bdf8)
 ![C++ std](https://img.shields.io/badge/C%2B%2B-%3E%3D20-%23b7bdf8?style=flat-square&labelColor=%23363a4f&logo=cplusplus)
 ![CMake Version](https://img.shields.io/badge/CMake-%3E%3D3.20-b7bdf8?style=flat-square&labelColor=363a4f&logo=cmake)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/TokiraNeo/NekiraPhysicsEngine/main?style=flat-square&labelColor=363a4f&color=b7bdf8&logo=github)
 ![GitHub repo size](https://img.shields.io/github/repo-size/TokiraNeo/NekiraPhysicsEngine?style=flat-square&labelColor=363a4f&color=b7bdf8&logo=github)
 
+</div>
+
 > [!Important]
 >
 > ### ThirdParty:
 >
-> - [NekiraDelegate](https://github.com/TokiraNeo/NekiraDelegate)
-> - [NekiraReflect](https://github.com/TokiraNeo/NekiraReflect)
-> - [GoogleTest](https://github.com/google/googletest)
-> - [EASTL](https://github.com/electronicarts/EASTL)
+> <div align="center">
+>
+> <img alt="NekiraReflect" src="https://img.shields.io/badge/Nekira_Reflect-363a4f?style=for-the-badge&logo=github&labelColor=363a4f&link=https%3A%2F%2Fgithub.com%2FTokiraNeo%2FNekiraReflect">
+> <img alt="NekiraDelegate" src="https://img.shields.io/badge/Nekira_Delegate-363a4f?style=for-the-badge&logo=github&labelColor=363a4f&link=https%3A%2F%2Fgithub.com%2FTokiraNeo%2FNekiraDelegate">
+>
+> </div>
 
 ## Overview
 
