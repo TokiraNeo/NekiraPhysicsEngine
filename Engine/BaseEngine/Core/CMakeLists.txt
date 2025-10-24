@@ -13,7 +13,7 @@ file(GLOB_RECURSE CORE_SOURCE_FILES "Private/*.cpp")
 # ======================================
 # 生成库
 # ======================================
-add_library(Core STATIC ${CORE_HEADER_FILES} ${CORE_SOURCE_FILES})
+add_library(Core SHARED ${CORE_HEADER_FILES} ${CORE_SOURCE_FILES})
 
 # ======================================
 # 头文件目录

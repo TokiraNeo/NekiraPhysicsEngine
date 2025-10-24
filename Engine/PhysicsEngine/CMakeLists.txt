@@ -15,5 +15,5 @@ foreach(module ${PhysicsEngine_ModuleList})
 endforeach()
 
 # 定义PhysicsEngine目标
-add_custom_target(PhysicsEngine)
-add_dependencies(PhysicsEngine ${PhysicsEngine_Modules})
+#add_custom_target(PhysicsEngine)
+#add_dependencies(PhysicsEngine ${PhysicsEngine_Modules})
