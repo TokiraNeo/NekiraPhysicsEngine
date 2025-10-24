@@ -17,7 +17,6 @@
 *.smod
 
 
-
 # 忽略IDE相关
 .idea/
 
@@ -31,9 +30,6 @@ Binaries/
 
 # 忽略clangd相关
 .cache/
-
-# 忽略CMakeUserPresets.json
-#CMakeUserPresets.json
 
 # 忽略install测试文件
 install/
