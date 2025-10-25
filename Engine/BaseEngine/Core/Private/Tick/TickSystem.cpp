@@ -36,7 +36,6 @@ void CTickSystem::PreRegisterTick(ITickInterface* tickable)
     PreRegisteredTickables.push(tickable);
 }
 
-
 void CTickSystem::UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::MultiSignalHandle& handle)
 {
     if(TickGroupMap.find(tickGroup) != TickGroupMap.end())

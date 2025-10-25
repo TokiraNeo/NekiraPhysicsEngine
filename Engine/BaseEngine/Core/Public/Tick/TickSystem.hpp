@@ -9,9 +9,14 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <Delegate/Delegate.hpp>
 #include <EASTL/stack.h>
 #include <EASTL/unordered_map.h>
+
+// Forward declaration
+namespace NekiraDelegate
+{
+struct MultiSignalHandle;
+}
 
 NAMESPACE_BEGIN(BE::Core)
 
