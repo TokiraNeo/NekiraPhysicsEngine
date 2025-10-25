@@ -9,20 +9,25 @@
 #pragma once
 
 #include <CoreObject/CoreObject.hpp>
+#include <NekiraECS/Core/Entity/Entity.hpp>
 
 NAMESPACE_BEGIN(PHYE::PhysicsBase)
 
-class CPhysicsObject : public BE::Core::CObject
+class CPhysicsObject final : public BE::Core::CObject
 {
 public:
     CPhysicsObject() = default;
-    virtual ~CPhysicsObject() = default;
+    ~CPhysicsObject() override = default;
 
     CPhysicsObject(const CPhysicsObject&) = default;
     CPhysicsObject& operator=(const CPhysicsObject&) = default;
 
     CPhysicsObject(CPhysicsObject&&) noexcept = default;
     CPhysicsObject& operator=(CPhysicsObject&&) noexcept = default;
+
+protected:
+    NekiraECS::Entity ID;
+
 };
 
 

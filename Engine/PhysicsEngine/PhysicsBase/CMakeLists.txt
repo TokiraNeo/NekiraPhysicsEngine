@@ -2,6 +2,8 @@
 # PhysicsBase 模块
 # ======================================
 
+find_package(NekiraECSLib CONFIG REQUIRED)
+
 # ======================================
 # 头文件、源文件
 # ======================================
@@ -36,6 +38,7 @@ set_target_properties(PhysicsBase PROPERTIES
 target_link_libraries(PhysicsBase
     PUBLIC
         Core
+        NekiraECSLib::NekiraECSCore
     PRIVATE
 
 )
