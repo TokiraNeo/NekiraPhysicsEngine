@@ -17,18 +17,19 @@ class CPhysicsObject final : public BE::Core::CObject
 {
 public:
     CPhysicsObject() = default;
-    ~CPhysicsObject() override = default;
+
+    explicit CPhysicsObject(NekiraECS::Entity entityID);
+
+    ~CPhysicsObject() override;
 
     CPhysicsObject(const CPhysicsObject&) = default;
-    CPhysicsObject& operator=(const CPhysicsObject&) = default;
-
     CPhysicsObject(CPhysicsObject&&) noexcept = default;
+
+    CPhysicsObject& operator=(const CPhysicsObject&) = default;
     CPhysicsObject& operator=(CPhysicsObject&&) noexcept = default;
 
 protected:
     NekiraECS::Entity ID;
-
 };
-
 
 NAMESPACE_END() // namespace PHYE::PhysicsBase
