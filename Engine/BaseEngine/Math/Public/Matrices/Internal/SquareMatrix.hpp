@@ -24,7 +24,7 @@ struct TSquareMatrix
 {
     static_assert((N >= 2), "Square matrix must be at least 2x2.");
 
-private:
+protected:
     /**
      * @brief In Nekira Physics Engine, we use row-major order to store matrix data as it can improve CPU cache
      * performance.
@@ -44,12 +44,11 @@ public:
 
     constexpr T* operator[](char index);
 
-    TSquareMatrix operator*(T scalar) const;
-    // Matrix Multiplication
-    TSquareMatrix operator*(const TSquareMatrix& other) const;
-
     // Get Transpose of the matrix
     TSquareMatrix Transpose() const;
+
+protected:
+    void MatrixMultiply(const TSquareMatrix& other, TSquareMatrix& result) const;
 };
 
 
@@ -101,23 +100,22 @@ constexpr T* TSquareMatrix<T, N>::operator[](char index)
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>
-TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(T scalar) const
+TSquareMatrix<T, N> TSquareMatrix<T, N>::Transpose() const
 {
     TSquareMatrix<T, N> result;
     for (char i = 0; i < (N * N); ++i)
     {
-        result.Data[i] = Data[i] * scalar;
+        const char ROW = i / N;
+        const char COL = i % N;
+        result.Data[i] = Data[(COL * N) + ROW];
     }
     return result;
 }
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>
-TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(const TSquareMatrix& other) const
+void TSquareMatrix<T, N>::MatrixMultiply(const TSquareMatrix& other, TSquareMatrix& result) const
 {
-    // Square Matrix Multiplication will always result in a square matrix of the same size
-    TSquareMatrix<T, N> result;
-
     for (char row = 0; row < N; ++row)
     {
         for (char col = 0; col < N; ++col)
@@ -131,22 +129,6 @@ TSquareMatrix<T, N> TSquareMatrix<T, N>::operator*(const TSquareMatrix& other) c
             result.Data[(row * N) + col] = sum;
         }
     }
-
-    return result;
-}
-
-template <typename T, char N>
-    requires TMatrixInternal::TMatrixConcept<T, N>
-TSquareMatrix<T, N> TSquareMatrix<T, N>::Transpose() const
-{
-    TSquareMatrix<T, N> result;
-    for (char i = 0; i < (N * N); ++i)
-    {
-        const char ROW = i / N;
-        const char COL = i % N;
-        result.Data[i] = Data[(COL * N) + ROW];
-    }
-    return result;
 }
 
 NAMESPACE_END() // namespace BE::Math

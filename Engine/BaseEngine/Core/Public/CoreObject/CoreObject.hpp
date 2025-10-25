@@ -23,7 +23,7 @@ class CObject : public NekiraDelegate::IConnectionInterface
 {
 public:
     CObject() = default;
-    virtual ~CObject() = default;
+    ~CObject() override = default;
 
     CObject(const CObject&) = default;
     CObject& operator=(const CObject&) = default;
