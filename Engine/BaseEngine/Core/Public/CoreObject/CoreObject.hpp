@@ -9,7 +9,7 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <NekiraDelegate/SignalSlot/Connection.hpp>
+#include <Tick/TickInterface.hpp>
 
 
 NAMESPACE_BEGIN(BE::Core)
@@ -19,7 +19,7 @@ NAMESPACE_BEGIN(BE::Core)
  * Inherits from IConnectionInterface to manage signal-slot connections automatically, which provides
  * a safe way to use Delegate.
  */
-class CObject : public NekiraDelegate::IConnectionInterface
+class CObject : public ITickInterface
 {
 public:
     CObject() = default;
@@ -30,6 +30,7 @@ public:
 
     CObject(CObject&&) noexcept = default;
     CObject& operator=(CObject&&) noexcept = default;
+
 };
 
 NAMESPACE_END() // namespace BE::Core
