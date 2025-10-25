@@ -7,6 +7,7 @@
  */
 
 #pragma once
+
 #include <CoreMacros.hpp>
 #include <Delegate/Delegate.hpp>
 
