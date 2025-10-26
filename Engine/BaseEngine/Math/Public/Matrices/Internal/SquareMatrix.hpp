@@ -8,8 +8,7 @@
 
 #pragma once
 
-
-#include <EASTL/array.h>
+#include <array>
 #include <Matrices/Internal/MatrixBase.hpp>
 #include <Utility/MathUtilities.hpp>
 
@@ -29,7 +28,7 @@ protected:
      * @brief In Nekira Physics Engine, we use row-major order to store matrix data as it can improve CPU cache
      * performance.
      */
-    eastl::array<T, N * N> Data{0};
+    std::array<T, N * N> Data{0};
 
 public:
     virtual ~TSquareMatrix() = default;
@@ -63,7 +62,7 @@ TSquareMatrix<T, N>::TSquareMatrix(const TSquareMatrix& other) : Data(other.Data
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>
-TSquareMatrix<T, N>::TSquareMatrix(TSquareMatrix&& other) noexcept : Data(eastl::move(other.Data))
+TSquareMatrix<T, N>::TSquareMatrix(TSquareMatrix&& other) noexcept : Data(std::move(other.Data))
 {}
 
 template <typename T, char N>
@@ -83,7 +82,7 @@ TSquareMatrix<T, N>& TSquareMatrix<T, N>::operator=(TSquareMatrix&& other) noexc
 {
     if (this != &other)
     {
-        Data = eastl::move(other.Data);
+        Data = std::move(other.Data);
     }
     return *this;
 }

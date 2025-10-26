@@ -9,14 +9,10 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <EASTL/stack.h>
-#include <EASTL/unordered_map.h>
+#include <Delegate/Delegate.hpp>
+#include <stack>
+#include <unordered_map>
 
-// Forward declaration
-namespace NekiraDelegate
-{
-struct MultiSignalHandle;
-}
 
 NAMESPACE_BEGIN(BE::Core)
 
@@ -53,14 +49,14 @@ public:
     void UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::MultiSignalHandle& handle);
 
 private:
-     CTickSystem() = default;
+    CTickSystem() = default;
 
     // Register a tick delegate
     void RegisterTick(ETickGroup tickGroup, ITickInterface* tickable, void (ITickInterface::*funcPtr)(float));
 
-    eastl::stack<ITickInterface*> PreRegisteredTickables;
+    std::stack<ITickInterface*> PreRegisteredTickables;
 
-    eastl::unordered_map<ETickGroup, TTickSignature> TickGroupMap;
+    std::unordered_map<ETickGroup, TTickSignature> TickGroupMap;
 };
 
 
