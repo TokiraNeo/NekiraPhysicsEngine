@@ -8,24 +8,24 @@
 
 #pragma once
 
-#include <CoreObject/CoreObject.hpp>
+#include <CoreMacros.hpp>
 #include <NekiraECS/Core/Entity/Entity.hpp>
 
 NAMESPACE_BEGIN(PHYE::PhysicsBase)
 
-class CPhysicsObject final : public BE::Core::CObject
+class CPhysicsObject
 {
 public:
     CPhysicsObject() = default;
 
     explicit CPhysicsObject(NekiraECS::Entity entityID);
 
-    ~CPhysicsObject() override;
+    virtual ~CPhysicsObject();
 
-    CPhysicsObject(const CPhysicsObject&) = default;
+    CPhysicsObject(const CPhysicsObject&) = delete;
     CPhysicsObject(CPhysicsObject&&) noexcept = default;
 
-    CPhysicsObject& operator=(const CPhysicsObject&) = default;
+    CPhysicsObject& operator=(const CPhysicsObject&) = delete;
     CPhysicsObject& operator=(CPhysicsObject&&) noexcept = default;
 
 protected:

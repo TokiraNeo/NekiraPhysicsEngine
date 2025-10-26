@@ -9,7 +9,7 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <EASTL/type_traits.h>
+#include <type_traits>
 #include <Utility/MathUtilities.hpp>
 
 
@@ -19,7 +19,7 @@ NAMESPACE_BEGIN(TRangeInternal)
 
 /// Concept for TRange<>
 template <typename T>
-concept TRangeConcept = eastl::is_floating_point_v<T> || eastl::is_integral_v<T>;
+concept TRangeConcept = std::is_floating_point_v<T> || std::is_integral_v<T>;
 
 NAMESPACE_END() // namespace BE::Math::TRangeInternal
 

@@ -25,12 +25,11 @@ public:
     CObject() = default;
     ~CObject() override = default;
 
-    CObject(const CObject&) = default;
-    CObject& operator=(const CObject&) = default;
+    CObject(const CObject&) = delete;
+    CObject& operator=(const CObject&) = delete;
 
     CObject(CObject&&) noexcept = default;
     CObject& operator=(CObject&&) noexcept = default;
-
 };
 
 NAMESPACE_END() // namespace BE::Core

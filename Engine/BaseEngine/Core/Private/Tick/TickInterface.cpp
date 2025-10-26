@@ -19,16 +19,16 @@ ITickInterface::ITickInterface() : TickGroup(TICK_GROUP_DEFAULT)
     CTickSystem::Get().PreRegisterTick(this);
 }
 
-void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
-{
-    TickHandle = handle;
-}
-
 ITickInterface::~ITickInterface()
 {
     OnRegisterTick.RemoveBinding();
 
     CTickSystem::Get().UnregisterTick(TickGroup,TickHandle);
+}
+
+void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
+{
+    TickHandle = std::move(handle);
 }
 
 ETickGroup ITickInterface::GetTickGroup() const
