@@ -26,11 +26,3 @@ target_link_libraries(CoreBase
         
 )
 
-# ======================================
-# 构建输出
-# ======================================
-set_target_properties(CoreBase PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin
-)

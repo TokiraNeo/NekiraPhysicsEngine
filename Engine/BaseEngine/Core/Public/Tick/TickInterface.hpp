@@ -1,5 +1,5 @@
 ﻿/**
-* GPL-3.0 License
+ * GPL-3.0 License
  *
  * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
@@ -21,21 +21,22 @@ enum class ETickGroup : unsigned char;
  */
 class ITickInterface : public NekiraDelegate::IConnectionInterface
 {
-    NEKIRA_SINGLE_DELEGATE(TOnRegisterTickSignature, void, NekiraDelegate::MultiSignalHandle)
+    NEKIRA_SINGLE_DELEGATE(TOnRegisterTickSignature, void, NekiraDelegate::MultiSignalHandle);
 
 public:
     ITickInterface();
     ~ITickInterface() override;
 
-    ITickInterface(const ITickInterface&) = default;
+    ITickInterface(const ITickInterface&) = delete;
     ITickInterface(ITickInterface&&) noexcept = default;
 
-    ITickInterface& operator=(const ITickInterface&) = default;
+    ITickInterface& operator=(const ITickInterface&) = delete;
     ITickInterface& operator=(ITickInterface&&) noexcept = default;
 
-    virtual void Tick(float deltaTime) {}
+    virtual void Tick(float deltaTime)
+    {}
 
-    ETickGroup GetTickGroup() const;
+    [[nodiscard]] ETickGroup GetTickGroup() const;
 
 private:
     void OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle);
@@ -48,7 +49,7 @@ protected:
     ETickGroup TickGroup;
 
 private:
-    NekiraDelegate::MultiSignalHandle TickHandle {};
+    NekiraDelegate::MultiSignalHandle TickHandle{};
 };
 
 NAMESPACE_END() // namespace BE::Core

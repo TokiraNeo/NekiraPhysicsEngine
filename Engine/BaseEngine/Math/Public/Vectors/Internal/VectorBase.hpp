@@ -9,7 +9,7 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <EASTL/type_traits.h>
+#include <type_traits>
 
 NAMESPACE_BEGIN(BE::Math)
 
@@ -17,7 +17,7 @@ NAMESPACE_BEGIN(TVectorInternal)
 
 /// TVectorConcept
 template <typename T>
-concept TVectorConcept = eastl::is_floating_point_v<T>;
+concept TVectorConcept = std::is_floating_point_v<T>;
 
 NAMESPACE_END() // namespace BE::Math::TVectorInternal
 
