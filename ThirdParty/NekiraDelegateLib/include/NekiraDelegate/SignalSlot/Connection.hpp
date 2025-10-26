@@ -37,10 +37,17 @@ namespace NekiraDelegate
 class ConnectionBase
 {
 public:
+    ConnectionBase() = default;
     virtual ~ConnectionBase() = default;
 
+    ConnectionBase(const ConnectionBase&) = default;
+    ConnectionBase(ConnectionBase&&) noexcept = default;
+
+    ConnectionBase& operator=(const ConnectionBase&) = default;
+    ConnectionBase& operator=(ConnectionBase&&) noexcept = default;
+
     // 连接是否有效
-    virtual bool IsValid() const = 0;
+    [[nodiscard]] virtual bool IsValid() const = 0;
 
     // 断开连接
     virtual void Disconnect() = 0;
@@ -54,7 +61,7 @@ namespace NekiraDelegate
 
 // 模板连接器的默认实现
 template <typename RT, typename... Args>
-class Connection : public ConnectionBase
+class Connection final : public ConnectionBase
 {
 private:
     // 使用 std::function 来存储连接的回调
@@ -62,17 +69,23 @@ private:
     std::function<RT(Args...)> Callback;
 
     // 是否有效的标志
-    bool bIsValidConnected;
+    bool bIsValidConnected {false};
 
 public:
     Connection() = default;
-    virtual ~Connection() = default;
+     ~Connection() override = default;
 
-    Connection(std::function<RT(Args...)> InCallback) : Callback(std::move(InCallback)), bIsValidConnected(true)
+    explicit Connection(std::function<RT(Args...)> InCallback) : Callback(std::move(InCallback)), bIsValidConnected(true)
     {}
 
+    Connection(const Connection&) = default;
+    Connection(Connection&&) noexcept = default;
+
+    Connection& operator=(const Connection&) = default;
+    Connection& operator=(Connection&&) noexcept = default;
+
     // 检查连接是否有效
-    bool IsValid() const override
+    [[nodiscard]] bool IsValid() const override
     {
         return bIsValidConnected && Callback != nullptr;
     }
@@ -106,11 +119,13 @@ private:
 public:
     IConnectionInterface() = default;
 
-    virtual ~IConnectionInterface()
-    {
-        // 在析构时清理所有连接
-        DisconnectAll();
-    }
+    virtual ~IConnectionInterface();
+
+    IConnectionInterface(const IConnectionInterface&) = default;
+    IConnectionInterface(IConnectionInterface&&) noexcept = default;
+
+    IConnectionInterface& operator=(const IConnectionInterface&) = default;
+    IConnectionInterface& operator=(IConnectionInterface&&) noexcept = default;
 
     // 添加连接.这里使用const是为了确保即便对象是const类型也能正常添加连接，对连接器的自动管理不受影响
     void AddConnection(std::shared_ptr<ConnectionBase> InConnection) const;
