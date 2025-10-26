@@ -19,6 +19,11 @@ ITickInterface::ITickInterface() : TickGroup(TICK_GROUP_DEFAULT)
     CTickSystem::Get().PreRegisterTick(this);
 }
 
+void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
+{
+    TickHandle = handle;
+}
+
 ITickInterface::~ITickInterface()
 {
     OnRegisterTick.RemoveBinding();
@@ -31,9 +36,5 @@ ETickGroup ITickInterface::GetTickGroup() const
     return TickGroup;
 }
 
-void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
-{
-    TickHandle = handle;
-}
 
 NAMESPACE_END() // namespace BE::Core

@@ -29,7 +29,7 @@ enum class ETickGroup : unsigned char;
  */
 class CTickSystem final
 {
-    NEKIRA_MULTI_DELEGATE(TTickSignature, float)
+    NEKIRA_MULTI_DELEGATE(TTickSignature, float /* deltaTime */)
 
 public:
     CTickSystem(const CTickSystem&) = delete;
@@ -37,6 +37,8 @@ public:
 
     CTickSystem& operator=(const CTickSystem&) = delete;
     CTickSystem& operator=(CTickSystem&&) noexcept = delete;
+
+    ~CTickSystem() = default;
 
     // Get the singleton instance of Tick System
     static CTickSystem& Get();
@@ -52,7 +54,6 @@ public:
 
 private:
      CTickSystem() = default;
-    ~CTickSystem() = default;
 
     // Register a tick delegate
     void RegisterTick(ETickGroup tickGroup, ITickInterface* tickable, void (ITickInterface::*funcPtr)(float));
