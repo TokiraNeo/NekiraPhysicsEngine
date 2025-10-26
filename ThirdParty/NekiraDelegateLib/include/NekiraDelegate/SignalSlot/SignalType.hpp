@@ -37,7 +37,7 @@ namespace NekiraDelegate
 {
 // 单播信号类
 template <typename RT, typename... Args>
-class SingleSignal
+class SingleSignal final
 {
 private:
     // 当前连接器
@@ -45,9 +45,33 @@ private:
 
 public:
     SingleSignal() = default;
+    ~SingleSignal()
+    {
+        Disconnect();
+    }
+
+    SingleSignal(const SingleSignal&) = delete;
+    SingleSignal& operator=(const SingleSignal&) = delete;
+
+    SingleSignal(SingleSignal&& other) noexcept
+        : ConnectionPtr(std::move(other.ConnectionPtr))
+    {
+        other.ConnectionPtr = nullptr;
+    }
+
+    SingleSignal& operator=(SingleSignal&& other) noexcept
+    {
+        if (this != &other)
+        {
+            Disconnect();
+            ConnectionPtr       = std::move(other.ConnectionPtr);
+            other.ConnectionPtr = nullptr;
+        }
+        return *this;
+    }
 
     // 是否有效的连接
-    bool IsValid() const
+    [[nodiscard]] bool IsValid() const
     {
         return ConnectionPtr && ConnectionPtr->IsValid();
     }
@@ -125,8 +149,23 @@ public:
 namespace NekiraDelegate
 {
 // 用于移除多播信号类中的特定连接
-struct MultiSignalHandle
+struct MultiSignalHandle final
 {
+    MultiSignalHandle() = default;
+    ~MultiSignalHandle() = default;
+
+    MultiSignalHandle(void* InSignalPtr, std::size_t InId)
+        : SignalPtr(InSignalPtr)
+        , Id(InId)
+    {
+    }
+
+    MultiSignalHandle(const MultiSignalHandle&) = default;
+    MultiSignalHandle(MultiSignalHandle&&) = default;
+
+    MultiSignalHandle& operator=(const MultiSignalHandle&) = default;
+    MultiSignalHandle& operator=(MultiSignalHandle&&) = default;
+
     bool operator==(const MultiSignalHandle& Other) const
     {
         return SignalPtr == Other.SignalPtr && Id == Other.Id;
@@ -148,7 +187,7 @@ namespace NekiraDelegate
 
 // 多播信号类
 template <typename... Args>
-class MultiSignal
+class MultiSignal final
 {
 private:
     using ConnectionType = Connection<void, Args...>;
@@ -161,9 +200,36 @@ private:
 
 public:
     MultiSignal() = default;
+    ~MultiSignal()
+    {
+        DisconnectAll();
+    }
+
+    MultiSignal(const MultiSignal&) = delete;
+    MultiSignal& operator=(const MultiSignal&) = delete;
+
+    MultiSignal(MultiSignal&& other) noexcept
+        : ConnectionMap(std::move(other.ConnectionMap))
+        , NextId(other.NextId)
+    {
+        other.NextId = 0;
+    }
+
+    MultiSignal& operator=(MultiSignal&& other) noexcept
+    {
+        if (this != &other)
+        {
+            DisconnectAll();
+            ConnectionMap = std::move(other.ConnectionMap);
+            NextId        = other.NextId;
+            other.NextId  = 0;
+        }
+        return *this;
+    }
+
 
     // 是否有效
-    bool IsValid() const
+    [[nodiscard]] bool IsValid() const
     {
         return !ConnectionMap.empty();
     }
