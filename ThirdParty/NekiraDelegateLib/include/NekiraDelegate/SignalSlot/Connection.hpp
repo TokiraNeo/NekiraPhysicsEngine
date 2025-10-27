@@ -98,7 +98,7 @@ public:
     }
 
     // 调用连接的回调
-    RT Invoke(Args&&... args)
+    RT Invoke(Args... args)
     {
         return IsValid() ? Callback(std::forward<Args>(args)...) : RT{};
     }

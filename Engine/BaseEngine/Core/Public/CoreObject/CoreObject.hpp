@@ -16,8 +16,9 @@ NAMESPACE_BEGIN(BE::Core)
 
 /**
  * @brief Base Object class in Nekira Physics Engine.
- * Inherits from IConnectionInterface to manage signal-slot connections automatically, which provides
+ * - Inherits from IConnectionInterface(from ITickInterface) to manage signal-slot connections automatically, which provides
  * a safe way to use Delegate.
+ * - Inherits from ITickInterface to integrate with the engine's ticking system.
  */
 class CObject : public ITickInterface
 {
