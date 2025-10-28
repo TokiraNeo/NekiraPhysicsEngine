@@ -19,6 +19,7 @@
 
 # 忽略IDE相关
 .idea/
+.vs/
 
 # 忽略VSCode相关
 .vscode*/

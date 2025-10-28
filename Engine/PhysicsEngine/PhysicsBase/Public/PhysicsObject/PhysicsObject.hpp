@@ -8,22 +8,28 @@
 
 #pragma once
 
-#include <CoreObject/CoreObject.hpp>
+#include <CoreMacros.hpp>
+#include <NekiraECS/Core/Entity/Entity.hpp>
 
 NAMESPACE_BEGIN(PHYE::PhysicsBase)
 
-class CPhysicsObject : public BE::Core::CObject
+class CPhysicsObject
 {
 public:
     CPhysicsObject() = default;
-    virtual ~CPhysicsObject() = default;
 
-    CPhysicsObject(const CPhysicsObject&) = default;
-    CPhysicsObject& operator=(const CPhysicsObject&) = default;
+    explicit CPhysicsObject(NekiraECS::Entity entityID);
 
+    virtual ~CPhysicsObject();
+
+    CPhysicsObject(const CPhysicsObject&) = delete;
     CPhysicsObject(CPhysicsObject&&) noexcept = default;
-    CPhysicsObject& operator=(CPhysicsObject&&) noexcept = default;
-};
 
+    CPhysicsObject& operator=(const CPhysicsObject&) = delete;
+    CPhysicsObject& operator=(CPhysicsObject&&) noexcept = default;
+
+protected:
+    NekiraECS::Entity ID;
+};
 
 NAMESPACE_END() // namespace PHYE::PhysicsBase

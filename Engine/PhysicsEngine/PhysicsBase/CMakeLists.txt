@@ -2,6 +2,8 @@
 # PhysicsBase 模块
 # ======================================
 
+find_package(NekiraECSLib CONFIG REQUIRED)
+
 # ======================================
 # 头文件、源文件
 # ======================================
@@ -22,20 +24,12 @@ target_include_directories(PhysicsBase
 )
 
 # ======================================
-# 构建输出
-# ======================================
-set_target_properties(PhysicsBase PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin
-)
-
-# ======================================
 # 依赖模块
 # ======================================
 target_link_libraries(PhysicsBase
     PUBLIC
         Core
+        NekiraECSLib::NekiraECSCore
     PRIVATE
 
 )

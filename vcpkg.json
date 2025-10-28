@@ -1,5 +1,16 @@
 {
+  "name": "nekira-physics-engine-dependencies",
+  "version": "1.0.3",
   "dependencies": [
-    "eastl"
+    {
+      "name": "eabase",
+      "version>=": "2024-08-18"
+    },
+    {
+      "name": "eastl"
+    },
+    {
+      "name": "taskflow"
+    }
   ]
 }

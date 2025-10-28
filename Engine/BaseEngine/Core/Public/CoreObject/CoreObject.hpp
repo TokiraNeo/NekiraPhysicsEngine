@@ -9,24 +9,26 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <NekiraDelegate/SignalSlot/Connection.hpp>
+#include <Tick/TickInterface.hpp>
+
 
 
 NAMESPACE_BEGIN(BE::Core)
 
 /**
  * @brief Base Object class in Nekira Physics Engine.
- * Inherits from IConnectionInterface to manage signal-slot connections automatically, which provides
+ * - Inherits from IConnectionInterface(from ITickInterface) to manage signal-slot connections automatically, which provides
  * a safe way to use Delegate.
+ * - Inherits from ITickInterface to integrate with the engine's ticking system.
  */
-class CObject : public NekiraDelegate::IConnectionInterface
+class CObject : public ITickInterface
 {
 public:
     CObject() = default;
-    virtual ~CObject() = default;
+    ~CObject() override = default;
 
-    CObject(const CObject&) = default;
-    CObject& operator=(const CObject&) = default;
+    CObject(const CObject&) = delete;
+    CObject& operator=(const CObject&) = delete;
 
     CObject(CObject&&) noexcept = default;
     CObject& operator=(CObject&&) noexcept = default;

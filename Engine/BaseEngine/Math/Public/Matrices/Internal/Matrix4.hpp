@@ -24,8 +24,14 @@ struct TMatrix4 final : public TSquareMatrix<T, 4>
     constexpr TMatrix4(const TVector4<T>& row1, const TVector4<T>& row2, const TVector4<T>& row3,
                        const TVector4<T>& row4);
 
+    // Multiply a scalar: Matrix4 * scalar
+    constexpr TMatrix4<T> operator*(T scalar) const;
+
     // Multiply a TVector4: Matrix4 * TVector4
     constexpr TVector4<T> operator*(const TVector4<T>& vec) const;
+
+    // Multiply a TMatrix4: Matrix4 * Matrix4
+    constexpr TMatrix4 operator*(const TMatrix4& other) const;
 
     // Identity Matrix4
     constexpr static TMatrix4 Identity();
@@ -45,7 +51,7 @@ struct TMatrix4 final : public TSquareMatrix<T, 4>
     // Get Adjugate Matrix4
     TMatrix4 Adjugate() const;
 
-    // Get Derminant of the matrix
+    // Get Determinant of the matrix
     constexpr T Determinant() const;
 
     // Get Inverse of the matrix
@@ -95,6 +101,18 @@ constexpr TMatrix4<T>::TMatrix4(const TVector4<T>& row1, const TVector4<T>& row2
 
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr TMatrix4<T> TMatrix4<T>::operator*(T scalar) const
+{
+    TMatrix4<T> result;
+    for (char i = 0; i < 16; ++i)
+    {
+        result.Data[i] = this->Data[i] * scalar;
+    }
+    return result;
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
 constexpr TVector4<T> TMatrix4<T>::operator*(const TVector4<T>& vec) const
 {
     const TVector4<T> ROW1{(*this)[0][0], (*this)[0][1], (*this)[0][2], (*this)[0][3]};
@@ -109,6 +127,17 @@ constexpr TVector4<T> TMatrix4<T>::operator*(const TVector4<T>& vec) const
     const T W = (vec | ROW4);
 
     return TVector4<T>{X, Y, Z, W};
+}
+
+template <typename T>
+    requires TMatrixInternal::TMatrixConcept<T, 4>
+constexpr TMatrix4<T> TMatrix4<T>::operator*(const TMatrix4& other) const
+{
+    TMatrix4<T> result;
+
+    this -> MatrixMultiply(other, result);
+
+    return result;
 }
 
 template <typename T>
