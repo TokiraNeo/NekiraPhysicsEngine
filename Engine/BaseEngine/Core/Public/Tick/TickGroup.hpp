@@ -9,11 +9,12 @@
 #pragma once
 
 #include <CoreMacros.hpp>
+#include <cstdint>
 
 NAMESPACE_BEGIN(BE::Core)
 
 // Tick Groups for managing tick order
-enum class ETickGroup : unsigned char
+enum class ETickGroup : uint8_t
 {
     BeginFrame = 0,
     PreUpdate,

@@ -18,7 +18,7 @@ NAMESPACE_BEGIN(BE::Core)
 
 // Forward declaration
 class ITickInterface;
-enum class ETickGroup : unsigned char;
+enum class ETickGroup : uint8_t;
 
 /**
  * @brief Tick System to manage tick updates.
