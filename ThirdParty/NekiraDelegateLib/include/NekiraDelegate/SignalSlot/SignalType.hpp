@@ -37,23 +37,46 @@ namespace NekiraDelegate
 {
 // 单播信号类
 template <typename RT, typename... Args>
-class SingleSignal
+class SingleSignal final
 {
 private:
     // 当前连接器
     std::shared_ptr<Connection<RT, Args...>> ConnectionPtr;
 
 public:
-    SingleSignal() = default;
+     SingleSignal() = default;
+    ~SingleSignal()
+    {
+        Disconnect();
+    }
+
+                  SingleSignal(const SingleSignal&) = delete;
+    SingleSignal& operator=(const SingleSignal&) = delete;
+
+    SingleSignal(SingleSignal&& other) noexcept : ConnectionPtr(std::move(other.ConnectionPtr))
+    {
+        other.ConnectionPtr = nullptr;
+    }
+
+    SingleSignal& operator=(SingleSignal&& other) noexcept
+    {
+        if (this != &other)
+        {
+            Disconnect();
+            ConnectionPtr = std::move(other.ConnectionPtr);
+            other.ConnectionPtr = nullptr;
+        }
+        return *this;
+    }
 
     // 是否有效的连接
-    bool IsValid() const
+    [[nodiscard]] bool IsValid() const
     {
         return ConnectionPtr && ConnectionPtr->IsValid();
     }
 
     // 执行连接的回调
-    RT Invoke(Args&&... args)
+    RT Invoke(Args... args)
     {
         return IsValid() ? ConnectionPtr->Invoke(std::forward<Args>(args)...) : RT{};
     }
@@ -80,8 +103,7 @@ public:
         requires std::is_base_of_v<IConnectionInterface, ClassType>
     void Connect(ClassType* Object, RT (ClassType::*FuncPtr)(Args...))
     {
-        auto Lambda = [Object, FuncPtr](Args&&... args) -> RT
-        { return (Object->*FuncPtr)(std::forward<Args>(args)...); };
+        auto Lambda = [Object, FuncPtr](Args... args) -> RT { return (Object->*FuncPtr)(std::forward<Args>(args)...); };
 
         std::function<RT(Args...)> Func = Lambda;
 
@@ -96,8 +118,7 @@ public:
         requires std::is_base_of_v<IConnectionInterface, ClassType>
     void Connect(const ClassType* Object, RT (ClassType::*FuncPtr)(Args...) const)
     {
-        auto Lambda = [Object, FuncPtr](Args&&... args) -> RT
-        { return (Object->*FuncPtr)(std::forward<Args>(args)...); };
+        auto Lambda = [Object, FuncPtr](Args... args) -> RT { return (Object->*FuncPtr)(std::forward<Args>(args)...); };
 
         std::function<RT(Args...)> Func = Lambda;
 
@@ -125,8 +146,20 @@ public:
 namespace NekiraDelegate
 {
 // 用于移除多播信号类中的特定连接
-struct MultiSignalHandle
+struct MultiSignalHandle final
 {
+     MultiSignalHandle() = default;
+    ~MultiSignalHandle() = default;
+
+    MultiSignalHandle(void* InSignalPtr, std::size_t InId) : SignalPtr(InSignalPtr), Id(InId)
+    {}
+
+    MultiSignalHandle(const MultiSignalHandle&) = default;
+    MultiSignalHandle(MultiSignalHandle&&) = default;
+
+    MultiSignalHandle& operator=(const MultiSignalHandle&) = default;
+    MultiSignalHandle& operator=(MultiSignalHandle&&) = default;
+
     bool operator==(const MultiSignalHandle& Other) const
     {
         return SignalPtr == Other.SignalPtr && Id == Other.Id;
@@ -148,7 +181,7 @@ namespace NekiraDelegate
 
 // 多播信号类
 template <typename... Args>
-class MultiSignal
+class MultiSignal final
 {
 private:
     using ConnectionType = Connection<void, Args...>;
@@ -160,16 +193,41 @@ private:
     std::size_t NextId = 0; // 用于生成唯一的连接ID
 
 public:
-    MultiSignal() = default;
+     MultiSignal() = default;
+    ~MultiSignal()
+    {
+        DisconnectAll();
+    }
+
+                 MultiSignal(const MultiSignal&) = delete;
+    MultiSignal& operator=(const MultiSignal&) = delete;
+
+    MultiSignal(MultiSignal&& other) noexcept : ConnectionMap(std::move(other.ConnectionMap)), NextId(other.NextId)
+    {
+        other.NextId = 0;
+    }
+
+    MultiSignal& operator=(MultiSignal&& other) noexcept
+    {
+        if (this != &other)
+        {
+            DisconnectAll();
+            ConnectionMap = std::move(other.ConnectionMap);
+            NextId = other.NextId;
+            other.NextId = 0;
+        }
+        return *this;
+    }
+
 
     // 是否有效
-    bool IsValid() const
+    [[nodiscard]] bool IsValid() const
     {
         return !ConnectionMap.empty();
     }
 
     // 执行所有连接的回调
-    void Invoke(Args&&... args)
+    void Invoke(Args... args)
     {
         // 清理无效连接
         Cleanup();
@@ -214,7 +272,8 @@ public:
     MultiSignalHandle Connect(void (*FuncPtr)(Args...))
     {
         std::function<void(Args...)> Func = FuncPtr;
-        auto                         NewConnection = std::make_shared<ConnectionType>(std::move(Func));
+
+        auto NewConnection = std::make_shared<ConnectionType>(std::move(Func));
 
         MultiSignalHandle Handler{this, ++NextId};
 
@@ -230,7 +289,7 @@ public:
         requires std::is_base_of_v<IConnectionInterface, ClassType>
     MultiSignalHandle Connect(ClassType* Object, void (ClassType::*FuncPtr)(Args...))
     {
-        auto Lambda = [Object, FuncPtr](Args&&... args) { (Object->*FuncPtr)(std::forward<Args>(args)...); };
+        auto Lambda = [Object, FuncPtr](Args... args) { (Object->*FuncPtr)(std::forward<Args>(args)...); };
 
         std::function<void(Args...)> Func = Lambda;
 
@@ -253,7 +312,7 @@ public:
         requires std::is_base_of_v<IConnectionInterface, ClassType>
     MultiSignalHandle Connect(const ClassType* Object, void (ClassType::*FuncPtr)(Args...) const)
     {
-        auto Lambda = [Object, FuncPtr](Args&&... args) { (Object->*FuncPtr)(std::forward<Args>(args)...); };
+        auto Lambda = [Object, FuncPtr](Args... args) { (Object->*FuncPtr)(std::forward<Args>(args)...); };
 
         std::function<void(Args...)> Func = Lambda;
 

@@ -38,7 +38,7 @@ void CTickSystem::PreRegisterTick(ITickInterface* tickable)
 
 void CTickSystem::UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::MultiSignalHandle& handle)
 {
-    if(TickGroupMap.find(tickGroup) != TickGroupMap.end())
+    if (TickGroupMap.contains(tickGroup))
     {
         TickGroupMap[tickGroup].RemoveSingle(handle);
     }
@@ -46,15 +46,15 @@ void CTickSystem::UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::Mul
 
 void CTickSystem::RegisterTick(ETickGroup tickGroup, ITickInterface* tickable, void (ITickInterface::*funcPtr)(float))
 {
-    if (TickGroupMap.find(tickGroup) == TickGroupMap.end())
+    if (!TickGroupMap.contains(tickGroup))
     {
-        TickGroupMap[tickGroup] = TTickSignature{};
+        TickGroupMap.insert({tickGroup, TTickSignature()});
     }
 
-    NekiraDelegate::MultiSignalHandle handle = TickGroupMap[tickGroup].BindMemberFunction(tickable, funcPtr);
+    auto handle = TickGroupMap[tickGroup].BindMemberFunction(tickable, funcPtr);
 
-    // @todo: Broadcast the registration success
-
+    // Broadcast the registration success
+    tickable->OnRegisterTick.Invoke(handle);
 }
 
 NAMESPACE_END() // namespace BE::Core

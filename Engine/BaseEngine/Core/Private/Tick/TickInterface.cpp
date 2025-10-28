@@ -26,14 +26,15 @@ ITickInterface::~ITickInterface()
     CTickSystem::Get().UnregisterTick(TickGroup,TickHandle);
 }
 
+void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
+{
+    TickHandle = handle;
+}
+
 ETickGroup ITickInterface::GetTickGroup() const
 {
     return TickGroup;
 }
 
-void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
-{
-    TickHandle = handle;
-}
 
 NAMESPACE_END() // namespace BE::Core

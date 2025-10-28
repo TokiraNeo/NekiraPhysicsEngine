@@ -1,5 +1,5 @@
 ﻿/**
-* GPL-3.0 License
+ * GPL-3.0 License
  *
  * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
@@ -12,6 +12,7 @@
 
 NAMESPACE_BEGIN(BE::Core)
 
+// Tick Groups for managing tick order
 enum class ETickGroup : unsigned char
 {
     BeginFrame = 0,

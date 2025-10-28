@@ -41,14 +41,34 @@ public:
     Delegate() : Signal(std::make_unique<SingleSignal<RT, Args...>>())
     {}
 
+    ~Delegate()
+    {
+        RemoveBinding();
+        Signal.reset();
+    }
+
+    Delegate(const Delegate&) = delete;
+    Delegate(Delegate&& other) noexcept : Signal(std::move(other.Signal))
+    {}
+
+    Delegate& operator=(const Delegate&) = delete;
+    Delegate& operator=(Delegate&& other) noexcept
+    {
+        if (this != &other)
+        {
+            Signal = std::move(other.Signal);
+        }
+        return *this;
+    }
+
     // 是否有效
-    bool IsValid() const
+    [[nodiscard]] bool IsValid() const
     {
         return Signal && Signal->IsValid();
     }
 
     // 执行连接的回调
-    RT Invoke(Args&&... args)
+    RT Invoke(Args... args)
     {
         return IsValid() ? Signal->Invoke(std::forward<Args>(args)...) : RT{};
     }
@@ -121,15 +141,34 @@ private:
 public:
     MultiDelegate() : Signal(std::make_unique<MultiSignal<Args...>>())
     {}
+    ~MultiDelegate()
+    {
+        RemoveAll();
+        Signal.reset();
+    }
+
+    MultiDelegate(const MultiDelegate&) = delete;
+    MultiDelegate(MultiDelegate&& other) noexcept : Signal(std::move(other.Signal))
+    {}
+
+    MultiDelegate& operator=(const MultiDelegate&) = delete;
+    MultiDelegate& operator=(MultiDelegate&& other) noexcept
+    {
+        if(this != &other)
+        {
+            Signal = std::move(other.Signal);
+        }
+        return *this;
+    }
 
     // 是否有效
-    bool IsValid() const
+    [[nodiscard]] bool IsValid() const
     {
         return Signal && Signal->IsValid();
     }
 
     // 执行连接的回调
-    void Invoke(Args&&... args)
+    void Invoke(Args... args)
     {
         if (IsValid())
         {
@@ -186,3 +225,5 @@ public:
     }
 };
 } // namespace NekiraDelegate
+
+

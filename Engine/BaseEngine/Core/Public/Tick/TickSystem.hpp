@@ -9,14 +9,10 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <EASTL/stack.h>
-#include <EASTL/unordered_map.h>
+#include <Delegate/Delegate.hpp>
+#include <stack>
+#include <unordered_map>
 
-// Forward declaration
-namespace NekiraDelegate
-{
-struct MultiSignalHandle;
-}
 
 NAMESPACE_BEGIN(BE::Core)
 
@@ -29,7 +25,7 @@ enum class ETickGroup : unsigned char;
  */
 class CTickSystem final
 {
-    NEKIRA_MULTI_DELEGATE(TTickSignature, float)
+    NEKIRA_MULTI_DELEGATE(TTickSignature, float /* deltaTime */)
 
 public:
     CTickSystem(const CTickSystem&) = delete;
@@ -37,6 +33,8 @@ public:
 
     CTickSystem& operator=(const CTickSystem&) = delete;
     CTickSystem& operator=(CTickSystem&&) noexcept = delete;
+
+    ~CTickSystem() = default;
 
     // Get the singleton instance of Tick System
     static CTickSystem& Get();
@@ -51,15 +49,14 @@ public:
     void UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::MultiSignalHandle& handle);
 
 private:
-     CTickSystem() = default;
-    ~CTickSystem() = default;
+    CTickSystem() = default;
 
     // Register a tick delegate
     void RegisterTick(ETickGroup tickGroup, ITickInterface* tickable, void (ITickInterface::*funcPtr)(float));
 
-    eastl::stack<ITickInterface*> PreRegisteredTickables;
+    std::stack<ITickInterface*> PreRegisteredTickables;
 
-    eastl::unordered_map<ETickGroup, TTickSignature> TickGroupMap;
+    std::unordered_map<ETickGroup, TTickSignature> TickGroupMap;
 };
 
 

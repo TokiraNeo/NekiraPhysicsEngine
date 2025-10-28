@@ -24,7 +24,7 @@ endmacro()
 
 ####################################################################################
 
-message(NOTICE "NekiraDelegateLib: 1.1.0")
+message(NOTICE "NekiraDelegateLib: 1.1.3")
 
 # 设置include路径
 set(NekiraDelegate_INCLUDE_DIRS "${PACKAGE_PREFIX_DIR}/include")
