@@ -68,7 +68,7 @@ public:
     }
 
     // 执行连接的回调
-    RT Invoke(Args&&... args)
+    RT Invoke(Args... args)
     {
         return IsValid() ? Signal->Invoke(std::forward<Args>(args)...) : RT{};
     }
@@ -168,7 +168,7 @@ public:
     }
 
     // 执行连接的回调
-    void Invoke(Args&&... args)
+    void Invoke(Args... args)
     {
         if (IsValid())
         {
@@ -225,3 +225,5 @@ public:
     }
 };
 } // namespace NekiraDelegate
+
+
