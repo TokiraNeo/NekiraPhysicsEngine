@@ -28,7 +28,7 @@ ITickInterface::~ITickInterface()
 
 void ITickInterface::OnRegisterTickSuccess(NekiraDelegate::MultiSignalHandle handle)
 {
-    TickHandle = std::move(handle);
+    TickHandle = handle;
 }
 
 ETickGroup ITickInterface::GetTickGroup() const

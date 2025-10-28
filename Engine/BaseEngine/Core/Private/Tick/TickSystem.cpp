@@ -53,8 +53,8 @@ void CTickSystem::RegisterTick(ETickGroup tickGroup, ITickInterface* tickable, v
 
     auto handle = TickGroupMap[tickGroup].BindMemberFunction(tickable, funcPtr);
 
-    // @todo: Broadcast the registration success
-    tickable->OnRegisterTick.Invoke(std::move(handle));
+    // Broadcast the registration success
+    tickable->OnRegisterTick.Invoke(handle);
 }
 
 NAMESPACE_END() // namespace BE::Core
