@@ -7,18 +7,24 @@
  */
 
 #include <Geometry2D/Circle2D.hpp>
-#include <utility>
+
 #include <cassert>
+#include <utility>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-SCircle2D::SCircle2D() : Center(0.0F), Radius(1.0F)
+CCircle2D::CCircle2D() : Center(0.0F), Radius(1.0F)
 {}
 
-SCircle2D::SCircle2D(SPoint2D center, float radius) : Center(std::move(center)), Radius(radius)
+CCircle2D::CCircle2D(CPoint2D center, float radius) : Center(std::move(center)), Radius(radius)
 {
     // Make sure radius > 0
     assert(radius > 0.0F);
+}
+
+CPoint2D CCircle2D::GetCenter() const
+{
+    return Center;
 }
 
 NAMESPACE_END() // namespace PHYE::Physics2D

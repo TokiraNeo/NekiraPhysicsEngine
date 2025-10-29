@@ -12,35 +12,53 @@
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-SRectangle2D::SRectangle2D() : Origin{0.0F}, Extend{1.0F}
+CRectangle2D::CRectangle2D() : Origin(0.0F), End(1.0F)
 {}
 
-SRectangle2D::SRectangle2D(SPoint2D origin, SPoint2D extend) : Origin(std::move(origin)), Extend(std::move(extend))
+CRectangle2D::CRectangle2D(CPoint2D origin, CPoint2D end) : Origin(std::move(origin)), End(std::move(end))
 {}
 
-float SRectangle2D::Width() const
+CRectangle2D::CRectangle2D(CPoint2D origin, const SVector2F& extend) : Origin(std::move(origin)), End(std::move(origin + extend))
+{}
+
+CPoint2D CRectangle2D::GetOrigin() const
 {
-    return std::abs(Extend.X - Origin.X);
+    return Origin;
 }
 
-float SRectangle2D::Height() const
+CPoint2D CRectangle2D::GetEnd() const
 {
-    return std::abs(Extend.Y - Origin.Y);
+    return End;
 }
 
-float SRectangle2D::Perimeter() const
+SVector2F CRectangle2D::GetExtend() const
+{
+    return End - Origin;
+}
+
+float CRectangle2D::Width() const
+{
+    return std::abs(End.X() - Origin.X());
+}
+
+float CRectangle2D::Height() const
+{
+    return std::abs(End.Y() - Origin.Y());
+}
+
+float CRectangle2D::Perimeter() const
 {
     return 2.0F * (Width() + Height());
 }
 
-float SRectangle2D::Area() const
+float CRectangle2D::Area() const
 {
     return Width() * Height();
 }
 
-float SRectangle2D::DiagonalLength() const
+float CRectangle2D::DiagonalLength() const
 {
-    return (Extend - Origin).Magnitude();
+    return (End - Origin).Magnitude();
 }
 
 NAMESPACE_END() // namespace PHYE::Physics2D
@@ -52,8 +70,18 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
 SOrientedRectangle2D::SOrientedRectangle2D() : Center{0.0F}, HalfExtents{0.5F, 0.5F}, Angle{0.0F}
 {}
 
-SOrientedRectangle2D::SOrientedRectangle2D(SPoint2D center, SVector2F halfExtents, float angle)
+SOrientedRectangle2D::SOrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle)
     : Center(std::move(center)), HalfExtents(std::move(halfExtents)), Angle(angle)
 {}
+
+CPoint2D SOrientedRectangle2D::GetCenter() const
+{
+    return Center;
+}
+
+SVector2F SOrientedRectangle2D::GetHalfExtents() const
+{
+    return HalfExtents;
+}
 
 NAMESPACE_END() // namespace PHYE::Physics2D

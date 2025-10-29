@@ -17,27 +17,36 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
  * @brief Line2D
  * @details A line in 2D space defined by two endpoints: Start and End.
  */
-struct SLine2D final
+class CLine2D final : public CPrimitiveShape2D
 {
-    SPoint2D Start;
-    SPoint2D End;
+private:
+    CPoint2D Start;
+    CPoint2D End;
 
-     SLine2D() = default;
-    ~SLine2D() = default;
+public:
+    ~CLine2D() override = default;
 
-    SLine2D(const SLine2D& other) = default;
-    SLine2D(SLine2D&& other) noexcept = default;
+    CLine2D() = default;
+    CLine2D(CPoint2D start, CPoint2D end);
+    CLine2D(CPoint2D start, const SVector2F& extend);
 
-    SLine2D& operator=(const SLine2D& other) = default;
-    SLine2D& operator=(SLine2D&& other) noexcept = default;
+    CLine2D(const CLine2D& other) = default;
+    CLine2D(CLine2D&& other) noexcept = default;
 
-    SLine2D(SPoint2D start, SPoint2D end);
+    CLine2D& operator=(const CLine2D& other) = default;
+    CLine2D& operator=(CLine2D&& other) noexcept = default;
 
-    bool operator==(const SLine2D& other) const;
-    bool operator!=(const SLine2D& other) const;
+    bool operator==(const CLine2D& other) const;
+    bool operator!=(const CLine2D& other) const;
 
+    // Length
     [[nodiscard]] float Length() const;
     [[nodiscard]] float LengthSquared() const;
+
+    // Getters
+    [[nodiscard]] CPoint2D GetStart() const;
+    [[nodiscard]] CPoint2D  GetEnd() const;
+    [[nodiscard]] SVector2F GetDiagonal() const;
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D

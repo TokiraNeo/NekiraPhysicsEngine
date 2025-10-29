@@ -11,29 +11,47 @@
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-SLine2D::SLine2D(SPoint2D start, SPoint2D end) : Start(std::move(start)), End(std::move(end))
+CLine2D::CLine2D(CPoint2D start, CPoint2D end) : Start(std::move(start)), End(std::move(end))
 {}
 
-bool SLine2D::operator==(const SLine2D& other) const
+CLine2D::CLine2D(CPoint2D start, const SVector2F& extend) : Start(std::move(start)), End(std::move(start + extend))
+{}
+
+bool CLine2D::operator==(const CLine2D& other) const
 {
     return (other.Start == Start) && (other.End == End);
 }
 
-bool SLine2D::operator!=(const SLine2D& other) const
+bool CLine2D::operator!=(const CLine2D& other) const
 {
     return !(*this == other);
 }
 
-float SLine2D::Length() const
+float CLine2D::Length() const
 {
-    const SPoint2D DIFF = End - Start;
+    const auto DIFF = End - Start;
     return DIFF.Magnitude();
 }
 
-float SLine2D::LengthSquared() const
+float CLine2D::LengthSquared() const
 {
-    const SPoint2D DIFF = End - Start;
+    const auto DIFF = End - Start;
     return DIFF.SquareMagnitude();
+}
+
+CPoint2D CLine2D::GetStart() const
+{
+    return Start;
+}
+
+CPoint2D CLine2D::GetEnd() const
+{
+    return End;
+}
+
+SVector2F CLine2D::GetDiagonal() const
+{
+    return End - Start;
 }
 
 NAMESPACE_END() // namespace PHYE::Physics2D
