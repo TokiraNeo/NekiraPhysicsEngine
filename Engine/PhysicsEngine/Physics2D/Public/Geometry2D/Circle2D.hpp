@@ -10,26 +10,34 @@
 
 #include <Geometry2D/Point2D.hpp>
 
+
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
 /**
  * @brief Circle2D
  * @details A circle in 2D space defined by its center point and radius.
  */
-struct SCircle2D final
+class CCircle2D final : public CPrimitiveShape2D
 {
-    SPoint2D Center;
-    float Radius;
+private:
+    CPoint2D Center;
+    float    Radius;
 
-    ~SCircle2D() = default;
-    SCircle2D();
-    SCircle2D(SPoint2D center, float radius);
+public:
+    ~CCircle2D() override = default;
 
-    SCircle2D(const SCircle2D& other) = default;
-    SCircle2D(SCircle2D&& other) noexcept = default;
+    CCircle2D();
+    CCircle2D(CPoint2D center, float radius);
 
-    SCircle2D& operator=(const SCircle2D& other) = default;
-    SCircle2D& operator=(SCircle2D&& other) noexcept = default;
+    CCircle2D(const CCircle2D& other) = default;
+    CCircle2D(CCircle2D&& other) noexcept = default;
+
+    CCircle2D& operator=(const CCircle2D& other) = default;
+    CCircle2D& operator=(CCircle2D&& other) noexcept = default;
+
+    // Getters
+    [[nodiscard]] CPoint2D GetCenter() const;
+    [[nodiscard]] constexpr float    GetRadius() const { return Radius; }
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D
