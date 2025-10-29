@@ -10,7 +10,7 @@
 
 #include <CoreMacros.hpp>
 #include <type_traits>
-#include <Utility/MathUtilities.hpp>
+#include <MathUtility/MathUtilities.hpp>
 
 
 NAMESPACE_BEGIN(BE::Math)
