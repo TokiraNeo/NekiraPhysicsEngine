@@ -10,7 +10,7 @@
 
 #include <array>
 #include <Matrices/Internal/MatrixBase.hpp>
-#include <Utility/MathUtilities.hpp>
+#include <MathUtility/MathUtilities.hpp>
 
 
 

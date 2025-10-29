@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Utility/MathUtilities.hpp>
+#include <MathUtility/MathUtilities.hpp>
 #include <Vectors/Internal/VectorBase.hpp>
 
 
