@@ -12,6 +12,7 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
+
 /**
  * @brief Check if a floating-point number is nearly zero
  * @param value The floating-point number to check

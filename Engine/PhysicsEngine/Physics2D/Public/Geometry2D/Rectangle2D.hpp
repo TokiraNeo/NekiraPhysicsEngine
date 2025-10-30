@@ -15,7 +15,7 @@
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
 /**
- * @brief Rectangle2D
+ * @brief Rectangle2D(axis-aligned)
  * @details A rectangle in 2D space can be defined by its origin point and extend (opposite
  * corner).
  */
@@ -54,7 +54,7 @@ public:
  * @brief Oriented Rectangle2D
  * @details An oriented rectangle in 2D space defined by its center point, half extents and rotation angle(In degrees).
  */
-class SOrientedRectangle2D final : public CPrimitiveShape2D
+class COrientedRectangle2D final : public CPrimitiveShape2D
 {
 private:
     CPoint2D Center;
@@ -62,22 +62,23 @@ private:
     float Angle; // In degrees
 
 public:
-    ~SOrientedRectangle2D() override = default;
+    ~COrientedRectangle2D() override = default;
 
-     SOrientedRectangle2D();
-     SOrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle = 0.0F);
+     COrientedRectangle2D();
+     COrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle = 0.0F);
 
-    SOrientedRectangle2D(const SOrientedRectangle2D& other) = default;
-    SOrientedRectangle2D(SOrientedRectangle2D&& other) noexcept = default;
+    COrientedRectangle2D(const COrientedRectangle2D& other) = default;
+    COrientedRectangle2D(COrientedRectangle2D&& other) noexcept = default;
 
-    SOrientedRectangle2D& operator=(const SOrientedRectangle2D& other) = default;
-    SOrientedRectangle2D& operator=(SOrientedRectangle2D&& other) noexcept = default;
+    COrientedRectangle2D& operator=(const COrientedRectangle2D& other) = default;
+    COrientedRectangle2D& operator=(COrientedRectangle2D&& other) noexcept = default;
 
    // Getters
     [[nodiscard]] CPoint2D GetCenter() const;
     [[nodiscard]] SVector2F GetHalfExtents() const;
 
     [[nodiscard]] constexpr float GetAngle() const { return Angle; }
+
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D

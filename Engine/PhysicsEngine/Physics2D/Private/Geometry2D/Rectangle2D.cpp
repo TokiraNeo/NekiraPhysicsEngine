@@ -67,19 +67,19 @@ NAMESPACE_END() // namespace PHYE::Physics2D
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-SOrientedRectangle2D::SOrientedRectangle2D() : Center{0.0F}, HalfExtents{0.5F, 0.5F}, Angle{0.0F}
+COrientedRectangle2D::COrientedRectangle2D() : Center{0.0F}, HalfExtents{0.5F, 0.5F}, Angle{0.0F}
 {}
 
-SOrientedRectangle2D::SOrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle)
+COrientedRectangle2D::COrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle)
     : Center(std::move(center)), HalfExtents(std::move(halfExtents)), Angle(angle)
 {}
 
-CPoint2D SOrientedRectangle2D::GetCenter() const
+CPoint2D COrientedRectangle2D::GetCenter() const
 {
     return Center;
 }
 
-SVector2F SOrientedRectangle2D::GetHalfExtents() const
+SVector2F COrientedRectangle2D::GetHalfExtents() const
 {
     return HalfExtents;
 }
