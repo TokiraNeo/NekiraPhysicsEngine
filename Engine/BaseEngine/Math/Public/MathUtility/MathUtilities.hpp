@@ -12,6 +12,7 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
+
 /**
  * @brief Check if a floating-point number is nearly zero
  * @param value The floating-point number to check
@@ -58,6 +59,12 @@ double ACos(double value);
  */
 float  ASin(float value);
 double ASin(double value);
+
+/**
+ * @brief Arc Tangent2 (in Radians)
+ */
+float  ATan2(float y, float x);
+double ATan2(double y, double x);
 
 /**
  * @brief Arc Tangent (in Radians)

@@ -82,6 +82,16 @@ double ASin(double value)
     return std::asin(value);
 }
 
+float ATan2(float y, float x)
+{
+    return std::atan2(y, x);
+}
+
+double ATan2(double y, double x)
+{
+    return std::atan2(y, x);
+}
+
 float RadiansToDegrees(float radians)
 {
     return radians * (180.0F / std::numbers::pi_v<float>);
