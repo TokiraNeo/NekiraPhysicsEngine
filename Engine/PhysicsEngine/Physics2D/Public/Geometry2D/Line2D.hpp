@@ -44,7 +44,7 @@ public:
     [[nodiscard]] float LengthSquared() const;
 
     // Getters
-    [[nodiscard]] CPoint2D GetStart() const;
+    [[nodiscard]] CPoint2D  GetStart() const;
     [[nodiscard]] CPoint2D  GetEnd() const;
     [[nodiscard]] SVector2F GetDiagonal() const;
 };

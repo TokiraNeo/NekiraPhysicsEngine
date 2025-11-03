@@ -15,7 +15,10 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// TVector4<>
+/**
+ * @brief TVector4<>
+ * @details A generic 4D vector class template supporting various mathematical operations.
+ */
 template <typename T>
     requires TVectorInternal::TVectorConcept<T>
 struct TVector4 final

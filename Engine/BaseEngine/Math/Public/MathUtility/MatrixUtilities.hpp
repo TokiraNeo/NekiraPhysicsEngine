@@ -17,6 +17,45 @@ NAMESPACE_BEGIN(BE::Math)
 // =====================================================================
 
 /**
+ * @brief Get Translation Matrix3 from a translation vector(Two-dimensional)
+ * @param position Translation vector
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Translation2D3x3(const BE::Math::TVector2<T>& position)
+{
+    /**
+     * @brief
+     * Translation matrix in row-major order:
+     * | 1 0 Tx |
+     * | 0 1 Ty |
+     * | 0 0 1  |
+     */
+
+    BE::Math::TMatrix3<T> result = BE::Math::TMatrix3<T>::Identity();
+
+    result[0][2] = position.X;
+    result[1][2] = position.Y;
+
+    return result;
+}
+
+/**
+ * @brief Get Translation Matrix3 from x and y components(Two-dimensional)
+ * @param x X component of translation
+ * @param y Y component of translation
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Translation2D3x3(T x, T y)
+{
+    BE::Math::TMatrix3<T> result = BE::Math::TMatrix3<T>::Identity();
+
+    result[0][2] = x;
+    result[1][2] = y;
+
+    return result;
+}
+
+/**
  * @brief Get Translation Matrix4 from a translation vector
  * @param position Translation vector
  */
@@ -71,6 +110,53 @@ static BE::Math::TMatrix4<T> Translation4x4(T x, T y, T z)
 // =====================================================================
 // Scaling Matrix
 // =====================================================================
+
+/**
+ * @brief Get Scaling Matrix3 from a scale vector(Two-dimensional)
+ * @param scale Scale vector
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Scaling2D3x3(const BE::Math::TVector2<T>& scale)
+{
+    /**
+     * @brief
+     * As we use row-major order, the scaling matrix is:
+     * | Sx 0  0 |
+     * | 0  Sy 0 |
+     * | 0  0  1 |
+     */
+
+    BE::Math::TMatrix3<T> result = BE::Math::TMatrix3<T>::Identity();
+
+    result[0][0] = scale.X;
+    result[1][1] = scale.Y;
+
+    return result;
+}
+
+/**
+ * @brief Get Scaling Matrix3 from x and y components(Two-dimensional)
+ * @param x X component of scale
+ * @param y Y component of scale
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Scaling2D3x3(T x, T y)
+{
+    /**
+     * @brief
+     * As we use row-major order, the scaling matrix is:
+     * | Sx 0  0 |
+     * | 0  Sy 0 |
+     * | 0  0  1 |
+     */
+
+    BE::Math::TMatrix3<T> result = BE::Math::TMatrix3<T>::Identity();
+
+    result[0][0] = x;
+    result[1][1] = y;
+
+    return result;
+}
 
 /**
  * @brief Get Scaling Matrix4 from a scale vector
@@ -310,6 +396,16 @@ static BE::Math::TMatrix3<T> ZRotation3x3(T degrees)
 // =====================================================================
 
 /**
+ * @brief Get Rotation Matrix3 for tow-dimensional rotation from an angle in degrees
+ * @param degrees Angle in degrees
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Rotation2D3x3(T degrees)
+{
+    return ZRotation3x3<T>(degrees);
+}
+
+/**
  * @brief Get Rotation Matrix4 from TVector3(X, Y, Z)
  * @param rotation Rotation vector3 in degrees for each axis
  */
@@ -328,6 +424,8 @@ static BE::Math::TMatrix3<T> Rotation3x3(const BE::Math::TVector3<T>& rotation)
 {
     return XRotation3x3<T>(rotation.X) * YRotation3x3<T>(rotation.Y) * ZRotation3x3<T>(rotation.Z);
 }
+
+
 
 // =====================================================================
 // Axis-Angle Rotation Matrix (Rodrigues' Rotation Formula)
@@ -454,6 +552,19 @@ static BE::Math::TVector3<T> TransformVector3D(const BE::Math::TVector3<T>& dire
 // =====================================================================
 
 /**
+ * @brief Get Transform Matrix3 from translation, rotation and scale.(Two-dimensional)
+ * @param scale Scale vector
+ * @param rotation Rotate Angle in degrees
+ * @param translation Translation vector
+ */
+template <typename T = float>
+static BE::Math::TMatrix3<T> Transform2D3x3(const BE::Math::TVector2<T>& scale, T rotation,
+                                        const BE::Math::TVector2<T>& translation)
+{
+    return Scaling2D3x3<T>(scale) * Rotation2D3x3<T>(rotation) * Translation2D3x3<T>(translation);
+}
+
+/**
  * @brief Get Transform Matrix4 from translation, rotation and scale
  * @param scale Scale vector
  * @param rotation Rotation vector (in degrees)
@@ -479,6 +590,5 @@ static BE::Math::TMatrix4<T> Transform4x4(const BE::Math::TVector3<T>& scale, co
 {
     return Scaling4x4<T>(scale) * AxisRotation4x4<T>(axis, degrees) * Translation4x4<T>(translation);
 }
-
 
 NAMESPACE_END() // namespace BE::Math

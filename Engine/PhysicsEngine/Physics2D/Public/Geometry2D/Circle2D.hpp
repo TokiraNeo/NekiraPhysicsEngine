@@ -1,5 +1,5 @@
 ﻿/**
-* GPL-3.0 License
+ * GPL-3.0 License
  *
  * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
@@ -9,7 +9,6 @@
 #pragma once
 
 #include <Geometry2D/Point2D.hpp>
-
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
@@ -36,8 +35,11 @@ public:
     CCircle2D& operator=(CCircle2D&& other) noexcept = default;
 
     // Getters
-    [[nodiscard]] CPoint2D GetCenter() const;
-    [[nodiscard]] constexpr float    GetRadius() const { return Radius; }
+    [[nodiscard]] CPoint2D        GetCenter() const;
+    [[nodiscard]] constexpr float GetRadius() const
+    {
+        return Radius;
+    }
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D
