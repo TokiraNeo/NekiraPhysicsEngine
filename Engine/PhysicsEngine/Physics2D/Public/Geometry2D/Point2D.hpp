@@ -26,9 +26,11 @@ private:
 public:
     ~CPoint2D() override = default;
 
-    constexpr CPoint2D();
-    explicit constexpr CPoint2D(float value) : Position(value) {}
-    constexpr CPoint2D(float x, float y) : Position(x, y) {}
+    constexpr          CPoint2D();
+    explicit constexpr CPoint2D(float value) : Position(value)
+    {}
+    constexpr CPoint2D(float x, float y) : Position(x, y)
+    {}
     explicit CPoint2D(SVector2F vector2f);
 
     CPoint2D(const CPoint2D& other) = default;
@@ -54,9 +56,15 @@ public:
     CPoint2D& operator-=(const SVector2F& vector);
 
     // Getters
-    [[nodiscard]] constexpr float X() const {return Position.X;}
+    [[nodiscard]] constexpr float X() const
+    {
+        return Position.X;
+    }
 
-    [[nodiscard]] constexpr float Y() const {return Position.Y;}
+    [[nodiscard]] constexpr float Y() const
+    {
+        return Position.Y;
+    }
 
     [[nodiscard]] SVector2F ToVector2F() const;
 

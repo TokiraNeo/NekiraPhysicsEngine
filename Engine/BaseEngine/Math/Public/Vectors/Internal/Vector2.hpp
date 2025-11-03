@@ -12,7 +12,6 @@
 #include <Vectors/Internal/VectorBase.hpp>
 
 
-
 NAMESPACE_BEGIN(BE::Math)
 
 /// TVector2<>

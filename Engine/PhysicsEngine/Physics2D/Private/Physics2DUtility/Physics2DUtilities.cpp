@@ -64,7 +64,7 @@ bool IsPointInRectangle2D(const CPoint2D& point, const CRectangle2D& rectangle, 
 
 bool IsPointInOrientedRectangle2D(const CPoint2D& point, const COrientedRectangle2D& orientedRectangle)
 {
-
+    //
     return false;
 }
 

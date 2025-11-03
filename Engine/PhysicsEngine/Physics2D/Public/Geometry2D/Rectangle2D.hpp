@@ -28,9 +28,9 @@ private:
 public:
     ~CRectangle2D() override = default;
 
-     CRectangle2D();
-     CRectangle2D(CPoint2D origin, CPoint2D end);
-     CRectangle2D(CPoint2D origin, const SVector2F& extend);
+    CRectangle2D();
+    CRectangle2D(CPoint2D origin, CPoint2D end);
+    CRectangle2D(CPoint2D origin, const SVector2F& extend);
 
     CRectangle2D(const CRectangle2D& other) = default;
     CRectangle2D(CRectangle2D&& other) noexcept = default;
@@ -39,8 +39,8 @@ public:
     CRectangle2D& operator=(CRectangle2D&& other) noexcept = default;
 
     // Getters
-    [[nodiscard]] CPoint2D GetOrigin() const;
-    [[nodiscard]] CPoint2D GetEnd() const;
+    [[nodiscard]] CPoint2D  GetOrigin() const;
+    [[nodiscard]] CPoint2D  GetEnd() const;
     [[nodiscard]] SVector2F GetExtend() const;
 
     [[nodiscard]] float Width() const;
@@ -57,15 +57,15 @@ public:
 class COrientedRectangle2D final : public CPrimitiveShape2D
 {
 private:
-    CPoint2D Center;
+    CPoint2D  Center;
     SVector2F HalfExtents;
-    float Angle; // In degrees
+    float     Angle; // In degrees
 
 public:
     ~COrientedRectangle2D() override = default;
 
-     COrientedRectangle2D();
-     COrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle = 0.0F);
+    COrientedRectangle2D();
+    COrientedRectangle2D(CPoint2D center, SVector2F halfExtents, float angle = 0.0F);
 
     COrientedRectangle2D(const COrientedRectangle2D& other) = default;
     COrientedRectangle2D(COrientedRectangle2D&& other) noexcept = default;
@@ -73,12 +73,14 @@ public:
     COrientedRectangle2D& operator=(const COrientedRectangle2D& other) = default;
     COrientedRectangle2D& operator=(COrientedRectangle2D&& other) noexcept = default;
 
-   // Getters
-    [[nodiscard]] CPoint2D GetCenter() const;
+    // Getters
+    [[nodiscard]] CPoint2D  GetCenter() const;
     [[nodiscard]] SVector2F GetHalfExtents() const;
 
-    [[nodiscard]] constexpr float GetAngle() const { return Angle; }
-
+    [[nodiscard]] constexpr float GetAngle() const
+    {
+        return Angle;
+    }
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D
