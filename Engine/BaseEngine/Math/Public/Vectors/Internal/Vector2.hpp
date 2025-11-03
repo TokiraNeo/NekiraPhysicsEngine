@@ -14,7 +14,10 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// TVector2<>
+/**
+ * @brief TVector2<>
+ * @details A generic 2D vector class template supporting various mathematical operations.
+ */
 template <typename T>
     requires TVectorInternal::TVectorConcept<T>
 struct TVector2 final

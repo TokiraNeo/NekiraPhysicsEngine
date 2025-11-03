@@ -61,6 +61,12 @@ float  ASin(float value);
 double ASin(double value);
 
 /**
+ * @brief Arc Tangent2 (in Radians)
+ */
+float  ATan2(float y, float x);
+double ATan2(double y, double x);
+
+/**
  * @brief Arc Tangent (in Radians)
  */
 float  RadiansToDegrees(float radians);
