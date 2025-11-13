@@ -16,7 +16,7 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
  * @brief Circle2D
  * @details A circle in 2D space defined by its center point and radius.
  */
-class CCircle2D final : public CPrimitiveShape2D
+class PHYSICS2D_API CCircle2D final : public CPrimitiveShape2D
 {
 private:
     CPoint2D Center;

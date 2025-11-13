@@ -49,6 +49,9 @@ struct TVector3 final
     TVector3& operator*=(const TVector3& other);
     TVector3& operator*=(T scalar);
 
+    // Negate operator
+    constexpr TVector3 operator-() const;
+
     bool operator==(const TVector3& other) const;
     bool operator!=(const TVector3& other) const;
 
@@ -204,6 +207,13 @@ TVector3<T>& TVector3<T>::operator*=(T scalar)
     Y *= scalar;
     Z *= scalar;
     return *this;
+}
+
+template <typename T>
+    requires TVectorInternal::TVectorConcept<T>
+constexpr TVector3<T> TVector3<T>::operator-() const
+{
+    return TVector3<T>(-X, -Y, -Z);
 }
 
 template <typename T>

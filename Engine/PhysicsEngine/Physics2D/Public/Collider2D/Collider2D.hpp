@@ -9,8 +9,10 @@
 #pragma once
 
 #include <CoreMacros.hpp>
+#include <Physics2D.hpp>
+#include <Transforms/Transforms.hpp>
 #include <memory>
-#include <Vectors/Vectors.hpp>
+
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
@@ -21,7 +23,7 @@ class CPrimitiveShape2D;
 /**
  * @brief Collider2D that holds bounding volume information.
  */
-class CCollider2D final
+class PHYSICS2D_API CCollider2D final
 {
 public:
     CCollider2D() = default;
@@ -42,9 +44,7 @@ private:
     std::unique_ptr<CPrimitiveShape2D> PrimitiveShape;
 
     // Local Transform
-    SVector2F LocalPosition;
-    SVector2F LocalScale;
-    float LocalRotation = 0.0F;
+    STransform2D LocalTransform;
 
     // @TODO: Cache Bounding Volume for two collision detection phases???
 };

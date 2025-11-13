@@ -18,7 +18,8 @@ CRectangle2D::CRectangle2D() : Origin(0.0F), End(1.0F)
 CRectangle2D::CRectangle2D(CPoint2D origin, CPoint2D end) : Origin(std::move(origin)), End(std::move(end))
 {}
 
-CRectangle2D::CRectangle2D(CPoint2D origin, const SVector2F& extend) : Origin(std::move(origin)), End(std::move(origin + extend))
+CRectangle2D::CRectangle2D(CPoint2D origin, const SVector2F& extend)
+    : Origin(std::move(origin)), End(std::move(origin + extend))
 {}
 
 CPoint2D CRectangle2D::GetOrigin() const

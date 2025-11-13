@@ -10,10 +10,12 @@
 
 #include <CoreMacros.hpp>
 #include <NekiraECS/Core/Entity/Entity.hpp>
+#include <PhysicsBase.hpp>
+
 
 NAMESPACE_BEGIN(PHYE::PhysicsBase)
 
-class CPhysicsObject
+class PHYSICSBASE_API CPhysicsObject
 {
 public:
     CPhysicsObject() = default;

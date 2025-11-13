@@ -19,7 +19,7 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
  * @details A rectangle in 2D space can be defined by its origin point and extend (opposite
  * corner).
  */
-class CRectangle2D final : public CPrimitiveShape2D
+class PHYSICS2D_API CRectangle2D final : public CPrimitiveShape2D
 {
 private:
     CPoint2D Origin;
@@ -54,7 +54,7 @@ public:
  * @brief Oriented Rectangle2D
  * @details An oriented rectangle in 2D space defined by its center point, half extents and rotation angle(In degrees).
  */
-class COrientedRectangle2D final : public CPrimitiveShape2D
+class PHYSICS2D_API COrientedRectangle2D final : public CPrimitiveShape2D
 {
 private:
     CPoint2D  Center;

@@ -14,6 +14,11 @@ file(GLOB_RECURSE HEADER_FILES "Public/*.hpp")
 add_library(CoreBase INTERFACE ${HEADER_FILES})
 
 # ======================================
+# 导出宏
+# ======================================
+target_compile_definitions(CoreBase INTERFACE COREBASE_EXPORT)
+
+# ======================================
 # 头文件目录
 # ======================================
 target_include_directories(CoreBase
