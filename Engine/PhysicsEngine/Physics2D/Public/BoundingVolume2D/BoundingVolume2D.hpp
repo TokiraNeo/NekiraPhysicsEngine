@@ -9,13 +9,14 @@
 #pragma once
 
 #include <CoreMacros.hpp>
+#include <Physics2D.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
 /**
  * @brief Bounding Valume 2D base class for all 2D bounding volumes.
  */
-struct SBoundingVolume2D
+struct PHYSICS2D_API SBoundingVolume2D
 {
 public:
     SBoundingVolume2D() = default;

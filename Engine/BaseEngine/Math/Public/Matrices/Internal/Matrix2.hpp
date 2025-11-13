@@ -14,7 +14,9 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// 2x2 Matrix
+/**
+ * @brief 2x2 Matrix
+ */
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 2>
 struct TMatrix2 final : public TSquareMatrix<T, 2>
@@ -80,7 +82,7 @@ constexpr TMatrix2<T> TMatrix2<T>::operator*(T scalar) const
     TMatrix2<T> result;
     for (char i = 0; i < 4; ++i)
     {
-        result.Data[i] = this -> Data[i] * scalar;
+        result.Data[i] = this->Data[i] * scalar;
     }
     return result;
 }
@@ -105,7 +107,7 @@ constexpr TMatrix2<T> TMatrix2<T>::operator*(const TMatrix2& other) const
 {
     TMatrix2<T> result;
 
-    this -> MatrixMultiply(other, result);
+    this->MatrixMultiply(other, result);
 
     return result;
 }

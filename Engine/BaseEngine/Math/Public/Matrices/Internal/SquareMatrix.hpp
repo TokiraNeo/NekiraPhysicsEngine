@@ -8,15 +8,18 @@
 
 #pragma once
 
-#include <array>
-#include <Matrices/Internal/MatrixBase.hpp>
 #include <MathUtility/MathUtilities.hpp>
+#include <Matrices/Internal/MatrixBase.hpp>
+#include <array>
+
 
 
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// TSquareMatrix<>
+/**
+ * @brief Square Matrix
+ */
 template <typename T, char N = 2>
     requires TMatrixInternal::TMatrixConcept<T, N>
 struct TSquareMatrix

@@ -15,7 +15,9 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// 4x4 Matrix
+/**
+ * @brief 4x4 Matrix
+ */
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 4>
 struct TMatrix4 final : public TSquareMatrix<T, 4>
@@ -56,12 +58,6 @@ struct TMatrix4 final : public TSquareMatrix<T, 4>
 
     // Get Inverse of the matrix
     TMatrix4 Inverse() const;
-
-    // Get Translation vector from the matrix
-    constexpr TVector3<T> GetTranslation() const;
-
-    // Get Scale vector from the matrix
-    constexpr TVector3<T> GetScale() const;
 
     // Get 3x3 SubMatrix excluding specified row and column
     constexpr TMatrix3<T> GetSubMatrix(char excludedRow, char excludedCol) const;
@@ -135,7 +131,7 @@ constexpr TMatrix4<T> TMatrix4<T>::operator*(const TMatrix4& other) const
 {
     TMatrix4<T> result;
 
-    this -> MatrixMultiply(other, result);
+    this->MatrixMultiply(other, result);
 
     return result;
 }
@@ -241,41 +237,6 @@ TMatrix4<T> TMatrix4<T>::Inverse() const
         return TMatrix4<T>(0);
     }
     return (1.0 / det) * Adjugate();
-}
-
-template <typename T>
-    requires TMatrixInternal::TMatrixConcept<T, 4>
-constexpr TVector3<T> TMatrix4<T>::GetTranslation() const
-{
-    /**
-     * @brief
-     * 在矩阵的数学表现上，Translation矩阵通常是这样的：
-     * | 1 0 0 Tx |
-     * | 0 1 0 Ty |
-     * | 0 0 1 Tz |
-     * | 0 0 0 1  |
-     *
-     * 在Nekira Physics Engine中，我们使用`行主序(row-major)`存储矩阵数据，
-     * 因此Translation矩阵在内存中的布局是这样的：
-     * | 1 0 0 Tx |
-     * | 0 1 0 Ty |
-     * | 0 0 1 Tz |
-     * | 0 0 0 1  |
-     * 即与数学形式保持一致。
-     * DirecX使用的是行主序，而OpenGL、Vulkan使用的是列主序。
-     * Nekira Physics Engine选择行主序，保证直观上与数学表现一致。
-     */
-    return TVector3<T>((*this)[0][3], (*this)[1][3], (*this)[2][3]);
-}
-
-template <typename T>
-    requires TMatrixInternal::TMatrixConcept<T, 4>
-constexpr TVector3<T> TMatrix4<T>::GetScale() const
-{
-    /**
-     * @brief As we use row-major order, the scale vector is ([0][0], [1][1], [2][2])
-     */
-    return TVector3<T>((*this)[0][0], (*this)[1][1], (*this)[2][2]);
 }
 
 template <typename T>

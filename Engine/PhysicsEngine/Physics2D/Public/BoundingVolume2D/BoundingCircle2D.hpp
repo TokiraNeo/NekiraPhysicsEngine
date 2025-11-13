@@ -12,7 +12,7 @@
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-struct SBoundingCircle2D final : public SBoundingVolume2D
+struct PHYSICS2D_API SBoundingCircle2D final : public SBoundingVolume2D
 {};
 
 NAMESPACE_END() // namespace PHYE::Physics2D

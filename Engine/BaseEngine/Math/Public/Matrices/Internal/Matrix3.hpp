@@ -13,7 +13,9 @@
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// 3x3 Matrix
+/**
+ * @brief 3x3 Matrix
+ */
 template <typename T>
     requires TMatrixInternal::TMatrixConcept<T, 3>
 struct TMatrix3 final : public TSquareMatrix<T, 3>
@@ -85,7 +87,7 @@ constexpr TMatrix3<T> TMatrix3<T>::operator*(T scalar) const
     TMatrix3<T> result;
     for (char i = 0; i < 9; ++i)
     {
-        result.Data[i] = this -> Data[i] * scalar;
+        result.Data[i] = this->Data[i] * scalar;
     }
     return result;
 }
@@ -112,7 +114,7 @@ constexpr TMatrix3<T> TMatrix3<T>::operator*(const TMatrix3& other) const
 {
     TMatrix3<T> result;
 
-    this -> MatrixMultiply(other, result);
+    this->MatrixMultiply(other, result);
 
     return result;
 }

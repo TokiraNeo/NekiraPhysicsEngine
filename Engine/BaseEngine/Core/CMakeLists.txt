@@ -16,6 +16,11 @@ file(GLOB_RECURSE CORE_SOURCE_FILES "Private/*.cpp")
 add_library(Core SHARED ${CORE_HEADER_FILES} ${CORE_SOURCE_FILES})
 
 # ======================================
+# 导出宏
+# ======================================
+target_compile_definitions(Core PRIVATE CORE_EXPORT)
+
+# ======================================
 # 头文件目录
 # ======================================
 target_include_directories(Core PUBLIC Public)
