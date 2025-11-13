@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <BoundingVolume2D/BoundingVolume2D.hpp>
+#include <Rigid2D/BoundingVolume2D/BoundingVolume2D.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 

@@ -8,11 +8,11 @@
 
 #pragma once
 
+#include <CoreMacros.hpp>
 #include <Physics2D.hpp>
-#include <RigidBodyType.hpp>
 #include <memory>
 #include <vector>
-
+#include <NekiraECS/Core/Entity/Entity.hpp>
 
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
@@ -27,15 +27,15 @@ class CCollider2D;
 class PHYSICS2D_API CRigidBody2D final
 {
 private:
-    // Rigid Body Type
-    PHYE::PhysicsBase::ERigidBodyType Type = PHYE::PhysicsBase::ERigidBodyType::Static;
+    // Rigid Body Entity(Used to link SRigidBodyComponent2D component)
+    NekiraECS::Entity RigidBodyEntity;
 
     // Colliders attached to this rigid body
     std::vector<std::unique_ptr<CCollider2D>> Colliders;
 
 public:
-    CRigidBody2D() = default;
-    ~CRigidBody2D() = default;
+    CRigidBody2D();
+    ~CRigidBody2D();
 
     CRigidBody2D(const CRigidBody2D&) = delete;
     CRigidBody2D(CRigidBody2D&&) noexcept = default;
@@ -43,14 +43,7 @@ public:
     CRigidBody2D& operator=(const CRigidBody2D&) = delete;
     CRigidBody2D& operator=(CRigidBody2D&&) noexcept = default;
 
-    constexpr explicit CRigidBody2D(PHYE::PhysicsBase::ERigidBodyType type) : Type(type)
-    {}
 
-    // Getters
-    [[nodiscard]] constexpr PHYE::PhysicsBase::ERigidBodyType GetRigidType() const
-    {
-        return Type;
-    }
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D

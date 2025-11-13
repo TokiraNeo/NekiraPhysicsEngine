@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include <BoundingVolume2D/BoundingVolume2D.hpp>
+#include <Rigid2D/BoundingVolume2D/BoundingVolume2D.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-struct PHYSICS2D_API SBoundingCircle2D final : public SBoundingVolume2D
+struct PHYSICS2D_API SBoundingAABB2D final : public SBoundingVolume2D
 {};
 
 NAMESPACE_END() // namespace PHYE::Physics2D

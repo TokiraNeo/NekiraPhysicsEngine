@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Geometry2D/PrimitiveShape2D.hpp>
+#include <Rigid2D/Geometry2D/PrimitiveShape2D.hpp>
 #include <Vectors/Vectors.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
