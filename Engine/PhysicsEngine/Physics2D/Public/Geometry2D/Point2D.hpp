@@ -18,7 +18,7 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
  * @details Since a point in 2D space can simply be represented by a 2D vector,
  * so we just define Point2D as a type alias of TVector2<float>.
  */
-class CPoint2D final : public CPrimitiveShape2D
+class PHYSICS2D_API CPoint2D final : public CPrimitiveShape2D
 {
 private:
     SVector2F Position;
@@ -26,7 +26,7 @@ private:
 public:
     ~CPoint2D() override = default;
 
-    constexpr          CPoint2D();
+    constexpr CPoint2D();
     explicit constexpr CPoint2D(float value) : Position(value)
     {}
     constexpr CPoint2D(float x, float y) : Position(x, y)

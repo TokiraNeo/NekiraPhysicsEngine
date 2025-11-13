@@ -8,6 +8,7 @@
 
 #pragma once
 
+
 /* ====-------------------------------------------==== */
 #ifndef KINDER_SMALL_FLOAT
 #define KINDER_SMALL_FLOAT 1E-6F

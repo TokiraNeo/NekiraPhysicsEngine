@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <Physics2D.hpp>
 #include <RigidBodyType.hpp>
 #include <memory>
 #include <vector>
@@ -23,7 +24,7 @@ class CCollider2D;
  * @brief RigidBody2D
  * @details holds rigid body type, mass, velocity, collider2D and other physical properties.
  */
-class CRigidBody2D final
+class PHYSICS2D_API CRigidBody2D final
 {
 private:
     // Rigid Body Type
@@ -42,10 +43,8 @@ public:
     CRigidBody2D& operator=(const CRigidBody2D&) = delete;
     CRigidBody2D& operator=(CRigidBody2D&&) noexcept = default;
 
-    constexpr explicit CRigidBody2D(PHYE::PhysicsBase::ERigidBodyType type)
-        : Type(type)
-    {
-    }
+    constexpr explicit CRigidBody2D(PHYE::PhysicsBase::ERigidBodyType type) : Type(type)
+    {}
 
     // Getters
     [[nodiscard]] constexpr PHYE::PhysicsBase::ERigidBodyType GetRigidType() const

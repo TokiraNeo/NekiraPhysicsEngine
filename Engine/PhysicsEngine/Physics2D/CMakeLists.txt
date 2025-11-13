@@ -14,6 +14,14 @@ file(GLOB_RECURSE SOURCE_FILES "Private/*.cpp")
 add_library(Physics2D SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
 # ======================================
+# 导出宏
+# ======================================
+target_compile_definitions(Physics2D
+    PRIVATE
+        PHYSICS2D_EXPORT
+)
+
+# ======================================
 # 头文件目录
 # ======================================
 target_include_directories(Physics2D

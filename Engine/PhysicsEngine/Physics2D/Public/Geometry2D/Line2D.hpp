@@ -17,7 +17,7 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
  * @brief Line2D
  * @details A line in 2D space defined by two endpoints: Start and End.
  */
-class CLine2D final : public CPrimitiveShape2D
+class PHYSICS2D_API CLine2D final : public CPrimitiveShape2D
 {
 private:
     CPoint2D Start;

@@ -16,6 +16,14 @@ file(GLOB_RECURSE SOURCE_FILES "Private/*.cpp")
 add_library(PhysicsBase SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
 # ======================================
+# 导出宏
+# ======================================
+target_compile_definitions(PhysicsBase
+    PRIVATE 
+        PHYSICSBASE_EXPORT
+)
+
+# ======================================
 # 头文件目录
 # ======================================
 target_include_directories(PhysicsBase
