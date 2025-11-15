@@ -77,6 +77,7 @@ public:
     [[nodiscard]] CPoint2D  GetCenter() const;
     [[nodiscard]] SVector2F GetHalfExtents() const;
 
+    // Get rotation angle in degrees
     [[nodiscard]] constexpr float GetAngle() const
     {
         return Angle;

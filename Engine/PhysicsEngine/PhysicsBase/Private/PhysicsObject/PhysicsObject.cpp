@@ -7,16 +7,8 @@
  */
 
 #include <PhysicsObject/PhysicsObject.hpp>
-#include <NekiraECS/Core/Coordinator/Coordinator.hpp>
 
 NAMESPACE_BEGIN(PHYE::PhysicsBase)
 
-CPhysicsObject::CPhysicsObject(NekiraECS::Entity entityID) : ID(entityID)
-{}
-
-CPhysicsObject::~CPhysicsObject()
-{
-    NekiraECS::Coordinator::DestroyEntity(ID);
-}
 
 NAMESPACE_END() // namespace PHYE::PhysicsBase

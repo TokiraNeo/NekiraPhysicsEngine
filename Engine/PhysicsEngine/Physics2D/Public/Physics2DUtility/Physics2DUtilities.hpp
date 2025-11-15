@@ -52,8 +52,10 @@ PHYSICS2D_API bool IsPointInRectangle2D(const CPoint2D& point, const CRectangle2
  * @brief Check if a Point2D is in an OrientedRectangle2D(includes the edge).
  * @param point The point to check.
  * @param orientedRectangle The oriented rectangle to check against.
+ * @param includeEdge Whether to include the edge of the oriented rectangle in the check.
  * @return true if the point is in the oriented rectangle, false otherwise.
  */
-PHYSICS2D_API bool IsPointInOrientedRectangle2D(const CPoint2D& point, const COrientedRectangle2D& orientedRectangle);
+PHYSICS2D_API bool IsPointInOrientedRectangle2D(const CPoint2D& point, const COrientedRectangle2D& orientedRectangle,
+                                                bool includeEdge = true);
 
 NAMESPACE_END() // namespace PHYE::Physics2D

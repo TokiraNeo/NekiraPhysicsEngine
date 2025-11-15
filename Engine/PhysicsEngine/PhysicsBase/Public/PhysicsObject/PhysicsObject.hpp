@@ -9,29 +9,28 @@
 #pragma once
 
 #include <CoreMacros.hpp>
-#include <NekiraECS/Core/Entity/Entity.hpp>
 #include <PhysicsBase.hpp>
 
 
 NAMESPACE_BEGIN(PHYE::PhysicsBase)
 
+/**
+ * @brief Physics Object Base Class.
+ * @details This class determines a base object in the Physics World.
+ * 2D or 3D Physics Object classes will inherit from this class.
+ */
 class PHYSICSBASE_API CPhysicsObject
 {
 public:
     CPhysicsObject() = default;
 
-    explicit CPhysicsObject(NekiraECS::Entity entityID);
-
-    virtual ~CPhysicsObject();
+    virtual ~CPhysicsObject() = default;
 
     CPhysicsObject(const CPhysicsObject&) = delete;
     CPhysicsObject(CPhysicsObject&&) noexcept = default;
 
     CPhysicsObject& operator=(const CPhysicsObject&) = delete;
     CPhysicsObject& operator=(CPhysicsObject&&) noexcept = default;
-
-protected:
-    NekiraECS::Entity ID;
 };
 
 NAMESPACE_END() // namespace PHYE::PhysicsBase

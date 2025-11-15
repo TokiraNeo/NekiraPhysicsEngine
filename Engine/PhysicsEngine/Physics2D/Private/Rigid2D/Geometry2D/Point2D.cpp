@@ -38,6 +38,11 @@ CPoint2D CPoint2D::operator+(const SVector2F& vector) const
     return CPoint2D(Position + vector);
 }
 
+CPoint2D CPoint2D::operator-(const SVector2F& vector) const
+{
+    return CPoint2D(Position - vector);
+}
+
 SVector2F CPoint2D::operator-(const CPoint2D& other) const
 {
     return Position - other.Position;

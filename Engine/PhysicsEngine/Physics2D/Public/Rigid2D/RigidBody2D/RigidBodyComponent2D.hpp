@@ -1,5 +1,5 @@
-﻿/**
-* GPL-3.0 License
+/**
+ * GPL-3.0 License
  *
  * Copyright (C) 2025 TokiraNeo (https://github.com/TokiraNeo)
  *
@@ -11,14 +11,22 @@
 
 
 #include <CoreMacros.hpp>
+#include <NekiraECS/Core/Component/Component.hpp>
 #include <Physics2D.hpp>
 #include <RigidBodyType.hpp>
 #include <Transforms/Transforms.hpp>
 #include <Vectors/Vectors.hpp>
-#include <NekiraECS/Core/Component/Component.hpp>
+
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
+/**
+ * @brief 2D Rigid Body Component
+ * @details This component holds rigid body properties for 2D physics simulation.
+ * These properties include type, mass, velocity, and transform information.
+ * Originally, these properties were part of CRigidBody2D class, but here they are refactored into this component for
+ * better ECS integration.
+ */
 struct PHYSICS2D_API SRigidBodyComponent2D final : public NekiraECS::Component<SRigidBodyComponent2D>
 {
     // 刚体类型
@@ -40,13 +48,14 @@ struct PHYSICS2D_API SRigidBodyComponent2D final : public NekiraECS::Component<S
 
     // 转动惯量，反映物体抗旋转的能力
     float Inertia;
-    // 转动惯量的倒数，优化计算，0表示无限大转动惯量（static类型刚体)
+    // 转动惯量的倒数
     float InverseInertia;
 
     ~SRigidBodyComponent2D() override = default;
 
     SRigidBodyComponent2D();
-    explicit SRigidBodyComponent2D(PHYE::PhysicsBase::ERigidBodyType rigidBodyType, float mass = 1.0F, float inertia = 1.0F);
+    explicit SRigidBodyComponent2D(PHYE::PhysicsBase::ERigidBodyType rigidBodyType, float mass = 1.0F,
+                                   float inertia = 1.0F);
 
     SRigidBodyComponent2D(const SRigidBodyComponent2D&) = delete;
     SRigidBodyComponent2D(SRigidBodyComponent2D&&) noexcept = default;

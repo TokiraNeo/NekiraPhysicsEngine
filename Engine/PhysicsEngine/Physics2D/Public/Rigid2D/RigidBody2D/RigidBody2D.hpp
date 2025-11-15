@@ -9,10 +9,11 @@
 #pragma once
 
 #include <CoreMacros.hpp>
+#include <NekiraECS/Core/Entity/Entity.hpp>
 #include <Physics2D.hpp>
 #include <memory>
 #include <vector>
-#include <NekiraECS/Core/Entity/Entity.hpp>
+
 
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
@@ -22,7 +23,9 @@ class CCollider2D;
 
 /**
  * @brief RigidBody2D
- * @details holds rigid body type, mass, velocity, collider2D and other physical properties.
+ * @details holds Colliders and Entity links to the SRigidBodyComponent2D component.
+ * We wanna to use ECS for better performance, so the rigid body properties are moved to SRigidBodyComponent2D
+ * component. And we remain a RigidBodyEntity in this class to link the component.
  */
 class PHYSICS2D_API CRigidBody2D final
 {
@@ -42,8 +45,6 @@ public:
 
     CRigidBody2D& operator=(const CRigidBody2D&) = delete;
     CRigidBody2D& operator=(CRigidBody2D&&) noexcept = default;
-
-
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D
