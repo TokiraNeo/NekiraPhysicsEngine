@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Geometry2D/PrimitiveShape2D.hpp>
+#include <Rigid2D/Geometry2D/PrimitiveShape2D.hpp>
 #include <Vectors/Vectors.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
@@ -47,6 +47,9 @@ public:
 
     // Point2D + Vector2F = Point2D
     CPoint2D operator+(const SVector2F& vector) const;
+
+    // Point2D - Vector2F = Point2D
+    CPoint2D operator-(const SVector2F& vector) const;
 
     // Point2D - Point2D = Vector2F
     SVector2F operator-(const CPoint2D& other) const;

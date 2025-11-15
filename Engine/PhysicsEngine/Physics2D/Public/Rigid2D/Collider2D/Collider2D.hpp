@@ -47,6 +47,7 @@ private:
     STransform2D LocalTransform;
 
     // @TODO: Cache Bounding Volume for two collision detection phases???
+
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D
