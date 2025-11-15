@@ -6,4 +6,4 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#include <BoundingVolume2D/BoundingAABB2D.hpp>
+#include <Rigid2D/BoundingVolume2D/BoundingAABB2D.hpp>

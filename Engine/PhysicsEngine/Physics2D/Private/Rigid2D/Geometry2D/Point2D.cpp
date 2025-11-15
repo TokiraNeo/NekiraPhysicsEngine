@@ -6,7 +6,7 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#include <Geometry2D/Point2D.hpp>
+#include <Rigid2D/Geometry2D/Point2D.hpp>
 #include <utility>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
@@ -36,6 +36,11 @@ bool CPoint2D::operator!=(const CPoint2D& other) const
 CPoint2D CPoint2D::operator+(const SVector2F& vector) const
 {
     return CPoint2D(Position + vector);
+}
+
+CPoint2D CPoint2D::operator-(const SVector2F& vector) const
+{
+    return CPoint2D(Position - vector);
 }
 
 SVector2F CPoint2D::operator-(const CPoint2D& other) const

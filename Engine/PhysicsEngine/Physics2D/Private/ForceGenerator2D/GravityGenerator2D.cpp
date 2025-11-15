@@ -6,13 +6,14 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#pragma once
+#include <ForceGenerator2D/GravityGenerator2D.hpp>
 
-#include <BoundingVolume2D/BoundingVolume2D.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-struct PHYSICS2D_API SBoundingCircle2D final : public SBoundingVolume2D
-{};
+void CGravityGenerator2D::UpdateForce(CPhysicsObject2D* object, float deltaTime)
+{
+    // @TODO: Implement Gravity Force Application Logic Here
+}
 
 NAMESPACE_END() // namespace PHYE::Physics2D

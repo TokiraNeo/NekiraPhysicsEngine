@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Geometry2D/Point2D.hpp>
+#include <Rigid2D/Geometry2D/Point2D.hpp>
 
 
 NAMESPACE_BEGIN(PHYE::Physics2D)

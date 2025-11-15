@@ -6,11 +6,12 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#include <Geometry2D/Circle2D.hpp>
-#include <Geometry2D/Line2D.hpp>
-#include <Geometry2D/Rectangle2D.hpp>
-#include <MathUtility/MathUtilities.hpp>
+#include <MathUtility/MatrixUtilities.hpp>
 #include <Physics2DUtility/Physics2DUtilities.hpp>
+#include <Rigid2D/Geometry2D/Circle2D.hpp>
+#include <Rigid2D/Geometry2D/Line2D.hpp>
+#include <Rigid2D/Geometry2D/Rectangle2D.hpp>
+
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
@@ -62,10 +63,27 @@ bool IsPointInRectangle2D(const CPoint2D& point, const CRectangle2D& rectangle, 
     return IS_IN_X && IS_IN_Y;
 }
 
-bool IsPointInOrientedRectangle2D(const CPoint2D& point, const COrientedRectangle2D& orientedRectangle)
+bool IsPointInOrientedRectangle2D(const CPoint2D& point, const COrientedRectangle2D& orientedRectangle,
+                                  bool includeEdge)
 {
-    //
-    return false;
+    // 将点转换到以矩形中心为原点的坐标系中
+    auto translatedPoint = point - orientedRectangle.GetCenter();
+
+    // 旋转矩阵
+    auto rotationMatrix = BE::Math::ZRotation3x3(-orientedRectangle.GetAngle());
+
+    // 将点旋转回轴对齐矩形的坐标系
+    auto rotatedPoint = BE::Math::TransformPoint2D(translatedPoint, rotationMatrix);
+
+    // 以矩形中心为原点的局部轴对齐矩形
+    auto localRectangle = CRectangle2D(CPoint2D(0.0F), orientedRectangle.GetHalfExtents() * 2.0F);
+
+    // 若该点加上矩形的半尺寸后仍在局部轴对齐矩形范围内，则点在矩形内
+    auto localVector = rotatedPoint + orientedRectangle.GetHalfExtents();
+    auto localPoint = CPoint2D(localVector);
+
+    // 使用轴对齐矩形的点内检测函数
+    return IsPointInRectangle2D(localPoint, localRectangle, includeEdge);
 }
 
 NAMESPACE_END() // namespace PHYE::Physics2D

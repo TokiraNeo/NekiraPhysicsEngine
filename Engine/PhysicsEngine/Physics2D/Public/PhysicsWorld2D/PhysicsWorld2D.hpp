@@ -10,8 +10,13 @@
 
 #include <CoreMacros.hpp>
 #include <Physics2D.hpp>
+#include <memory>
+#include <vector>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
+
+// Forward Declarations
+class CPhysicsObject2D;
 
 /**
  * @brief Physics World 2D
@@ -19,6 +24,12 @@ NAMESPACE_BEGIN(PHYE::Physics2D)
  */
 class PHYSICS2D_API CPhysicsWorld2D final
 {
+private:
+    CPhysicsWorld2D() = default;
+
+    // 2D Physics Objects in the world
+    std::vector<std::unique_ptr<CPhysicsObject2D>> PhysicsObjects;
+
 public:
     CPhysicsWorld2D(const CPhysicsWorld2D&) = delete;
     CPhysicsWorld2D(CPhysicsWorld2D&&) noexcept = delete;
@@ -30,9 +41,6 @@ public:
 
     // Get singleton instance
     static CPhysicsWorld2D& Get();
-
-private:
-    CPhysicsWorld2D() = default;
 };
 
 

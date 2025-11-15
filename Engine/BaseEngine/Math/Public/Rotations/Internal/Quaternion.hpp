@@ -263,6 +263,7 @@ constexpr TRotator<T> TQuaternion<T>::ToRotator() const
 {
     // @TODO: Implement conversion from quaternion to rotator (Euler angles)
 
+
     return TRotator<T>();
 }
 

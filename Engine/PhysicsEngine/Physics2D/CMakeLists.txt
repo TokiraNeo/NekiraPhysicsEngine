@@ -27,6 +27,8 @@ target_compile_definitions(Physics2D
 target_include_directories(Physics2D
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Public
+    PRIVATE
+
 )
 
 # ======================================

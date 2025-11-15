@@ -6,7 +6,7 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#include <Geometry2D/Circle2D.hpp>
+#include <Rigid2D/Geometry2D/Circle2D.hpp>
 
 #include <cassert>
 #include <utility>

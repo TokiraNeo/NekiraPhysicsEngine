@@ -8,8 +8,9 @@
 
 #pragma once
 
+#include <CoreMacros.hpp>
+#include <NekiraECS/Core/Entity/Entity.hpp>
 #include <Physics2D.hpp>
-#include <RigidBodyType.hpp>
 #include <memory>
 #include <vector>
 
@@ -22,35 +23,28 @@ class CCollider2D;
 
 /**
  * @brief RigidBody2D
- * @details holds rigid body type, mass, velocity, collider2D and other physical properties.
+ * @details holds Colliders and Entity links to the SRigidBodyComponent2D component.
+ * We wanna to use ECS for better performance, so the rigid body properties are moved to SRigidBodyComponent2D
+ * component. And we remain a RigidBodyEntity in this class to link the component.
  */
 class PHYSICS2D_API CRigidBody2D final
 {
 private:
-    // Rigid Body Type
-    PHYE::PhysicsBase::ERigidBodyType Type = PHYE::PhysicsBase::ERigidBodyType::Static;
+    // Rigid Body Entity(Used to link SRigidBodyComponent2D component)
+    NekiraECS::Entity RigidBodyEntity;
 
     // Colliders attached to this rigid body
     std::vector<std::unique_ptr<CCollider2D>> Colliders;
 
 public:
-    CRigidBody2D() = default;
-    ~CRigidBody2D() = default;
+    CRigidBody2D();
+    ~CRigidBody2D();
 
     CRigidBody2D(const CRigidBody2D&) = delete;
     CRigidBody2D(CRigidBody2D&&) noexcept = default;
 
     CRigidBody2D& operator=(const CRigidBody2D&) = delete;
     CRigidBody2D& operator=(CRigidBody2D&&) noexcept = default;
-
-    constexpr explicit CRigidBody2D(PHYE::PhysicsBase::ERigidBodyType type) : Type(type)
-    {}
-
-    // Getters
-    [[nodiscard]] constexpr PHYE::PhysicsBase::ERigidBodyType GetRigidType() const
-    {
-        return Type;
-    }
 };
 
 NAMESPACE_END() // namespace PHYE::Physics2D

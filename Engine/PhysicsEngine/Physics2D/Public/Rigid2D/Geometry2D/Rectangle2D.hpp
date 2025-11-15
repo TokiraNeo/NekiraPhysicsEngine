@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <Geometry2D/Point2D.hpp>
+#include <Rigid2D/Geometry2D/Point2D.hpp>
 
 
 
@@ -77,6 +77,7 @@ public:
     [[nodiscard]] CPoint2D  GetCenter() const;
     [[nodiscard]] SVector2F GetHalfExtents() const;
 
+    // Get rotation angle in degrees
     [[nodiscard]] constexpr float GetAngle() const
     {
         return Angle;

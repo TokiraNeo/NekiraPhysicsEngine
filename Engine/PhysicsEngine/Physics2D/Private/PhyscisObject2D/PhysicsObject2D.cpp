@@ -6,13 +6,12 @@
  * For more detail, please refer to the LICENSE file in the root directory of this project.
  */
 
-#pragma once
-
-#include <BoundingVolume2D/BoundingVolume2D.hpp>
+#include <PhysicsObject2D/PhysicsObject2D.hpp>
+#include <Rigid2D/RigidBody2D/RigidBody2D.hpp>
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-struct PHYSICS2D_API SBoundingOBB2D final : public SBoundingVolume2D
-{};
+CPhysicsObject2D::CPhysicsObject2D() : RigidBody(std::move(std::make_unique<CRigidBody2D>()))
+{}
 
 NAMESPACE_END() // namespace PHYE::Physics2D
