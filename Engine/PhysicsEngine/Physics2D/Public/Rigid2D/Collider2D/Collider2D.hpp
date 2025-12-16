@@ -17,7 +17,7 @@
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
 // Forward Declarations
-struct SBoundingVolume2D;
+struct CBoundingVolume2D;
 class CPrimitiveShape2D;
 
 /**

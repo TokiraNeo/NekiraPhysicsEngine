@@ -24,7 +24,7 @@ class CCollider2D;
 /**
  * @brief RigidBody2D
  * @details holds Colliders and Entity links to the SRigidBodyComponent2D component.
- * We wanna to use ECS for better performance, so the rigid body properties are moved to SRigidBodyComponent2D
+ * We want to use ECS for better performance, so the rigid body properties are moved to SRigidBodyComponent2D
  * component. And we remain a RigidBodyEntity in this class to link the component.
  */
 class PHYSICS2D_API CRigidBody2D final
