@@ -12,7 +12,7 @@
 
 NAMESPACE_BEGIN(PHYE::Physics2D)
 
-struct PHYSICS2D_API SBoundingOBB2D final : public SBoundingVolume2D
+class PHYSICS2D_API CBoundingOBB2D final : public CBoundingVolume2D
 {};
 
 NAMESPACE_END() // namespace PHYE::Physics2D
