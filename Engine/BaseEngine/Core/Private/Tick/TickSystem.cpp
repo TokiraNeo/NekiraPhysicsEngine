@@ -19,16 +19,8 @@ CTickSystem& CTickSystem::Get()
 
 void CTickSystem::Initialize()
 {
-    // Process pre-registered tickables
-    while (!PreRegisteredTickables.empty())
-    {
-        auto* tickable = PreRegisteredTickables.top();
-        PreRegisteredTickables.pop();
-
-        const ETickGroup TICK_GROUP = tickable->GetTickGroup();
-
-        RegisterTick(TICK_GROUP, tickable, &ITickInterface::Tick);
-    }
+    // Process any pre-registered tickables at initialization
+    ProcessPreRegisteredTick();
 }
 
 void CTickSystem::PreRegisterTick(ITickInterface* tickable)
@@ -41,6 +33,20 @@ void CTickSystem::UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::Mul
     if (TickGroupMap.contains(tickGroup))
     {
         TickGroupMap[tickGroup].RemoveSingle(handle);
+    }
+}
+
+void CTickSystem::ProcessPreRegisteredTick()
+{
+    // Process pre-registered tickables
+    while (!PreRegisteredTickables.empty())
+    {
+        auto* tickable = PreRegisteredTickables.front();
+        PreRegisteredTickables.pop();
+
+        const ETickGroup TICK_GROUP = tickable->GetTickGroup();
+
+        RegisterTick(TICK_GROUP, tickable, &ITickInterface::Tick);
     }
 }
 
