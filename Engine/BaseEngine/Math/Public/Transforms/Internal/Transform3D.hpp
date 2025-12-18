@@ -10,10 +10,16 @@
 
 #include <MathUtility/MatrixUtilities.hpp>
 #include <Transforms/Internal/TransformBase.hpp>
+#include <Rotations/Internal/Rotator.hpp>
+#include <Rotations/Internal/Quaternion.hpp>
 
 
 NAMESPACE_BEGIN(BE::Math)
 
+/**
+ * @brief Transform3D for three-dimensional space
+ * @details This class represents a 3D transformation including translation, rotation, and scaling.
+ */
 template <typename T = float>
     requires TTransformInternal::TTransformConcept<T>
 struct TTransform3D final
@@ -27,7 +33,7 @@ public:
     constexpr TTransform3D();
 
     // Construct with translation, rotation, and scale
-    constexpr TTransform3D(const TVector3<T>& translation, const TVector3<T>& rotation = TVector3<T>(0.0),
+    constexpr TTransform3D(const TVector3<T>& translation, const TRotator<T>& rotation = TRotator<T>(0.0),
                            const TVector3<T>& scale = TVector3<T>(1.0));
 
     // Construct with translation only
@@ -49,7 +55,7 @@ public:
 
     // Getters
     [[nodiscard]] constexpr TVector3<T> GetTranslation() const;
-    [[nodiscard]] constexpr TVector3<T> GetRotation() const;
+    [[nodiscard]] constexpr TRotator<T> GetRotation() const;
     [[nodiscard]] constexpr TVector3<T> GetScale() const;
 
     // Setters
@@ -71,9 +77,9 @@ constexpr TTransform3D<T>::TTransform3D() : Matrix(TMatrix4<T>::Identity())
 
 template <typename T>
     requires TTransformInternal::TTransformConcept<T>
-constexpr TTransform3D<T>::TTransform3D(const TVector3<T>& translation, const TVector3<T>& rotation,
+constexpr TTransform3D<T>::TTransform3D(const TVector3<T>& translation, const TRotator<T>& rotation,
                                         const TVector3<T>& scale)
-    : Matrix(BE::Math::Transform4x4(scale, rotation, translation))
+    : Matrix(BE::Math::Transform4x4(scale, rotation.ToVector(), translation))
 {}
 
 template <typename T>
@@ -98,6 +104,7 @@ TTransform3D<T>::TTransform3D(TTransform3D&& other) noexcept : Matrix(other.Matr
 {
     other.Matrix = TMatrix4<T>::Identity();
 }
+
 template <typename T>
     requires TTransformInternal::TTransformConcept<T>
 TTransform3D<T>& TTransform3D<T>::operator=(const TTransform3D& other)
@@ -165,11 +172,10 @@ template <typename T>
 
 template <typename T>
     requires TTransformInternal::TTransformConcept<T>
-[[nodiscard]] constexpr TVector3<T> TTransform3D<T>::GetRotation() const
+[[nodiscard]] constexpr TRotator<T> TTransform3D<T>::GetRotation() const
 {
     // @TODO: Extract rotation from the transformation matrix
-    // @TODO:
-    // 这里需要先实现Rotator和Quaternion类用于表示3D旋转，这是目前欠缺的部分,直接使用向量表示旋转会有很多不方便的地方
+    return TRotator<T>();
 }
 
 template <typename T>
@@ -179,8 +185,13 @@ template <typename T>
     /**
      * @brief
      * 由于我们使用行主序存储矩阵数据，缩放向量位于矩阵的对角线上，即[0][0]、[1][1]、[2][2]位置。
-     * 这与数学上对缩放矩阵的定义是一致的。
+     * 缩放矩阵的定义为:
+     * | Sx 0  0  0 |
+     * | 0  Sy 0  0 |
+     * | 0  0  Sz 0 |
+     * | 0  0  0  1 |
      */
     return TVector3<T>(Matrix[0][0], Matrix[1][1], Matrix[2][2]);
 }
+
 NAMESPACE_END() // namespace BE::Math

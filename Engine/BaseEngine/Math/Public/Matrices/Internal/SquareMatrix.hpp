@@ -8,15 +8,18 @@
 
 #pragma once
 
-#include <array>
-#include <Matrices/Internal/MatrixBase.hpp>
 #include <MathUtility/MathUtilities.hpp>
+#include <Matrices/Internal/MatrixBase.hpp>
+#include <array>
+
 
 
 
 NAMESPACE_BEGIN(BE::Math)
 
-/// TSquareMatrix<>
+/**
+ * @brief Square Matrix
+ */
 template <typename T, char N = 2>
     requires TMatrixInternal::TMatrixConcept<T, N>
 struct TSquareMatrix
@@ -41,7 +44,7 @@ public:
     TSquareMatrix& operator=(const TSquareMatrix&);
     TSquareMatrix& operator=(TSquareMatrix&&) noexcept;
 
-    constexpr T* operator[](char index);
+    constexpr T* operator[](char index) const;
 
     // Get Transpose of the matrix
     TSquareMatrix Transpose() const;
@@ -89,7 +92,7 @@ TSquareMatrix<T, N>& TSquareMatrix<T, N>::operator=(TSquareMatrix&& other) noexc
 
 template <typename T, char N>
     requires TMatrixInternal::TMatrixConcept<T, N>
-constexpr T* TSquareMatrix<T, N>::operator[](char index)
+constexpr T* TSquareMatrix<T, N>::operator[](char index) const
 {
     index = Clamp<char>(index, 0, N - 1);
     // @example:
