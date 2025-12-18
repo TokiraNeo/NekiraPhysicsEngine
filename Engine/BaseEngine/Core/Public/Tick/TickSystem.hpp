@@ -10,7 +10,7 @@
 
 #include <CoreMacros.hpp>
 #include <Delegate/Delegate.hpp>
-#include <stack>
+#include <queue>
 #include <unordered_map>
 
 
@@ -48,13 +48,18 @@ public:
     // Unregister a tick delegate
     void UnregisterTick(ETickGroup tickGroup, const NekiraDelegate::MultiSignalHandle& handle);
 
+
 private:
     CTickSystem() = default;
+
+    // Process Pre-Registered tickables in RunTime
+    void ProcessPreRegisteredTick();
 
     // Register a tick delegate
     void RegisterTick(ETickGroup tickGroup, ITickInterface* tickable, void (ITickInterface::*funcPtr)(float));
 
-    std::stack<ITickInterface*> PreRegisteredTickables;
+    // Queue of pre-registered tickables
+    std::queue<ITickInterface*> PreRegisteredTickables;
 
     std::unordered_map<ETickGroup, TTickSignature> TickGroupMap;
 };
